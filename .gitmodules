@@ -1,4 +1,3 @@
 [submodule "Assets/Scripts/Lua"]
 	path = Assets/Scripts/Lua
 	url = https://github.com/gameDevKey/LuaGameFramework.git
-	ignore = all
