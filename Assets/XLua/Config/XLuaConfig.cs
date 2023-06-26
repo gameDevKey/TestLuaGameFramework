@@ -13,11 +13,11 @@ using System.Reflection;
 using System.Linq;
 
 //配置的详细介绍请看Doc下《XLua的配置.doc》
-public static class ExampleConfig
+public static class XLuaConfig
 {
     /***************如果你全lua编程，可以参考这份自动化配置***************/
-    //--------------begin 纯lua编程配置参考----------------------------
-    //static List<string> exclude = new List<string> {
+    // //--------------begin 纯lua编程配置参考----------------------------
+    // static List<string> exclude = new List<string> {
     //    "HideInInspector", "ExecuteInEditMode",
     //    "AddComponentMenu", "ContextMenu",
     //    "RequireComponent", "DisallowMultipleComponent",
@@ -54,10 +54,10 @@ public static class ExampleConfig
     //    "ClusterInput", "Motion",
     //    "UnityEngine.UI.ReflectionMethodsCache", "NativeLeakDetection",
     //    "NativeLeakDetectionMode", "WWWAudioExtensions", "UnityEngine.Experimental",
-    //};
+    // };
 
-    //static bool isExcluded(Type type)
-    //{
+    // static bool isExcluded(Type type)
+    // {
     //    var fullName = type.FullName;
     //    for (int i = 0; i < exclude.Count; i++)
     //    {
@@ -67,11 +67,11 @@ public static class ExampleConfig
     //        }
     //    }
     //    return false;
-    //}
+    // }
 
-    //[LuaCallCSharp]
-    //public static IEnumerable<Type> LuaCallCSharp
-    //{
+    // [LuaCallCSharp]
+    // public static IEnumerable<Type> LuaCallCSharp
+    // {
     //    get
     //    {
     //        List<string> namespaces = new List<string>() // 在这里添加名字空间
@@ -96,12 +96,12 @@ public static class ExampleConfig
     //                           select type);
     //        return unityTypes.Concat(customTypes);
     //    }
-    //}
+    // }
 
-    ////自动把LuaCallCSharp涉及到的delegate加到CSharpCallLua列表，后续可以直接用lua函数做callback
-    //[CSharpCallLua]
-    //public static List<Type> CSharpCallLua
-    //{
+    // //自动把LuaCallCSharp涉及到的delegate加到CSharpCallLua列表，后续可以直接用lua函数做callback
+    // [CSharpCallLua]
+    // public static List<Type> CSharpCallLua
+    // {
     //    get
     //    {
     //        var lua_call_csharp = LuaCallCSharp;
@@ -133,23 +133,23 @@ public static class ExampleConfig
     //        }
     //        return delegate_types.Where(t => t.BaseType == typeof(MulticastDelegate) && !hasGenericParameter(t) && !delegateHasEditorRef(t)).Distinct().ToList();
     //    }
-    //}
+    // }
     //--------------end 纯lua编程配置参考----------------------------
 
     /***************热补丁可以参考这份自动化配置***************/
-    //[Hotfix]
-    //static IEnumerable<Type> HotfixInject
-    //{
+    // [Hotfix]
+    // static IEnumerable<Type> HotfixInject
+    // {
     //    get
     //    {
     //        return (from type in Assembly.Load("Assembly-CSharp").GetTypes()
     //                where type.Namespace == null || !type.Namespace.StartsWith("XLua")
     //                select type);
     //    }
-    //}
-    //--------------begin 热补丁自动化配置-------------------------
-    //static bool hasGenericParameter(Type type)
-    //{
+    // }
+    // //--------------begin 热补丁自动化配置-------------------------
+    // static bool hasGenericParameter(Type type)
+    // {
     //    if (type.IsGenericTypeDefinition) return true;
     //    if (type.IsGenericParameter) return true;
     //    if (type.IsByRef || type.IsArray)
@@ -167,10 +167,10 @@ public static class ExampleConfig
     //        }
     //    }
     //    return false;
-    //}
+    // }
 
-    //static bool typeHasEditorRef(Type type)
-    //{
+    // static bool typeHasEditorRef(Type type)
+    // {
     //    if (type.Namespace != null && (type.Namespace == "UnityEditor" || type.Namespace.StartsWith("UnityEditor.")))
     //    {
     //        return true;
@@ -198,10 +198,10 @@ public static class ExampleConfig
     //        }
     //    }
     //    return false;
-    //}
+    // }
 
-    //static bool delegateHasEditorRef(Type delegateType)
-    //{
+    // static bool delegateHasEditorRef(Type delegateType)
+    // {
     //    if (typeHasEditorRef(delegateType)) return true;
     //    var method = delegateType.GetMethod("Invoke");
     //    if (method == null)
@@ -210,12 +210,12 @@ public static class ExampleConfig
     //    }
     //    if (typeHasEditorRef(method.ReturnType)) return true;
     //    return method.GetParameters().Any(pinfo => typeHasEditorRef(pinfo.ParameterType));
-    //}
+    // }
 
-    // 配置某Assembly下所有涉及到的delegate到CSharpCallLua下，Hotfix下拿不准那些delegate需要适配到lua function可以这么配置
-    //[CSharpCallLua]
-    //static IEnumerable<Type> AllDelegate
-    //{
+    // //配置某Assembly下所有涉及到的delegate到CSharpCallLua下，Hotfix下拿不准那些delegate需要适配到lua function可以这么配置
+    // [CSharpCallLua]
+    // static IEnumerable<Type> AllDelegate
+    // {
     //    get
     //    {
     //        BindingFlags flag = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
@@ -245,8 +245,8 @@ public static class ExampleConfig
     //                         select field.FieldType;
     //        return (returnTypes.Concat(paramTypes).Concat(fieldTypes)).Where(t => t.BaseType == typeof(MulticastDelegate) && !hasGenericParameter(t) && !delegateHasEditorRef(t)).Distinct();
     //    }
-    //}
-    //--------------end 热补丁自动化配置-------------------------
+    // }
+    // //--------------end 热补丁自动化配置-------------------------
 
     //黑名单
     [BlackList]

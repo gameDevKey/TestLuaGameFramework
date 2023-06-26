@@ -40,6 +40,39 @@ namespace XLua
 		
 			UnityEngineRay2D_TypeID = -1;
 		
+			DGTweeningAutoPlay_TypeID = -1;
+			DGTweeningAutoPlay_EnumRef = -1;
+		
+			DGTweeningAxisConstraint_TypeID = -1;
+			DGTweeningAxisConstraint_EnumRef = -1;
+		
+			DGTweeningEase_TypeID = -1;
+			DGTweeningEase_EnumRef = -1;
+		
+			DGTweeningLogBehaviour_TypeID = -1;
+			DGTweeningLogBehaviour_EnumRef = -1;
+		
+			DGTweeningLoopType_TypeID = -1;
+			DGTweeningLoopType_EnumRef = -1;
+		
+			DGTweeningPathMode_TypeID = -1;
+			DGTweeningPathMode_EnumRef = -1;
+		
+			DGTweeningPathType_TypeID = -1;
+			DGTweeningPathType_EnumRef = -1;
+		
+			DGTweeningRotateMode_TypeID = -1;
+			DGTweeningRotateMode_EnumRef = -1;
+		
+			DGTweeningScrambleMode_TypeID = -1;
+			DGTweeningScrambleMode_EnumRef = -1;
+		
+			DGTweeningTweenType_TypeID = -1;
+			DGTweeningTweenType_EnumRef = -1;
+		
+			DGTweeningUpdateType_TypeID = -1;
+			DGTweeningUpdateType_EnumRef = -1;
+		
 			TutorialTestEnum_TypeID = -1;
 			TutorialTestEnum_EnumRef = -1;
 		
@@ -62,6 +95,17 @@ namespace XLua
 			translator.RegisterPushAndGetAndUpdate<UnityEngine.Ray>(translator.PushUnityEngineRay, translator.GetUnityEngineRay, translator.UpdateUnityEngineRay);
 			translator.RegisterPushAndGetAndUpdate<UnityEngine.Bounds>(translator.PushUnityEngineBounds, translator.GetUnityEngineBounds, translator.UpdateUnityEngineBounds);
 			translator.RegisterPushAndGetAndUpdate<UnityEngine.Ray2D>(translator.PushUnityEngineRay2D, translator.GetUnityEngineRay2D, translator.UpdateUnityEngineRay2D);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.AutoPlay>(translator.PushDGTweeningAutoPlay, translator.GetDGTweeningAutoPlay, translator.UpdateDGTweeningAutoPlay);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.AxisConstraint>(translator.PushDGTweeningAxisConstraint, translator.GetDGTweeningAxisConstraint, translator.UpdateDGTweeningAxisConstraint);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.Ease>(translator.PushDGTweeningEase, translator.GetDGTweeningEase, translator.UpdateDGTweeningEase);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.LogBehaviour>(translator.PushDGTweeningLogBehaviour, translator.GetDGTweeningLogBehaviour, translator.UpdateDGTweeningLogBehaviour);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.LoopType>(translator.PushDGTweeningLoopType, translator.GetDGTweeningLoopType, translator.UpdateDGTweeningLoopType);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.PathMode>(translator.PushDGTweeningPathMode, translator.GetDGTweeningPathMode, translator.UpdateDGTweeningPathMode);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.PathType>(translator.PushDGTweeningPathType, translator.GetDGTweeningPathType, translator.UpdateDGTweeningPathType);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.RotateMode>(translator.PushDGTweeningRotateMode, translator.GetDGTweeningRotateMode, translator.UpdateDGTweeningRotateMode);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.ScrambleMode>(translator.PushDGTweeningScrambleMode, translator.GetDGTweeningScrambleMode, translator.UpdateDGTweeningScrambleMode);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.TweenType>(translator.PushDGTweeningTweenType, translator.GetDGTweeningTweenType, translator.UpdateDGTweeningTweenType);
+			translator.RegisterPushAndGetAndUpdate<DG.Tweening.UpdateType>(translator.PushDGTweeningUpdateType, translator.GetDGTweeningUpdateType, translator.UpdateDGTweeningUpdateType);
 			translator.RegisterPushAndGetAndUpdate<Tutorial.TestEnum>(translator.PushTutorialTestEnum, translator.GetTutorialTestEnum, translator.UpdateTutorialTestEnum);
 			translator.RegisterPushAndGetAndUpdate<XLuaTest.MyEnum>(translator.PushXLuaTestMyEnum, translator.GetXLuaTestMyEnum, translator.UpdateXLuaTestMyEnum);
 			translator.RegisterPushAndGetAndUpdate<Tutorial.DerivedClass.TestEnumInner>(translator.PushTutorialDerivedClassTestEnumInner, translator.GetTutorialDerivedClassTestEnumInner, translator.UpdateTutorialDerivedClassTestEnumInner);
@@ -791,6 +835,930 @@ namespace XLua
             }
         }
         
+        static int DGTweeningAutoPlay_TypeID = -1;
+		static int DGTweeningAutoPlay_EnumRef = -1;
+        
+        public static void PushDGTweeningAutoPlay(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.AutoPlay val)
+        {
+            if (DGTweeningAutoPlay_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningAutoPlay_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.AutoPlay), out is_first);
+				
+				if (DGTweeningAutoPlay_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.AutoPlay));
+				    DGTweeningAutoPlay_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningAutoPlay_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningAutoPlay_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.AutoPlay ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningAutoPlay_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningAutoPlay(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.AutoPlay val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningAutoPlay_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.AutoPlay");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.AutoPlay");
+                }
+				val = (DG.Tweening.AutoPlay)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.AutoPlay)thiz.objectCasters.GetCaster(typeof(DG.Tweening.AutoPlay))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningAutoPlay(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.AutoPlay val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningAutoPlay_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.AutoPlay");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.AutoPlay ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningAxisConstraint_TypeID = -1;
+		static int DGTweeningAxisConstraint_EnumRef = -1;
+        
+        public static void PushDGTweeningAxisConstraint(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.AxisConstraint val)
+        {
+            if (DGTweeningAxisConstraint_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningAxisConstraint_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.AxisConstraint), out is_first);
+				
+				if (DGTweeningAxisConstraint_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.AxisConstraint));
+				    DGTweeningAxisConstraint_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningAxisConstraint_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningAxisConstraint_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.AxisConstraint ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningAxisConstraint_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningAxisConstraint(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.AxisConstraint val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningAxisConstraint_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.AxisConstraint");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.AxisConstraint");
+                }
+				val = (DG.Tweening.AxisConstraint)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.AxisConstraint)thiz.objectCasters.GetCaster(typeof(DG.Tweening.AxisConstraint))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningAxisConstraint(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.AxisConstraint val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningAxisConstraint_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.AxisConstraint");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.AxisConstraint ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningEase_TypeID = -1;
+		static int DGTweeningEase_EnumRef = -1;
+        
+        public static void PushDGTweeningEase(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.Ease val)
+        {
+            if (DGTweeningEase_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningEase_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.Ease), out is_first);
+				
+				if (DGTweeningEase_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.Ease));
+				    DGTweeningEase_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningEase_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningEase_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.Ease ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningEase_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningEase(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.Ease val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningEase_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.Ease");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.Ease");
+                }
+				val = (DG.Tweening.Ease)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.Ease)thiz.objectCasters.GetCaster(typeof(DG.Tweening.Ease))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningEase(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.Ease val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningEase_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.Ease");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.Ease ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningLogBehaviour_TypeID = -1;
+		static int DGTweeningLogBehaviour_EnumRef = -1;
+        
+        public static void PushDGTweeningLogBehaviour(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.LogBehaviour val)
+        {
+            if (DGTweeningLogBehaviour_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningLogBehaviour_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.LogBehaviour), out is_first);
+				
+				if (DGTweeningLogBehaviour_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.LogBehaviour));
+				    DGTweeningLogBehaviour_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningLogBehaviour_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningLogBehaviour_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.LogBehaviour ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningLogBehaviour_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningLogBehaviour(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.LogBehaviour val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningLogBehaviour_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.LogBehaviour");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.LogBehaviour");
+                }
+				val = (DG.Tweening.LogBehaviour)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.LogBehaviour)thiz.objectCasters.GetCaster(typeof(DG.Tweening.LogBehaviour))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningLogBehaviour(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.LogBehaviour val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningLogBehaviour_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.LogBehaviour");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.LogBehaviour ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningLoopType_TypeID = -1;
+		static int DGTweeningLoopType_EnumRef = -1;
+        
+        public static void PushDGTweeningLoopType(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.LoopType val)
+        {
+            if (DGTweeningLoopType_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningLoopType_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.LoopType), out is_first);
+				
+				if (DGTweeningLoopType_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.LoopType));
+				    DGTweeningLoopType_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningLoopType_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningLoopType_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.LoopType ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningLoopType_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningLoopType(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.LoopType val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningLoopType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.LoopType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.LoopType");
+                }
+				val = (DG.Tweening.LoopType)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.LoopType)thiz.objectCasters.GetCaster(typeof(DG.Tweening.LoopType))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningLoopType(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.LoopType val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningLoopType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.LoopType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.LoopType ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningPathMode_TypeID = -1;
+		static int DGTweeningPathMode_EnumRef = -1;
+        
+        public static void PushDGTweeningPathMode(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.PathMode val)
+        {
+            if (DGTweeningPathMode_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningPathMode_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.PathMode), out is_first);
+				
+				if (DGTweeningPathMode_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.PathMode));
+				    DGTweeningPathMode_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningPathMode_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningPathMode_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.PathMode ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningPathMode_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningPathMode(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.PathMode val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningPathMode_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.PathMode");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.PathMode");
+                }
+				val = (DG.Tweening.PathMode)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.PathMode)thiz.objectCasters.GetCaster(typeof(DG.Tweening.PathMode))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningPathMode(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.PathMode val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningPathMode_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.PathMode");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.PathMode ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningPathType_TypeID = -1;
+		static int DGTweeningPathType_EnumRef = -1;
+        
+        public static void PushDGTweeningPathType(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.PathType val)
+        {
+            if (DGTweeningPathType_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningPathType_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.PathType), out is_first);
+				
+				if (DGTweeningPathType_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.PathType));
+				    DGTweeningPathType_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningPathType_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningPathType_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.PathType ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningPathType_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningPathType(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.PathType val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningPathType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.PathType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.PathType");
+                }
+				val = (DG.Tweening.PathType)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.PathType)thiz.objectCasters.GetCaster(typeof(DG.Tweening.PathType))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningPathType(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.PathType val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningPathType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.PathType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.PathType ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningRotateMode_TypeID = -1;
+		static int DGTweeningRotateMode_EnumRef = -1;
+        
+        public static void PushDGTweeningRotateMode(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.RotateMode val)
+        {
+            if (DGTweeningRotateMode_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningRotateMode_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.RotateMode), out is_first);
+				
+				if (DGTweeningRotateMode_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.RotateMode));
+				    DGTweeningRotateMode_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningRotateMode_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningRotateMode_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.RotateMode ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningRotateMode_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningRotateMode(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.RotateMode val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningRotateMode_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.RotateMode");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.RotateMode");
+                }
+				val = (DG.Tweening.RotateMode)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.RotateMode)thiz.objectCasters.GetCaster(typeof(DG.Tweening.RotateMode))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningRotateMode(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.RotateMode val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningRotateMode_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.RotateMode");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.RotateMode ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningScrambleMode_TypeID = -1;
+		static int DGTweeningScrambleMode_EnumRef = -1;
+        
+        public static void PushDGTweeningScrambleMode(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.ScrambleMode val)
+        {
+            if (DGTweeningScrambleMode_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningScrambleMode_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.ScrambleMode), out is_first);
+				
+				if (DGTweeningScrambleMode_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.ScrambleMode));
+				    DGTweeningScrambleMode_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningScrambleMode_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningScrambleMode_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.ScrambleMode ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningScrambleMode_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningScrambleMode(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.ScrambleMode val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningScrambleMode_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.ScrambleMode");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.ScrambleMode");
+                }
+				val = (DG.Tweening.ScrambleMode)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.ScrambleMode)thiz.objectCasters.GetCaster(typeof(DG.Tweening.ScrambleMode))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningScrambleMode(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.ScrambleMode val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningScrambleMode_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.ScrambleMode");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.ScrambleMode ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningTweenType_TypeID = -1;
+		static int DGTweeningTweenType_EnumRef = -1;
+        
+        public static void PushDGTweeningTweenType(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.TweenType val)
+        {
+            if (DGTweeningTweenType_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningTweenType_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.TweenType), out is_first);
+				
+				if (DGTweeningTweenType_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.TweenType));
+				    DGTweeningTweenType_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningTweenType_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningTweenType_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.TweenType ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningTweenType_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningTweenType(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.TweenType val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningTweenType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.TweenType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.TweenType");
+                }
+				val = (DG.Tweening.TweenType)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.TweenType)thiz.objectCasters.GetCaster(typeof(DG.Tweening.TweenType))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningTweenType(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.TweenType val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningTweenType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.TweenType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.TweenType ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int DGTweeningUpdateType_TypeID = -1;
+		static int DGTweeningUpdateType_EnumRef = -1;
+        
+        public static void PushDGTweeningUpdateType(this ObjectTranslator thiz, RealStatePtr L, DG.Tweening.UpdateType val)
+        {
+            if (DGTweeningUpdateType_TypeID == -1)
+            {
+			    bool is_first;
+                DGTweeningUpdateType_TypeID = thiz.getTypeId(L, typeof(DG.Tweening.UpdateType), out is_first);
+				
+				if (DGTweeningUpdateType_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(DG.Tweening.UpdateType));
+				    DGTweeningUpdateType_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, DGTweeningUpdateType_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, DGTweeningUpdateType_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for DG.Tweening.UpdateType ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, DGTweeningUpdateType_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetDGTweeningUpdateType(this ObjectTranslator thiz, RealStatePtr L, int index, out DG.Tweening.UpdateType val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningUpdateType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.UpdateType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for DG.Tweening.UpdateType");
+                }
+				val = (DG.Tweening.UpdateType)e;
+                
+            }
+            else
+            {
+                val = (DG.Tweening.UpdateType)thiz.objectCasters.GetCaster(typeof(DG.Tweening.UpdateType))(L, index, null);
+            }
+        }
+		
+        public static void UpdateDGTweeningUpdateType(this ObjectTranslator thiz, RealStatePtr L, int index, DG.Tweening.UpdateType val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != DGTweeningUpdateType_TypeID)
+				{
+				    throw new Exception("invalid userdata for DG.Tweening.UpdateType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for DG.Tweening.UpdateType ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
         static int TutorialTestEnum_TypeID = -1;
 		static int TutorialTestEnum_EnumRef = -1;
         
@@ -1120,6 +2088,72 @@ namespace XLua
 				translator.PushUnityEngineRay2D(L, array[index]);
 				return true;
 			}
+			else if (type == typeof(DG.Tweening.AutoPlay[]))
+			{
+			    DG.Tweening.AutoPlay[] array = obj as DG.Tweening.AutoPlay[];
+				translator.PushDGTweeningAutoPlay(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.AxisConstraint[]))
+			{
+			    DG.Tweening.AxisConstraint[] array = obj as DG.Tweening.AxisConstraint[];
+				translator.PushDGTweeningAxisConstraint(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.Ease[]))
+			{
+			    DG.Tweening.Ease[] array = obj as DG.Tweening.Ease[];
+				translator.PushDGTweeningEase(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.LogBehaviour[]))
+			{
+			    DG.Tweening.LogBehaviour[] array = obj as DG.Tweening.LogBehaviour[];
+				translator.PushDGTweeningLogBehaviour(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.LoopType[]))
+			{
+			    DG.Tweening.LoopType[] array = obj as DG.Tweening.LoopType[];
+				translator.PushDGTweeningLoopType(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.PathMode[]))
+			{
+			    DG.Tweening.PathMode[] array = obj as DG.Tweening.PathMode[];
+				translator.PushDGTweeningPathMode(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.PathType[]))
+			{
+			    DG.Tweening.PathType[] array = obj as DG.Tweening.PathType[];
+				translator.PushDGTweeningPathType(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.RotateMode[]))
+			{
+			    DG.Tweening.RotateMode[] array = obj as DG.Tweening.RotateMode[];
+				translator.PushDGTweeningRotateMode(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.ScrambleMode[]))
+			{
+			    DG.Tweening.ScrambleMode[] array = obj as DG.Tweening.ScrambleMode[];
+				translator.PushDGTweeningScrambleMode(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.TweenType[]))
+			{
+			    DG.Tweening.TweenType[] array = obj as DG.Tweening.TweenType[];
+				translator.PushDGTweeningTweenType(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.UpdateType[]))
+			{
+			    DG.Tweening.UpdateType[] array = obj as DG.Tweening.UpdateType[];
+				translator.PushDGTweeningUpdateType(L, array[index]);
+				return true;
+			}
 			else if (type == typeof(Tutorial.TestEnum[]))
 			{
 			    Tutorial.TestEnum[] array = obj as Tutorial.TestEnum[];
@@ -1207,6 +2241,72 @@ namespace XLua
 			else if (type == typeof(UnityEngine.Ray2D[]))
 			{
 			    UnityEngine.Ray2D[] array = obj as UnityEngine.Ray2D[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.AutoPlay[]))
+			{
+			    DG.Tweening.AutoPlay[] array = obj as DG.Tweening.AutoPlay[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.AxisConstraint[]))
+			{
+			    DG.Tweening.AxisConstraint[] array = obj as DG.Tweening.AxisConstraint[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.Ease[]))
+			{
+			    DG.Tweening.Ease[] array = obj as DG.Tweening.Ease[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.LogBehaviour[]))
+			{
+			    DG.Tweening.LogBehaviour[] array = obj as DG.Tweening.LogBehaviour[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.LoopType[]))
+			{
+			    DG.Tweening.LoopType[] array = obj as DG.Tweening.LoopType[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.PathMode[]))
+			{
+			    DG.Tweening.PathMode[] array = obj as DG.Tweening.PathMode[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.PathType[]))
+			{
+			    DG.Tweening.PathType[] array = obj as DG.Tweening.PathType[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.RotateMode[]))
+			{
+			    DG.Tweening.RotateMode[] array = obj as DG.Tweening.RotateMode[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.ScrambleMode[]))
+			{
+			    DG.Tweening.ScrambleMode[] array = obj as DG.Tweening.ScrambleMode[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.TweenType[]))
+			{
+			    DG.Tweening.TweenType[] array = obj as DG.Tweening.TweenType[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(DG.Tweening.UpdateType[]))
+			{
+			    DG.Tweening.UpdateType[] array = obj as DG.Tweening.UpdateType[];
 				translator.Get(L, obj_idx, out array[array_idx]);
 				return true;
 			}
