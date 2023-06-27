@@ -2,11 +2,11 @@ Shader "YQH/LowHpWarnning"
 {
     Properties
     {
-        [HideInInspector]_MainTex ("Texture", 2D) = "white" {}
-        _Color ("Color", Color) = (1,0,0,1)
-        _Speed ("Speed", Range(0, 10)) = 4
-        _Size ("Size", Range(0, 5)) = 2
+        _Color ("颜色", Color) = (1,0,0,1)
+        _Size ("尺寸", Range(0, 5)) = 2
         [Toggle]_Enable("开关",int) = 1
+        [Toggle]_Flash("闪烁",int) = 1
+        _Speed ("闪烁速度", Range(0, 10)) = 4
     }
 
     SubShader 
@@ -22,6 +22,7 @@ Shader "YQH/LowHpWarnning"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile _ _ENABLE_ON
+            #pragma multi_compile _ _FLASH_ON
             #include "UnityCG.cginc"
 
             sampler2D _MainTex;
@@ -35,8 +36,8 @@ Shader "YQH/LowHpWarnning"
             };
 
             struct v2f {
-                float4 vertex : SV_POSITION;
                 float4 screenPos : TEXCOORD1;
+                float4 vertex : SV_POSITION;
             };
 
             v2f vert (appdata v) {
@@ -65,13 +66,15 @@ Shader "YQH/LowHpWarnning"
                 float sY = smoothstep(0, _Size, disY / centerY);
 
                 // 计算纵向和横向的颜色占比
-                float4 finalColor = lerp(float4(0,0,0,0),_Color,sX);
+                fixed4 finalColor = lerp(fixed4(0,0,0,0),_Color,sX);
                 finalColor = lerp(finalColor,_Color,sY);
-
-                // 闪烁的Alpha值 区间[0,1]
-                float alpha = sin(_Time.y * _Speed) * 0.5 + 0.5;
-
-                finalColor.a *= alpha;
+                
+                #if _FLASH_ON
+                    // 闪烁的Alpha值 区间[0,1]
+                    finalColor.a *= sin(_Time.y * _Speed) * 0.5 + 0.5;
+                #else
+                    finalColor.a *= 1;
+                #endif
 
                 return finalColor;
             }
