@@ -78,5 +78,5 @@ Shader "YQH/LowHpWarnning"
             ENDCG
         }
     }
-    FallBack "Diffuse"
+    // FallBack "Diffuse"
 }
