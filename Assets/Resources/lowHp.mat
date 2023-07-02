@@ -9,8 +9,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: lowHp
   m_Shader: {fileID: 4800000, guid: 43223deeabe8be04e9f4ab596d1d6609, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ENABLE_ON
+  - _FLASH_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,6 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -28,6 +32,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Enable: 1
+    - _Flash: 1
     - _Size: 2
     - _Speed: 4
     m_Colors:
