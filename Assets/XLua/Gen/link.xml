@@ -3,10 +3,10 @@
 <linker>
 
 	<assembly fullname="Assembly-CSharp">
-	    <type fullname="UnityEngineObjectExtention" preserve="all"/>
+	    <type fullname="UnityEngineExtention" preserve="all"/>
 		<type fullname="DG.Tweening.DOTweenModuleUI" preserve="all"/>
 		<type fullname="FileUtils" preserve="all"/>
-		<type fullname="UnityEngineObjectExtention" preserve="all"/>
+		<type fullname="UnityEngineExtention" preserve="all"/>
 		<type fullname="DG.Tweening.DOTweenModuleUI" preserve="all"/>
 		<type fullname="Tutorial.BaseClass" preserve="all"/>
 		<type fullname="Tutorial.TestEnum" preserve="all"/>

@@ -25,7 +25,7 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(FileUtils), FileUtilsWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(UnityEngineObjectExtention), UnityEngineObjectExtentionWrap.__Register);
+            translator.DelayWrapLoader(typeof(UnityEngineExtention), UnityEngineExtentionWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(object), SystemObjectWrap.__Register);
@@ -1021,7 +1021,7 @@ namespace XLua
 			    
 				{typeof(UnityEngine.Object), new List<MethodInfo>(){
 				
-				  new __GEN_DELEGATE0(UnityEngineObjectExtention.IsNull)
+				  new __GEN_DELEGATE0(UnityEngineExtention.IsNull)
 #if UNITY_WSA && !UNITY_EDITOR
                                       .GetMethodInfo(),
 #else

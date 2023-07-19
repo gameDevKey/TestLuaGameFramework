@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class UnityEngineObjectExtentionWrap 
+    public class UnityEngineExtentionWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(UnityEngineObjectExtention);
+			System.Type type = typeof(UnityEngineExtention);
 			Utils.BeginObjectRegister(type, L, translator, 0, 0, 0, 0);
 			
 			
@@ -44,7 +44,7 @@ namespace XLua.CSObjectWrap
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int __CreateInstance(RealStatePtr L)
         {
-            return LuaAPI.luaL_error(L, "UnityEngineObjectExtention does not have a constructor!");
+            return LuaAPI.luaL_error(L, "UnityEngineExtention does not have a constructor!");
         }
         
 		

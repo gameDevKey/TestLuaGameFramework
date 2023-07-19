@@ -6,7 +6,7 @@ using XLua;
 
 [LuaCallCSharp]
 [ReflectionUse]
-public static class UnityEngineObjectExtention
+public static class UnityEngineExtention
 {
     public static bool IsNull(this UnityEngine.Object o)
     {
