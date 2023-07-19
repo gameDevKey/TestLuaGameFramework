@@ -9,6 +9,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using IResourceLocation = UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation;
 
 
+[XLua.LuaCallCSharp]
 public class GameAssetLoader : MonoSingleton<GameAssetLoader>
 {
     public static bool Log = true;
@@ -41,6 +42,12 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
         if (Log) Debug.Log($"结束加载label:{label}的{typeof(T)},用时{Time.realtimeSinceStartup - st}s");
     }
     #endregion 静态函数
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Init();
+    }
 
     public void Init()
     {
@@ -86,9 +93,11 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     {
         if (!ExistAsset<T>(key))
         {
+            var start = DateTime.Now;
             var op = Addressables.LoadAssetAsync<UnityEngine.Object>(key);
             op.WaitForCompletion();
             AddAsset(key, op.Result);
+            if (Log) Debug.Log($"加载{key}({typeof(T)})结束, 用时{(DateTime.Now - start).Milliseconds}ms.");
         }
         return GetAsset<T>(key);
     }
@@ -112,13 +121,14 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
 
     public void LoadAtlasByLabel(string label)
     {
-        GameAssetLoader.LoadObjectByLabelSync<SpriteAtlas>(label,(obj)=>{
+        GameAssetLoader.LoadObjectByLabelSync<SpriteAtlas>(label, (obj) =>
+        {
             Sprite[] sp = new Sprite[obj.spriteCount];
             obj.GetSprites(sp);
             for (int i = 0; i < sp.Length; i++)
             {
-                string key = sp[i].name.ToLower().Replace("(clone)","");
-                if(!ExistAsset<Sprite>(key)) AddAsset(key, sp[i]);
+                string key = sp[i].name.ToLower().Replace("(clone)", "");
+                if (!ExistAsset<Sprite>(key)) AddAsset(key, sp[i]);
             }
         });
     }

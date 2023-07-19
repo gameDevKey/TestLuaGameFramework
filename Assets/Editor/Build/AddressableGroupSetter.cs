@@ -18,8 +18,18 @@ public class AddressableGroupSetter
     {
         ResetGroup<GameObject>("Lua", BuildUtils.LUA_OUTPUT_PATH, "t:textasset", assetPath =>
         {
-            string fileName = Path.GetFileNameWithoutExtension(assetPath);
-            return $"{fileName}";
+            var path = assetPath.Replace(BuildUtils.LUA_OUTPUT_PATH + "/", "")
+                .Replace("/", ".")
+                .Replace(".lua.txt", "");
+            return path;
+        });
+        ResetGroup<GameObject>("UIPrefab", BuildUtils.UI_PREFAB_PATH, "t:prefab", assetPath =>
+        {
+            return BuildUtils.GetLastName(assetPath).Replace(".prefab","");
+        });
+        ResetGroup<GameObject>("GamePrefab", BuildUtils.GAME_PREFAB_PATH, "t:prefab", assetPath =>
+        {
+            return BuildUtils.GetLastName(assetPath).Replace(".prefab","");
         });
     }
 

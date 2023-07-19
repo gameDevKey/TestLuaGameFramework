@@ -11,7 +11,7 @@ public class GameLoading : MonoBehaviour
 
     void Awake()
     {
-        HandleProcess(GameLaunch.OpType.Unknown,0);
+        HandleProcess(GameLaunch.OpType.Unknown, 0);
         GameLaunch.Instance.onProcess += HandleProcess;
     }
 
@@ -28,7 +28,7 @@ public class GameLoading : MonoBehaviour
 
     void UpdateImageFill(float progress)
     {
-        ProgressFill.localScale = new Vector3(progress,1,1);
+        ProgressFill.localScale = new Vector3(progress, 1, 1);
     }
 
     void UpdateTips(GameLaunch.OpType opType, float progress)
@@ -51,7 +51,7 @@ public class GameLoading : MonoBehaviour
 
     string GetPercentStr(float progress)
     {
-        int num = (int)Mathf.Ceil(progress*100);
+        int num = (int)Mathf.Ceil(progress * 100);
         return $"{num}%";
     }
 }

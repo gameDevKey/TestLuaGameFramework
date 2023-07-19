@@ -7,6 +7,8 @@ public class BuildUtils
 {
     public const string LUA_SOURCE_PATH = "Assets/Scripts/Lua";
     public const string LUA_OUTPUT_PATH = "Assets/BuildAssets/Scripts/Lua";
+    public const string UI_PREFAB_PATH = "Assets/GameAssets/Prefab/UI";
+    public const string GAME_PREFAB_PATH = "Assets/GameAssets/Prefab/Game";
 
     public static void HandleLua()
     {
@@ -27,5 +29,12 @@ public class BuildUtils
                 return file.Name.Replace(".lua",".lua.txt");
             });
         Debug.Log($"已处理Lua文件{count}个.请查看:{outputDir}");
+    }
+
+    
+    public static string GetLastName(string path, string split = "/")
+    {
+        var arr = path.Split(split);
+        return arr[arr.Length-1];
     }
 }

@@ -18,1067 +18,1067 @@ MonoBehaviour:
   m_GUID: acf15c600658c9042b7d340754cf508b
   m_SerializeEntries:
   - m_GUID: 987176d581f0aa0468306d9e36e4c520
-    m_Address: ClsRef.lua
+    m_Address: Core.ClsRef
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a053ab81ac6e38140bf8d28d356b4a08
-    m_Address: Config.lua
+    m_Address: Core.Config
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c947c56850375634181e703f2e38f5fc
-    m_Address: Main.lua
+    m_Address: Core.Main
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 241467a530eea3e429b05ef03445524a
-    m_Address: Setup.lua
+    m_Address: Core.Setup
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 5605bc7f43121684ba034878619a6c71
-    m_Address: CsFileUtil.lua
+    m_Address: CSUtils.CsFileUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 02f938310b69a7b489a181975f64f0fc
-    m_Address: ButtonExt.lua
+    m_Address: CSUtils.UGUIExtension.ButtonExt
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c769507afe8b6764ebe6b759c8da202b
-    m_Address: RectTransformExt.lua
+    m_Address: CSUtils.UGUIExtension.RectTransformExt
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ef698dc238e3a26409cb51be18032b55
-    m_Address: ScrollRectExt.lua
+    m_Address: CSUtils.UGUIExtension.ScrollRectExt
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 53bc1985e9c27e64983475604f17ac98
-    m_Address: TransformExt.lua
+    m_Address: CSUtils.UGUIExtension.TransformExt
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a8bf7e05edbb121418adb5890599edae
-    m_Address: UIUtil.lua
+    m_Address: CSUtils.UIUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 69a4105f64a12714f827097b386bf72c
-    m_Address: UnityUtil.lua
+    m_Address: CSUtils.UnityUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 4a776041ab3f58d4f8788fa8ee3b330a
-    m_Address: Guide001.lua
+    m_Address: Data.Guide.Guide001
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 0e89a834e9826a24e804e762fd3ac3cb
-    m_Address: Guide002.lua
+    m_Address: Data.Guide.Guide002
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7f5503bdfc958c04db3e5897feed2059
-    m_Address: Skill001.lua
+    m_Address: Data.Skill.Skill001
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 5098ea3416abcdb42a14ce63db4ad838
-    m_Address: SkillAction001.lua
+    m_Address: Data.Skill.SkillAction001
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 6b0312fbbc9a0574d92d25fb5f0d74b2
-    m_Address: TimelineTemplate.lua
+    m_Address: Data.Timeline.TimelineTemplate
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2dea57ee7b3bee549bb427b2c03a3aa8
-    m_Address: TestCache.lua
+    m_Address: Debug.TestCache
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7275610eb750d31438f123601c2c2560
-    m_Address: TestCalculator.lua
+    m_Address: Debug.TestCalculator
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 375808219b5a81f44b9b4b3dc804871d
-    m_Address: TestClass.lua
+    m_Address: Debug.TestClass
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 6bc490ad9a31b2a44a2693c94b40d032
-    m_Address: TestCmd.lua
+    m_Address: Debug.TestCmd
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ac86b5d1a84a6ad42a6e0e887f990981
-    m_Address: TestDataWatcher.lua
+    m_Address: Debug.TestDataWatcher
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 713a287959589f943b164e88029ba5f3
-    m_Address: TestECSL.lua
+    m_Address: Debug.TestECSL
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ca8545df9e47e4b4caca16914f16035e
-    m_Address: TestEnum.lua
+    m_Address: Debug.TestEnum
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 69bb50558f7705444be4dff0c5d0ae61
-    m_Address: TestEvent.lua
+    m_Address: Debug.TestEvent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: aaf71271b83e5a44091728c6081d0854
-    m_Address: TestListMap.lua
+    m_Address: Debug.TestListMap
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: df7b43c14ef78ca4788807e101bfaa0f
-    m_Address: TestMain.lua
+    m_Address: Debug.TestMain
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 9254cfcc532b49446bd90ee1cfe034c6
-    m_Address: TestMath.lua
+    m_Address: Debug.TestMath
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 44e901af5bd22d14fbd0581a29524fa4
-    m_Address: TestModule.lua
+    m_Address: Debug.TestModule
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3347893b1f2386442ab168200c8fddce
-    m_Address: TestNetwork.lua
+    m_Address: Debug.TestNetwork
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 827f6e6911f9df9448efddc06003655b
-    m_Address: TestPool.lua
+    m_Address: Debug.TestPool
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b5d0abde37e072640bd09176d79c371f
-    m_Address: TestQuadTree.lua
+    m_Address: Debug.TestQuadTree
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 34eedb02f96050d4797613b0254489fb
-    m_Address: TestTable.lua
+    m_Address: Debug.TestTable
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a756ad720df07444ba2bb7d1ab88fb26
-    m_Address: TestTimeline.lua
+    m_Address: Debug.TestTimeline
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 745323331172cb14fbe1a09a5d49f538
-    m_Address: TestTimer.lua
+    m_Address: Debug.TestTimer
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 01eeca422883790489cfb75dfda6284e
-    m_Address: AttrConfig.lua
+    m_Address: Game.Config.AttrConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: aec94f7956c58c844abfe645831cfc7b
-    m_Address: EntityConfig.lua
+    m_Address: Game.Config.EntityConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: eb900e26a16e4e141a308c7919f0c03f
-    m_Address: EventConfig.lua
+    m_Address: Game.Config.EventConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 5059c00eac7d9a148a0816bf26999278
-    m_Address: MoveConfig.lua
+    m_Address: Game.Config.MoveConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 23cb0fbf591d3ad4d8c7421fe635b02f
-    m_Address: RangeConfig.lua
+    m_Address: Game.Config.RangeConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: eebb6446939603448bc0d2c038d06376
-    m_Address: SearchConfig.lua
+    m_Address: Game.Config.SearchConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7606f9781a65ae640bb4e3ea492100e3
-    m_Address: SkillConfig.lua
+    m_Address: Game.Config.SkillConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c1e5beb3a51074e4fab931599c8cdfa0
-    m_Address: StateConfig.lua
+    m_Address: Game.Config.StateConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 27b5b7fdb53b9e6448118a9bcf5bdfe1
-    m_Address: ECSLBase.lua
+    m_Address: Game.ECSL.Base.ECSLBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ade6bdd73ae1b2f4d990d3aa7f0e5ed2
-    m_Address: ECSLBehaivor.lua
+    m_Address: Game.ECSL.Base.ECSLBehaivor
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2d8541a56724bcf4f9e558f986a2a25e
-    m_Address: ECSLComponent.lua
+    m_Address: Game.ECSL.Base.ECSLComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: fabd89e7b33aa7b4ea90d85ffb93df12
-    m_Address: ECSLEntity.lua
+    m_Address: Game.ECSL.Base.ECSLEntity
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3f5baa4e6a49350439d09af993a66948
-    m_Address: ECSLRenderComponent.lua
+    m_Address: Game.ECSL.Base.ECSLRenderComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: af909fedd8204b7419568ab0b9290506
-    m_Address: ECSLSystem.lua
+    m_Address: Game.ECSL.Base.ECSLSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bd3f489772e220b48aaa693cd331f43d
-    m_Address: ECSLWorld.lua
+    m_Address: Game.ECSL.Base.ECSLWorld
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bfabae7cc908a0c448e8462f835c055a
-    m_Address: AttrComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.AttrComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 4863b8fc3ef21e54fbabd1cdfcbd5ec6
-    m_Address: CalcComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.CalcComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 71f5dc7df9baf4644a6d6e8e2fe83f21
-    m_Address: HitComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.HitComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: f40a6f909d15db04496091c240761c1f
-    m_Address: MoveComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.MoveComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7d9eebaa89035fc4baad2d29f801c2a5
-    m_Address: SkillComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.SkillComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b32ce3f2dcd5b7c40849435d1202d2b3
-    m_Address: StateComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.StateComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3998d0c83c325f94290ccc978b3471ae
-    m_Address: TransformComponent.lua
+    m_Address: Game.ECSL.Common.Component.Logic.TransformComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a04e66ccc0cb85146aa87b2d81225488
-    m_Address: RangeComponent.lua
+    m_Address: Game.ECSL.Common.Component.Render.RangeComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 101cb86632b4b9048b567aa5d5a8af44
-    m_Address: SkinComponent.lua
+    m_Address: Game.ECSL.Common.Component.Render.SkinComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: dd9ce49175fec0d4e957ad5dd6c9037f
-    m_Address: TransformRenderComponent.lua
+    m_Address: Game.ECSL.Common.Component.Render.TransformRenderComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 0b92f2b2a8bd7a24d9dab5ee932d9fbf
-    m_Address: EntityCreateSystem.lua
+    m_Address: Game.ECSL.Common.System.EntityCreateSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 70fdaf21a69b53a4ab93a184e9cfa300
-    m_Address: EntitySystem.lua
+    m_Address: Game.ECSL.Common.System.EntitySystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 83b394c38d6838b4abf16fdccb674198
-    m_Address: GameEventSystemExtend.lua
+    m_Address: Game.ECSL.Common.System.Extend.GameEventSystemExtend
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 8197d37cb4fff654596be3c05058f372
-    m_Address: GameEventSystem.lua
+    m_Address: Game.ECSL.Common.System.GameEventSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 24ec12876e0866c499fca74b81bf37fd
-    m_Address: GameFrameSyncSystem.lua
+    m_Address: Game.ECSL.Common.System.GameFrameSyncSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: d342c0a1a072db745a195dd193866f5e
-    m_Address: GameInputSystem.lua
+    m_Address: Game.ECSL.Common.System.GameInputSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a324f4f4d174e21468d880fbb31938f8
-    m_Address: SearchSystem.lua
+    m_Address: Game.ECSL.Common.System.SearchSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 9c64a04a06beeb14180461b7b6ab9eff
-    m_Address: ECSLConfig.lua
+    m_Address: Game.ECSL.ECSLConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 833ae3d36b29bfc408762f94b3e3d0ce
-    m_Address: ECSLUtil.lua
+    m_Address: Game.ECSL.Utils.ECSLUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 639c9a4fc4ac3f843972a7f17a8a197a
-    m_Address: GameManager.lua
+    m_Address: Game.GameManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 1907d80c0ed049b43843c01c1cf19c51
-    m_Address: IWorld.lua
+    m_Address: Game.Interface.IWorld
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 59915e7188b76eb4287424f56f986cc2
-    m_Address: GamePlayEntity.lua
+    m_Address: Game.Module.GamePlay.Entity.GamePlayEntity
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 5fae417246565494b93d58379e307ba7
-    m_Address: ProjEntity.lua
+    m_Address: Game.Module.GamePlay.Entity.ProjEntity
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 619686db891139c46a2c40788bbe6a47
-    m_Address: FightFSMLayer.lua
+    m_Address: Game.Module.GamePlay.FSM.FSMLayer.FightFSMLayer
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 854c2a13d97a36b4dac427f8ee0d8faa
-    m_Address: MoveFSMLayer.lua
+    m_Address: Game.Module.GamePlay.FSM.FSMLayer.MoveFSMLayer
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 92718fb06a224a34c9fc9a5992e72d6d
-    m_Address: FightFSMState.lua
+    m_Address: Game.Module.GamePlay.FSM.FSMState.FightFSMState
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b104a1010dffa5d43bc02a95b0a9dd28
-    m_Address: IdleFSMState.lua
+    m_Address: Game.Module.GamePlay.FSM.FSMState.IdleFSMState
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: fddda2d2eb6c3594eaa0c28082aba760
-    m_Address: MoveFSMState.lua
+    m_Address: Game.Module.GamePlay.FSM.FSMState.MoveFSMState
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b3b77317380af7144a38f01fcc0342d4
-    m_Address: RunFSMState.lua
+    m_Address: Game.Module.GamePlay.FSM.FSMState.RunFSMState
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 09055d6053cd9d74f83e8e598bcb012b
-    m_Address: StateFSM.lua
+    m_Address: Game.Module.GamePlay.FSM.StateFSM
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 6015c81a5a3c17c47b56179b7d0b5020
-    m_Address: GamePlayEntranceSystem.lua
+    m_Address: Game.Module.GamePlay.System.GamePlayEntranceSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: f0cfe2accbab81343b285cb312478ed9
-    m_Address: GamePlayOperateSystem.lua
+    m_Address: Game.Module.GamePlay.System.GamePlayOperateSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c01f3be7d2c08ed4b8012760a0d54f2d
-    m_Address: GamePlayWorld.lua
+    m_Address: Game.Module.GamePlay.World.GamePlayWorld
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3006e37ee89b4894ab7b3b9b8d359da2
-    m_Address: TestComponent.lua
+    m_Address: Game.Module.Test.Component.TestComponent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 5d9c77ef7c4cc374394f7ae0429b6cd2
-    m_Address: TestEntity.lua
+    m_Address: Game.Module.Test.Entity.TestEntity
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ec0cc05d793ec03448498c585888122d
-    m_Address: TestWorld.lua
+    m_Address: Game.Module.Test.World.TestWorld
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c8fa8d0c6003f8c4e9e2a07888db8c54
-    m_Address: LinearMover.lua
+    m_Address: Game.Unit.Move.LinearMover
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ebc882ad87afcd64ba5bc40efe7e2b36
-    m_Address: MoverBase.lua
+    m_Address: Game.Unit.Move.MoverBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: f793ad157c793d34fbf714d4086c96f0
-    m_Address: ActSkill.lua
+    m_Address: Game.Unit.Skill.ActSkill
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 314df61289127f3428ae4b0e2c5a995b
-    m_Address: PasvSkill.lua
+    m_Address: Game.Unit.Skill.PasvSkill
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: e1dcbda5e1b552d4ebba02bafad5ba06
-    m_Address: SkillBase.lua
+    m_Address: Game.Unit.Skill.SkillBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ab01ac5978c19474e93c115c29989877
-    m_Address: SkillTimeline.lua
+    m_Address: Game.Unit.Skill.SkillTimeline
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: fda8e6237ffb854439caefb163fa6e8e
-    m_Address: UpdateManager.lua
+    m_Address: Game.UpdateManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 38f57f4a7c2f8fe4eaa600f73e4dda0d
-    m_Address: WorldManager.lua
+    m_Address: Game.WorldManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 244fe2541b294b44a8be40f0e07496dc
-    m_Address: CtrlBase.lua
+    m_Address: Module.Base.CtrlBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 915c9aced69254a4e902c95177fddbd6
-    m_Address: FacadeBase.lua
+    m_Address: Module.Base.FacadeBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: edcaa43ec38403f47a16b4e53ed29200
-    m_Address: GameModuleBase.lua
+    m_Address: Module.Base.GameModuleBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 139c106d3a4d0c3449cda04a1f8922ad
-    m_Address: ModuleBase.lua
+    m_Address: Module.Base.ModuleBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 33e0cff33931c384d96d4df6b4f6999b
-    m_Address: ProxyBase.lua
+    m_Address: Module.Base.ProxyBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 28c03b2611cb3d24fa54fddc4fce056c
-    m_Address: ViewCtrlBase.lua
+    m_Address: Module.Base.ViewCtrlBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ee4067e78d72291419027e2a1efc682e
-    m_Address: GamePlayCtrl.lua
+    m_Address: Module.GamePlay.Ctrl.GamePlayCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2124069c5428ed44d971bc1e269b36a3
-    m_Address: GamePlayViewCtrl.lua
+    m_Address: Module.GamePlay.Ctrl.GamePlayViewCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ff2fe2c4ce658ca4aab9b54fba400647
-    m_Address: GamePlayFacade.lua
+    m_Address: Module.GamePlay.GamePlayFacade
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 06b52473dc1234d40816239542c5f2c8
-    m_Address: EGamePlayModule.lua
+    m_Address: Module.GamePlay.Proxy.EGamePlayModule
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 9c76b3c2dbe458c498d6cfcc87e60216
-    m_Address: GamePlayProxy.lua
+    m_Address: Module.GamePlay.Proxy.GamePlayProxy
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 939c5996ac01f8f4abe023e3f2b187e3
-    m_Address: GamePlayMenuItem.lua
+    m_Address: Module.GamePlay.View.GamePlayMenuItem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 9b180dec7a19d3848b3dda26b2212903
-    m_Address: GamePlayMenuViewUI.lua
+    m_Address: Module.GamePlay.View.GamePlayMenuViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 5b8a52d30ebfbd749ba648775b1b9be5
-    m_Address: GamePlayViewUI.lua
+    m_Address: Module.GamePlay.View.GamePlayViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 72907bc1c2b24f04bb082c8aa1de443b
-    m_Address: GenericLogicCtrl.lua
+    m_Address: Module.Generic.Ctrl.GenericLogicCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 0331e77b2d733df4e9be3c8375982d98
-    m_Address: GenericViewCtrl.lua
+    m_Address: Module.Generic.Ctrl.GenericViewCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bb9664486d250144abfd05fc636a36c8
-    m_Address: GenericFacade.lua
+    m_Address: Module.Generic.GenericFacade
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 0b58323e024e7f14b8cdddf1d1c863bc
-    m_Address: GenericProxy.lua
+    m_Address: Module.Generic.Proxy.GenericProxy
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bf69755308713b8468b154f6d0c66a34
-    m_Address: GenericViewUI.lua
+    m_Address: Module.Generic.View.GenericViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 15d416d2020e91e40ab9e601191dae5c
-    m_Address: GuideLogicCtrl.lua
+    m_Address: Module.Guide.Ctrl.GuideLogicCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 64ca34a8242583942a3cab5ce844ad0b
-    m_Address: GuideViewCtrl.lua
+    m_Address: Module.Guide.Ctrl.GuideViewCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c05661b9e6fa9844d87293d38b61cc4c
-    m_Address: GuideFacade.lua
+    m_Address: Module.Guide.GuideFacade
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: da8efafd18361624a8a0d2c17d480a73
-    m_Address: EGuideModule.lua
+    m_Address: Module.Guide.Proxy.EGuideModule
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 1ddc879158e641a4aa99dbf80a133a36
-    m_Address: GuideProxy.lua
+    m_Address: Module.Guide.Proxy.GuideProxy
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 677e73fe5d00323438aeb505142258b5
-    m_Address: DelayGuideAction.lua
+    m_Address: Module.Guide.Unit.Action.DelayGuideAction
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 048fa3e065c5cef4e88693233d78175a
-    m_Address: DialogueGuideAction.lua
+    m_Address: Module.Guide.Unit.Action.DialogueGuideAction
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7e10c7219463e754da2c67da071daa18
-    m_Address: GuideAction.lua
+    m_Address: Module.Guide.Unit.Base.GuideAction
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 00a4a33b414f845488378cabc9f6bd55
-    m_Address: GuideClip.lua
+    m_Address: Module.Guide.Unit.Base.GuideClip
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 29880df7f0d098047819fa3f77c38dbb
-    m_Address: GuideFinder.lua
+    m_Address: Module.Guide.Unit.Base.GuideFinder
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 11ac9a3193140a249b3deb0579f72803
-    m_Address: GuideModuleBase.lua
+    m_Address: Module.Guide.Unit.Base.GuideModuleBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 670b3437751090f4687d0fe67f8f3efa
-    m_Address: GuideTimeline.lua
+    m_Address: Module.Guide.Unit.Base.GuideTimeline
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: d463e672042288141b452b2ea6971739
-    m_Address: GuideTrigger.lua
+    m_Address: Module.Guide.Unit.Base.GuideTrigger
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 8df9afe5ac869474c9f632382f5493f0
-    m_Address: GuideUnit.lua
+    m_Address: Module.Guide.Unit.Base.GuideUnit
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 761e52b6109f0924483883ebd7e02fad
-    m_Address: UIPosGuideFinder.lua
+    m_Address: Module.Guide.Unit.Finder.UIPosGuideFinder
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 87362ce0b4ced6a4e983896a629d057a
-    m_Address: EnterGameGuideTrigger.lua
+    m_Address: Module.Guide.Unit.Trigger.EnterGameGuideTrigger
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: d349836ee263f184c84ed2dcb010d81b
-    m_Address: MoveGuideTrigger.lua
+    m_Address: Module.Guide.Unit.Trigger.MoveGuideTrigger
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 048f278544a8c7943a2e27493ae38ac7
-    m_Address: DialogueGuideExtendView.lua
+    m_Address: Module.Guide.View.DialogueGuideExtendView
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 1ca51483b81ba224aaf80a4962d8daae
-    m_Address: GuideViewUI.lua
+    m_Address: Module.Guide.View.GuideViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a6c974dab2b28214cba1464b28c8c186
-    m_Address: LoginLogicCtrl.lua
+    m_Address: Module.Login.Ctrl.LoginLogicCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: f966ca49a133f204db484642565ac253
-    m_Address: LoginViewCtrl.lua
+    m_Address: Module.Login.Ctrl.LoginViewCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: dd542e34570e338499ff16a0fcdc5f14
-    m_Address: LoginFacade.lua
+    m_Address: Module.Login.LoginFacade
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 684749916c49f0345a2e6d441002198d
-    m_Address: ELoginModule.lua
+    m_Address: Module.Login.Proxy.ELoginModule
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 4637c0e94d831ba488ac3759f8e37abc
-    m_Address: LoginProxy.lua
+    m_Address: Module.Login.Proxy.LoginProxy
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c4b6c9d998a53c749bf44dbd81691080
-    m_Address: LoginComUI.lua
+    m_Address: Module.Login.View.LoginComUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: df0e6e1b524fc72499be6a6390d4f4ec
-    m_Address: LoginViewUI.lua
+    m_Address: Module.Login.View.LoginViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 8c2c0114f5391644a905b4a8ceb509e1
-    m_Address: ServerListItem.lua
+    m_Address: Module.Login.View.ServerListItem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2f1328b0cbc488a4f87967b08834f157
-    m_Address: TemplateLogicCtrl.lua
+    m_Address: Module.Template.Ctrl.TemplateLogicCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: d9530abf24c00fb449eda3ab99434b16
-    m_Address: TemplateViewCtrl.lua
+    m_Address: Module.Template.Ctrl.TemplateViewCtrl
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 4818c8b7a7c72104e840c1e55f2fde15
-    m_Address: ETemplateModule.lua
+    m_Address: Module.Template.Proxy.ETemplateModule
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 94a2524169be4ce4889cc851ad29a92c
-    m_Address: TemplateProxy.lua
+    m_Address: Module.Template.Proxy.TemplateProxy
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 75bc044d0ee671f4aa58ad3dca82e87e
-    m_Address: TemplateFacade.lua
+    m_Address: Module.Template.TemplateFacade
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 002aaee67e319dc4f938a05b7b2b6108
-    m_Address: TemplateComUI.lua
+    m_Address: Module.Template.View.TemplateComUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: d6bb01346a6523341a46e52f74cbefbb
-    m_Address: TemplateExtendView1.lua
+    m_Address: Module.Template.View.TemplateExtendView1
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 8d34c81802e945e4dab215e49ea2b722
-    m_Address: TemplateExtendView2.lua
+    m_Address: Module.Template.View.TemplateExtendView2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b309275acb5c1204c8332bce7394f5e1
-    m_Address: TemplateViewUI.lua
+    m_Address: Module.Template.View.TemplateViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b71cceab1de7593438f209b2d061c003
-    m_Address: CalcDefine.lua
+    m_Address: Toolkit.Calculator.CalcDefine
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 276192cfba5220a41b099bcf23f1d082
-    m_Address: Calculator.lua
+    m_Address: Toolkit.Calculator.Calculator
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ed14dc33d8e258840a4644728f04c662
-    m_Address: CommandBase.lua
+    m_Address: Toolkit.Command.CommandBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 01eaa47eebce4f247896afa94d12f6b8
-    m_Address: CommandManager.lua
+    m_Address: Toolkit.Command.CommandManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 93da64e62c6987e46871c36b73b8d827
-    m_Address: DataWatcher.lua
+    m_Address: Toolkit.DataWatcher.DataWatcher
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a46e5181d492e8d4f8917eca66f21e81
-    m_Address: DataWatcherBase.lua
+    m_Address: Toolkit.DataWatcher.DataWatcherBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a5fa870a32d708c408cab4216f9ab9d4
-    m_Address: TableDataWatcher.lua
+    m_Address: Toolkit.DataWatcher.TableDataWatcher
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 33f9088386f1abb48959f536c0a1891f
-    m_Address: Enum.lua
+    m_Address: Toolkit.Enum.Enum
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3f19a0a8a0a28894b998a9213eab191c
-    m_Address: EGlobalEvent.lua
+    m_Address: Toolkit.Event.EGlobalEvent
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: e7b487e2867d8fa408549c614f9226c8
-    m_Address: EventDispatcher.lua
+    m_Address: Toolkit.Event.EventDispatcher
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 22a5b2fe906cc4548b9ecafd3e9dbee4
-    m_Address: FSM.lua
+    m_Address: Toolkit.FSM.FSM
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7483274be15fd9148814c4d5a7af74e8
-    m_Address: FSMBehavior.lua
+    m_Address: Toolkit.FSM.FSMBehavior
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2dd9ccb4b34e7bd41a2f18d167ff2b16
-    m_Address: FSMOrder.lua
+    m_Address: Toolkit.FSM.FSMOrder
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: df4a1ed1336cc7a408390d8b6e894a85
-    m_Address: FSMState.lua
+    m_Address: Toolkit.FSM.FSMState
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: e625b72a2c89f1847982f9e21a2ae856
-    m_Address: AssetLoader.lua
+    m_Address: Toolkit.Loader.AssetLoader
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b61d4cb2529ab6f4db5f5acce5ed5428
-    m_Address: Network.lua
+    m_Address: Toolkit.Network.Network
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3589bfc1b9df06946947ff7428356e25
-    m_Address: ProtoDefine.lua
+    m_Address: Toolkit.Network.ProtoDefine
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 98625d6e0b7af3d4bb52573c4994ff77
-    m_Address: EOrderQueue.lua
+    m_Address: Toolkit.OrderQueue.EOrderQueue
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 0a099e589f6f5be4e9e4f13e31ad4ae6
-    m_Address: OrderQueue.lua
+    m_Address: Toolkit.OrderQueue.OrderQueue
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 517d600b9dd8cbf46b75741ff1a5a215
-    m_Address: CacheItemBase.lua
+    m_Address: Toolkit.Pool.Base.CacheItemBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a27e5c4b9f4d46a48bf92bf9881bf581
-    m_Address: CachePoolBase.lua
+    m_Address: Toolkit.Pool.Base.CachePoolBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: df55ed4fa7461b743a8d4b0c45e39256
-    m_Address: ComplexPoolBase.lua
+    m_Address: Toolkit.Pool.Base.ComplexPoolBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2601359d29cf5974c8f8eaddd9792442
-    m_Address: CacheDefine.lua
+    m_Address: Toolkit.Pool.CacheDefine
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 31c14845480e1574d809bdaf3040d8ef
-    m_Address: CacheManager.lua
+    m_Address: Toolkit.Pool.CacheManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 77b6ec67aa9c1cf4aac6304c26cb1c26
-    m_Address: ICache.lua
+    m_Address: Toolkit.Pool.Interface.ICache
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 9f93275581879664f8122be65bc1b27f
-    m_Address: CacheLuaTable.lua
+    m_Address: Toolkit.Pool.LuaTable.CacheLuaTable
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 1ad992ed91356494ca7779b365b096f6
-    m_Address: LuaTablePool.lua
+    m_Address: Toolkit.Pool.LuaTable.LuaTablePool
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c55a067ef3a8a244b88ce9449af10b9c
-    m_Address: CacheTestItem.lua
+    m_Address: Toolkit.Pool.Test.CacheTestItem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 33ea2bc228f9f4341b689179ff14c69a
-    m_Address: TestItemPool.lua
+    m_Address: Toolkit.Pool.Test.TestItemPool
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: f76f864a28d2cdd42838933a49c5e887
-    m_Address: CacheUI.lua
+    m_Address: Toolkit.Pool.UI.CacheUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 55379d3da5b086e449541d721bfb5fa5
-    m_Address: UIPool.lua
+    m_Address: Toolkit.Pool.UI.UIPool
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ea53a0945cdfd794bae390e161911a8b
-    m_Address: EQuadTree.lua
+    m_Address: Toolkit.QuadTree.EQuadTree
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: ed9d874817e504945bba6fc396abc65f
-    m_Address: QuadTree.lua
+    m_Address: Toolkit.QuadTree.QuadTree
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: be45b68cf46bb7c4086e2ade71f812de
-    m_Address: QuadTreeNode.lua
+    m_Address: Toolkit.QuadTree.QuadTreeNode
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 811fccdfa17d02b46a039c1d38641806
-    m_Address: QuadTreeUtil.lua
+    m_Address: Toolkit.QuadTree.QuadTreeUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 12fddd419d43c5845b6d0f91afad5f81
-    m_Address: ERedPoint.lua
+    m_Address: Toolkit.RedPoint.ERedPoint
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a2ea9802e0bd0be4ca78da102b30096c
-    m_Address: RedPointManager.lua
+    m_Address: Toolkit.RedPoint.RedPointManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 46b6d9c373a2cce408b2c1a49fccce95
-    m_Address: RedPointNode.lua
+    m_Address: Toolkit.RedPoint.RedPointNode
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 1ffe245aab73f3049bcfcc8d7af5e7de
-    m_Address: dump.lua
+    m_Address: Toolkit.Snapshot.dump
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 6dcad16df89f96f41a63b9000f9be4c1
-    m_Address: print_r.lua
+    m_Address: Toolkit.Snapshot.print_r
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a8975ee81d737914fb575ac10c59a223
-    m_Address: snapshot_utils.lua
+    m_Address: Toolkit.Snapshot.snapshot_utils
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 9c2c76aacbe4b154189edb5fe46f9fbc
-    m_Address: TimelineBase.lua
+    m_Address: Toolkit.Timeline.TimelineBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: f345197933f4863488cd1d8f99fa59fc
-    m_Address: Timer.lua
+    m_Address: Toolkit.Timer.Timer
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 45e3fa7d5e04a0748af991987cef6a4a
-    m_Address: TimerManager.lua
+    m_Address: Toolkit.Timer.TimerManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 99c995078a60464439e077a83438ad47
-    m_Address: UIBase.lua
+    m_Address: UI.Base.UIBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: e51ceb05b1493c74a8e3a65e225fe398
-    m_Address: UIBaseExtend.lua
+    m_Address: UI.Base.UIBaseExtend
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bee49b4d09dc5ce4bb8ad0b4b645c4c2
-    m_Address: ELoopScrollView.lua
+    m_Address: UI.Common.LoopScrollView.ELoopScrollView
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 63302f318157bc340a4ca3f9a776c55d
-    m_Address: GridLoopScrollView.lua
+    m_Address: UI.Common.LoopScrollView.GridLoopScrollView
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 15da81f139d420942af91dd6d5877bef
-    m_Address: HorizontalLoopScrollView.lua
+    m_Address: UI.Common.LoopScrollView.HorizontalLoopScrollView
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: a8ca2c92fe729c94390171e0df4bdcff
-    m_Address: LoopScrollViewBase.lua
+    m_Address: UI.Common.LoopScrollView.LoopScrollViewBase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: eee9862200635ed4a9a028e843117cc3
-    m_Address: VerticalLoopScrollView.lua
+    m_Address: UI.Common.LoopScrollView.VerticalLoopScrollView
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: d91644cec6274de45bd8b73f8abf63cc
-    m_Address: ComUI.lua
+    m_Address: UI.ComUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c6eef8c4492a2474eb53c00693090170
-    m_Address: UIDefine.lua
+    m_Address: UI.UIDefine
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bfaa3b32f72b72343a8391f8b4e0a7c8
-    m_Address: UIManager.lua
+    m_Address: UI.UIManager
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: bb231cbe1b54ff240863d333f48de6d1
-    m_Address: ViewUI.lua
+    m_Address: UI.ViewUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: b06bfe2a436fcae46805cc982b6c59bb
-    m_Address: Algorithm.lua
+    m_Address: Utils.Algorithm
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 7e904751784033d4bb3a475cf4a30a58
-    m_Address: CallObject.lua
+    m_Address: Utils.CallObject
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 3002b304b98f2b74cb7babf967078ffa
-    m_Address: Class.lua
+    m_Address: Utils.Class
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 510fb64730511e5468850a486c9eb8e3
-    m_Address: Common.lua
+    m_Address: Utils.Common
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 6145f4991e6c32144b0ab67d82762bdc
-    m_Address: ListMap.lua
+    m_Address: Utils.ListMap
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 6bdf115b5c35c634880622623d093d84
-    m_Address: LuaFileUtil.lua
+    m_Address: Utils.LuaFileUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 75fb1f7500eb20841a1ff707aa5fa46a
-    m_Address: MathUtil.lua
+    m_Address: Utils.MathUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 2f78eda96ef270c4da0c90d69d40cffb
-    m_Address: String.lua
+    m_Address: Utils.String
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: c77d751c9e9bcae4b8b0b5b2d87acf09
-    m_Address: Table.lua
+    m_Address: Utils.Table
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
   - m_GUID: 893e4e29a31413549bb6cefd3a9b22e2
-    m_Address: Time.lua
+    m_Address: Utils.Time
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua

@@ -29,6 +29,7 @@ end
 
 function AssetLoader:TestLoadFunc()
     for _, data in ipairs(self.toLoads) do
+        print("加载资源",data.path)
         self.results[data.path] = UnityUtil.LoadResources(data.path)
         if data.callObject then
             data.callObject:Invoke(self.results[data.path],data.path)

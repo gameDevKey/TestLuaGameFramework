@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 
 public class GameLaunch : MonoSingleton<GameLaunch>
 {
@@ -16,6 +17,7 @@ public class GameLaunch : MonoSingleton<GameLaunch>
         CatalogUpdate,
     }
     public Action<OpType, float> onProcess;
+    public static bool Log = true;
 
     protected override void Awake()
     {
@@ -25,7 +27,7 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
     IEnumerator HandleOp(OpType e, AsyncOperationHandle handle)
     {
-        Debug.Log($"[{e}]开始.");
+        if (Log) Debug.Log($"[{e}]开始.");
         var start = DateTime.Now;
         onProcess?.Invoke(e, 0);
         while (!handle.IsDone)
@@ -33,12 +35,12 @@ public class GameLaunch : MonoSingleton<GameLaunch>
             onProcess?.Invoke(e, handle.PercentComplete);
             yield return null;
         }
+
         onProcess?.Invoke(e, 1);
-        var spendTime = (DateTime.Now - start).Milliseconds;
-        Debug.Log($"[{e}]结束, 用时{spendTime}ms.");
+        if (Log) Debug.Log($"[{e}]结束, 用时{(DateTime.Now - start).Milliseconds}ms.");
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
-            Debug.LogError($"[{e}]处理失败.");
+            if (Log) Debug.LogError($"[{e}]处理失败.");
         }
     }
 
@@ -75,6 +77,11 @@ public class GameLaunch : MonoSingleton<GameLaunch>
     IEnumerator LoadAssets()
     {
         //TODO
-        yield break;
+        yield return Finish();
+    }
+
+    IEnumerator Finish()
+    {
+        yield return SceneManager.LoadSceneAsync("Main");
     }
 }
