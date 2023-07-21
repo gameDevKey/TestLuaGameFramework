@@ -19,6 +19,19 @@ public class GameStart : MonoBehaviour
 
         luaEnv.AddLoader((ref string name) =>
         {
+#if UNITY_EDITOR
+            var data = BuildDataLoader.Instance.GetData();
+            if (data.BuildMode == BuildConfig.EBuildMode.Dev)
+            {
+                name = name.Replace(".", "/");
+                name = $"{BuildConfig.LUA_SOURCE_PATH}/{name}.lua";
+                if (File.Exists(name))
+                {
+                    return File.ReadAllBytes(name);
+                }
+                return null;
+            }
+#endif
             return GameAssetLoader.Instance.LoadBytes(name);
         });
         luaEnv.DoString("require('Core.Main')");

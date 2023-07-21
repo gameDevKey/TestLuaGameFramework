@@ -44,6 +44,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4fbcf29676bdf0a4e9c0119fd69ffa11, type: 2}
   - {fileID: 11400000, guid: 58994dc1c42c1094aa1b98e36943c230, type: 2}
   - {fileID: 11400000, guid: eb83aeb5ccd886c4cb23011360ce5761, type: 2}
+  - {fileID: 11400000, guid: ca9db13537bd9374aa0ad38bd93798e7, type: 2}
+  - {fileID: 11400000, guid: 6c7f1b855b11b4e4ca50aae892afa2df, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -87,6 +89,8 @@ MonoBehaviour:
     - default
     - Script
     - Lua
+    - UIPrefab
+    - GamePrefab
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 172a12069b895e2468ea07377da30837, type: 2}

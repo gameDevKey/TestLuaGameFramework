@@ -5,15 +5,10 @@ using UnityEditor;
 
 public class BuildUtils
 {
-    public const string LUA_SOURCE_PATH = "Assets/Scripts/Lua";
-    public const string LUA_OUTPUT_PATH = "Assets/BuildAssets/Scripts/Lua";
-    public const string UI_PREFAB_PATH = "Assets/GameAssets/Prefab/UI";
-    public const string GAME_PREFAB_PATH = "Assets/GameAssets/Prefab/Game";
-
     public static void HandleLua()
     {
-        FileUtil.DeleteFileOrDirectory(LUA_OUTPUT_PATH);
-        ParseLuaToTxt(LUA_SOURCE_PATH,LUA_OUTPUT_PATH);
+        FileUtil.DeleteFileOrDirectory(BuildConfig.LUA_OUTPUT_PATH);
+        ParseLuaToTxt(BuildConfig.LUA_SOURCE_PATH,BuildConfig.LUA_OUTPUT_PATH);
         AssetDatabase.Refresh();
     }
 

@@ -9,4 +9,16 @@ public class AndroidBuildTool : BuildToolBase
     {
         BuildUtils.HandleLua();
     }
+
+    void OnEnable()
+    {
+        Init(BuildConfig.ANDROID_DATA_OBJ_NAME);
+        this.name = "安卓平台";
+    }
+
+    void OnGUI()
+    {
+        DrawDataObjectArea();
+        DrawButton("确定", Build, "构建");
+    }
 }

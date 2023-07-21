@@ -7,7 +7,7 @@ end
 
 function GenericViewCtrl:BindEvents()
     self:AddGolbalListenerWithSelfFunc(EGlobalEvent.Lanuch, "ActiveGenericView", false)
-    self:AddGolbalListenerWithSelfFunc(EGlobalEvent.ViewEnter, "OnViewEnter", false)
+    self:AddGolbalListenerWithSelfFunc(EGlobalEvent.ViewEnterComplete, "OnViewEnterComplete", false)
     self:AddGolbalListenerWithSelfFunc(EGlobalEvent.ViewExit, "OnViewExit", false)
 end
 
@@ -15,7 +15,7 @@ function GenericViewCtrl:ActiveGenericView()
     self:EnterView(UIDefine.ViewType.GenericView)
 end
 
-function GenericViewCtrl:OnViewEnter(type, view)
+function GenericViewCtrl:OnViewEnterComplete(type, view)
     self:showCurrentViewName()
 end
 

@@ -7,7 +7,18 @@ public class DefaultBuildTool : BuildToolBase
 {
     public override void Build()
     {
-        Debug.Log("默认平台打包");
         BuildUtils.HandleLua();
+    }
+
+    void OnEnable()
+    {
+        Init(BuildConfig.DEFAULT_DATA_OBJ_NAME);
+        this.name = "默认平台";
+    }
+
+    void OnGUI()
+    {
+        DrawDataObjectArea();
+        DrawButton("确定", Build, "构建");
     }
 }

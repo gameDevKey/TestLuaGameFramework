@@ -12,7 +12,8 @@ function UIPool:OnDelete()
 end
 
 function UIPool:LoadAsset(path,fn,caller)
-    self.assetLoader:AddAsset(path)
+    PrintLog("UIPool:LoadAsset",path)
+    self.assetLoader:AddAsset(AssetDefine.Type.Prefab,path)
     self.assetLoader:LoadAsset(fn,caller)
 end
 

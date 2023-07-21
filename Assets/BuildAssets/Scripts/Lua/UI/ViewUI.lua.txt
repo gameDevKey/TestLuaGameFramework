@@ -150,6 +150,9 @@ function ViewUI:OnEnter(data)
 end
 
 function ViewUI:OnEnterComplete()
+    if self.viewCtrl then
+        self.viewCtrl:EnterViewComplete(self)
+    end
     self:CallExtendViewsFunc("EnterComplete")
 end
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc27e75e032d85d418ff9a653001ea60, type: 3}
+  m_Name: DefaultBuildData
+  m_EditorClassIdentifier: 
+  LUA_SOURCE_PATH: Assets/BuildAssets/Scripts/Lua
+  LUA_OUTPUT_PATH: Assets/BuildAssets/Scripts/Lua
+  UI_PREFAB_PATH: Assets/GameAssets/Prefab/UI
+  GAME_PREFAB_PATH: Assets/GameAssets/Prefab/Game
+  BuildMode: 1

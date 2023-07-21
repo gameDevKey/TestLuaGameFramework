@@ -4,6 +4,7 @@ function AssetLoader:OnInit()
     self.toLoads = {}
     self.results = {}
     self.isDone = false
+    self.csLoader = CS.GameAssetLoader.Instance
 end
 
 function AssetLoader:OnDelete()
@@ -13,45 +14,76 @@ function AssetLoader:OnDelete()
     end
 end
 
+function AssetLoader:AddAsset(assetType, path, callObject)
+    PrintLog("AssetLoader:AddAsset",assetType,path)
+    self.isDone = false
+    table.insert(self.toLoads, {
+        assetType = assetType,
+        path = path,
+        callObject = callObject
+    })
+end
+
 function AssetLoader:LoadAsset(fn,caller)
-    self.finishCallback = CallObject.New(fn,caller)
+    -- self:LoadAssetByCallObject(CallObject.New(fn,caller))
+end
 
-    if self:IsDone() then
-        self:LoadDone()
-        return
-    end
-
-    --测试----
-    if TEST_ENV then
-        self:TestLoadFunc()
+function AssetLoader:LoadAssetByCallObject(callObject)
+    self.finishCallback = callObject
+    if not self:IsDone() then
+        self.needLoads = {}
+        for _, data in ipairs(self.toLoads) do
+            self:MarkLoadAsset(data)
+        end
+        for _, data in ipairs(self.toLoads) do
+            if data.assetType == AssetDefine.Type.Prefab then
+                -- self.csLoader:LoadGameObjectAsync(data.path, function (obj)
+                --     self:OnLoadAsset(data, obj)
+                -- end)
+                self:OnLoadAsset(data, nil)
+            elseif data.assetType == AssetDefine.Type.Sprite then
+                error("接口未实现")
+            elseif data.assetType == AssetDefine.Type.Text then
+                -- self.csLoader:LoadTextAsync(data.path, function (obj)
+                --     self:OnLoadAsset(data, obj)
+                -- end)
+                self:OnLoadAsset(data, nil)
+            end
+        end
     end
 end
 
-function AssetLoader:TestLoadFunc()
-    for _, data in ipairs(self.toLoads) do
-        print("加载资源",data.path)
-        self.results[data.path] = UnityUtil.LoadResources(data.path)
-        if data.callObject then
-            data.callObject:Invoke(self.results[data.path],data.path)
-        end
+function AssetLoader:MarkLoadAsset(data)
+    self.needLoads[data] = true
+    PrintLog("AssetLoader:加载资源开始",data)
+end
+
+function AssetLoader:OnLoadAsset(data, obj)
+    if not self.needLoads[data] then
+        PrintError("资源加载异常", data, obj)
+        return
     end
-    self:LoadDone()
+    PrintLog("AssetLoader:加载资源结束",data,obj)
+    self.needLoads[data] = nil
+    if data.callObject then
+        data.callObject:Invoke(obj, data.path)
+    end
+    table.insert(self.results, {
+        path = data.path,
+        obj = obj,
+    })
+    if not table.IsValid(self.needLoads) then
+        self:LoadDone()
+    end
 end
 
 function AssetLoader:LoadDone()
+    PrintLog("AssetLoader:所有资源加载结束")
     self.isDone = true
     self.toLoads = {}
     if self.finishCallback then
         self.finishCallback:Invoke(self.results)
     end
-end
-
-function AssetLoader:AddAsset(path, callObject)
-    self.isDone = false
-    table.insert(self.toLoads, {
-        path = path,
-        callObject = callObject
-    })
 end
 
 function AssetLoader:IsDone()

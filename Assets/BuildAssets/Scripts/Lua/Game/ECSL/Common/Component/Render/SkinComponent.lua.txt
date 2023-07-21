@@ -23,7 +23,7 @@ end
 
 function SkinComponent:SetSkin(skinData)
     --Test
-    self.assetLoader:AddAsset(skinData.Asset,CallObject.New(self:ToFunc("OnSkinLoaded")))
+    self.assetLoader:AddAsset(AssetDefine.Type.Prefab,skinData.Asset,CallObject.New(self:ToFunc("OnSkinLoaded")))
     self.assetLoader:LoadAsset()
 end
 

@@ -4,6 +4,7 @@ function CacheUI:OnInit()
 end
 
 function CacheUI:onAssetLoaded(asset)
+    PrintLog("CacheUI:onAssetLoaded",self.data, asset)
     self.asset = asset[self.data.path]
     self:OnUse()
 end

@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UnityEditor;
 
 public class BuildEditor
 {
-    [MenuItem("打包工具/打包")]
-    public static void Build()
+    [MenuItem("构建/打包工具")]
+    public static void OpenBuildWindow()
     {
-        BuildToolBase tool = null;
 #if UNITY_ANDROID
-        tool = new AndroidBuildTool();
+        EditorWindow.GetWindow(typeof(AndroidBuildTool));
 #elif UNITY_IOS
 
 #else
-        tool = new DefaultBuildTool();
+        EditorWindow.GetWindow(typeof(DefaultBuildTool));
 #endif
-        tool?.Build();
     }
 }

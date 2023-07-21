@@ -10,6 +10,10 @@ function ViewCtrlBase:EnterView(uiType, data)
     end
 end
 
+function ViewCtrlBase:EnterViewComplete(view)
+    EventDispatcher.Global:Broadcast(EGlobalEvent.ViewEnterComplete,view.uiType,view)
+end
+
 function ViewCtrlBase:ExitView(view)
     local success = UIManager.Instance:Exit(view)
     if success then

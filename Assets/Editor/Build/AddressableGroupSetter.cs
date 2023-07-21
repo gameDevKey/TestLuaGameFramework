@@ -16,18 +16,18 @@ public class AddressableGroupSetter
     //TODO 配置化
     public static void InitGroups()
     {
-        ResetGroup<GameObject>("Lua", BuildUtils.LUA_OUTPUT_PATH, "t:textasset", assetPath =>
+        ResetGroup<GameObject>("Lua", BuildConfig.LUA_OUTPUT_PATH, "t:textasset", assetPath =>
         {
-            var path = assetPath.Replace(BuildUtils.LUA_OUTPUT_PATH + "/", "")
+            var path = assetPath.Replace(BuildConfig.LUA_OUTPUT_PATH + "/", "")
                 .Replace("/", ".")
                 .Replace(".lua.txt", "");
             return path;
         });
-        ResetGroup<GameObject>("UIPrefab", BuildUtils.UI_PREFAB_PATH, "t:prefab", assetPath =>
+        ResetGroup<GameObject>("UIPrefab", BuildConfig.UI_PREFAB_PATH, "t:prefab", assetPath =>
         {
             return BuildUtils.GetLastName(assetPath).Replace(".prefab","");
         });
-        ResetGroup<GameObject>("GamePrefab", BuildUtils.GAME_PREFAB_PATH, "t:prefab", assetPath =>
+        ResetGroup<GameObject>("GamePrefab", BuildConfig.GAME_PREFAB_PATH, "t:prefab", assetPath =>
         {
             return BuildUtils.GetLastName(assetPath).Replace(".prefab","");
         });

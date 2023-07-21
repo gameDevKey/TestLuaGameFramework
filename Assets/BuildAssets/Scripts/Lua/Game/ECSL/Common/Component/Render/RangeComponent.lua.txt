@@ -32,7 +32,7 @@ end
 
 function RangeComponent:LoadRes()
     local res = RangeConfig.Type2Res[self.range.type]
-    self.assetLoader:AddAsset(res,CallObject.New(self:ToFunc("OnResLoaded")))
+    self.assetLoader:AddAsset(AssetDefine.Type.Prefab,res,CallObject.New(self:ToFunc("OnResLoaded")))
     self.assetLoader:LoadAsset()
 end
 
