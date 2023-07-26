@@ -22,35 +22,6 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     Dictionary<Type, Dictionary<string, Object>> assetCache = null;
     Dictionary<string, List<Action<Object>>> waitCalls;
 
-    #region 静态函数
-    public static IList<T> LoadObjectByLabelSync<T>(string label, Action<T> onLoad) where T : Object
-    {
-        if (Log) Debug.Log($"开始加载label:{label}的{typeof(T)}");
-        float st = Time.realtimeSinceStartup;
-        var handles = Addressables.LoadAssetsAsync<T>(label, onLoad);
-        handles.WaitForCompletion();
-        if (Log) Debug.Log($"结束加载label:{label}的{typeof(T)},用时{Time.realtimeSinceStartup - st}s");
-        return handles.Result;
-    }
-
-    public static IEnumerator LoadObjectByLabelAsync<T>(string label, Action<IResourceLocation, T> callback) where T : Object
-    {
-        if (Log) Debug.Log($"开始加载label:{label}的{typeof(T)}");
-        float st = Time.realtimeSinceStartup;
-        var locations = Addressables.LoadResourceLocationsAsync(label);
-        yield return locations;
-        var ops = new List<AsyncOperationHandle>(locations.Result.Count);
-        foreach (var location in locations.Result)
-        {
-            var handle = Addressables.LoadAssetAsync<T>(location);
-            handle.Completed += op => { callback.Invoke(location, op.Result); };
-            ops.Add(handle);
-        }
-        yield return Addressables.ResourceManager.CreateGenericGroupOperation(ops, true);
-        if (Log) Debug.Log($"结束加载label:{label}的{typeof(T)},用时{Time.realtimeSinceStartup - st}s");
-    }
-    #endregion 静态函数
-
     protected override void Awake()
     {
         base.Awake();
@@ -84,18 +55,20 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
         return assetCache.ContainsKey(tpe) && assetCache[tpe].ContainsKey(key);
     }
 
-    public Object GetOrLoadAsset<T>(string key)
-    {
-        if (!ExistAsset<T>(key))
-        {
-            var start = DateTime.Now;
-            var op = Addressables.LoadAssetAsync<Object>(key);
-            op.WaitForCompletion();
-            AddAsset(key, op.Result);
-            if (Log) Debug.Log($"加载{key}({typeof(T)})结束, 用时{(DateTime.Now - start).Milliseconds}ms.");
-        }
-        return GetAsset<T>(key);
-    }
+    // WaitForCompletion 竟然也会出现未结束前多次调用的情况..
+    // public Object GetOrLoadAsset<T>(string key)
+    // {
+    //     if (!ExistAsset<T>(key))
+    //     {
+    //         if (Log) Debug.Log($"加载{key}({typeof(T)})开始.");
+    //         var start = DateTime.Now;
+    //         var op = Addressables.LoadAssetAsync<Object>(key);
+    //         op.WaitForCompletion();
+    //         AddAsset(key, op.Result);
+    //         if (Log) Debug.Log($"加载{key}({typeof(T)})结束, 用时{(DateTime.Now - start).Milliseconds}ms.");
+    //     }
+    //     return GetAsset<T>(key);
+    // }
 
 
     public IEnumerator GetOrLoadAssetAsync<T>(string key, Action<Object> callback)
@@ -115,6 +88,7 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
         if (loadLock.TryAdd(loadKey, true))
         {
             //开始加载资源
+            if (Log) Debug.Log($"加载{key}({typeof(T)})开始.");
             var start = DateTime.Now;
             var op = Addressables.LoadAssetAsync<Object>(key);
             op.Completed += op =>
@@ -135,30 +109,30 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     }
 
 
-    public byte[] LoadBytes(string path)
-    {
-        var text = GetOrLoadAsset<TextAsset>(path) as TextAsset;
-        return text.bytes;
-    }
+    // public byte[] LoadBytes(string path)
+    // {
+    //     var text = GetOrLoadAsset<TextAsset>(path) as TextAsset;
+    //     return text.bytes;
+    // }
 
-    public string LoadText(string path)
-    {
-        var text = GetOrLoadAsset<TextAsset>(path) as TextAsset;
-        return text.text;
-    }
+    // public string LoadText(string path)
+    // {
+    //     var text = GetOrLoadAsset<TextAsset>(path) as TextAsset;
+    //     return text.text;
+    // }
 
     public void LoadTextAsync(string path, LuaFunction func)
     {
         StartCoroutine(GetOrLoadAssetAsync<TextAsset>(path, (obj) =>
         {
-            func.Call((obj as TextAsset)?.text,path);
+            func.Call((obj as TextAsset)?.text, path);
         }));
     }
 
-    public GameObject LoadGameObject(string path)
-    {
-        return GetOrLoadAsset<GameObject>(path) as GameObject;
-    }
+    // public GameObject LoadGameObject(string path)
+    // {
+    //     return GetOrLoadAsset<GameObject>(path) as GameObject;
+    // }
 
     public void LoadGameObjectAsync(string path, LuaFunction func)
     {
@@ -215,4 +189,26 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     //         }
     //     }));
     // }
+
+
+    public IEnumerator LoadObjectByLabelAsync<T>(string label, Action<IResourceLocation, T> callback = null) where T : Object
+    {
+        if (Log) Debug.Log($"开始加载label为{label}的{typeof(T)}");
+        float st = Time.realtimeSinceStartup;
+        var locations = Addressables.LoadResourceLocationsAsync(label);
+        yield return locations;
+        var ops = new List<AsyncOperationHandle>(locations.Result.Count);
+        foreach (var location in locations.Result)
+        {
+            var handle = Addressables.LoadAssetAsync<T>(location);
+            handle.Completed += op =>
+            {
+                AddAsset(location.PrimaryKey, op.Result);
+                callback?.Invoke(location, op.Result);
+            };
+            ops.Add(handle);
+        }
+        yield return Addressables.ResourceManager.CreateGenericGroupOperation(ops, true);
+        if (Log) Debug.Log($"结束加载label为{label}的{typeof(T)},用时{Time.realtimeSinceStartup - st}s");
+    }
 }

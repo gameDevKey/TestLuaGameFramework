@@ -2,17 +2,13 @@ using UnityEngine;
 using UnityEditor;
 
 
+#if UNITY_EDITOR
 public class BuildDataLoader : MonoSingleton<BuildDataLoader>
 {
     private BuildDataObject data;
     public BuildDataObject LoadBuildData()
     {
-        string path = "";
-#if UNITY_EDITOR
-        path = BuildConfig.BUILD_OBJ_DIR_PATH + BuildConfig.DEFAULT_DATA_OBJ_NAME + ".asset";
-#elif UNITY_ANDROID
-        path = BuildConfig.BUILD_OBJ_DIR_PATH+BuildConfig.ANDROID_DATA_OBJ_NAME+".asset";
-#endif
+        string path = BuildConfig.BUILD_OBJ_DIR_PATH + BuildConfig.DEFAULT_DATA_OBJ_NAME + ".asset";
         return AssetDatabase.LoadAssetAtPath<BuildDataObject>(path);
     }
 
@@ -27,3 +23,4 @@ public class BuildDataLoader : MonoSingleton<BuildDataLoader>
         return data;
     }
 }
+#endif

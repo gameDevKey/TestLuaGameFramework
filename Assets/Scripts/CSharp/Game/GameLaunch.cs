@@ -15,6 +15,7 @@ public class GameLaunch : MonoSingleton<GameLaunch>
         AddressablesInit,
         CatalogCheckUpdate,
         CatalogUpdate,
+        DownloadLua,
     }
     public Action<OpType, float> onProcess;
     public static bool Log = true;
@@ -22,7 +23,14 @@ public class GameLaunch : MonoSingleton<GameLaunch>
     protected override void Awake()
     {
         base.Awake();
-        StartCoroutine(InitAddressables());
+        // StartCoroutine(InitAddressables());
+
+        if (Log) Debug.Log($"AddressablesInit开始.");
+        var start = DateTime.Now;
+        Addressables.InitializeAsync().Completed += (op) => {
+            if (Log) Debug.Log($"AddressablesInit结束, 用时{(DateTime.Now - start).Milliseconds}ms.");
+            StartCoroutine(CheckCatalogUpdate());
+        };
     }
 
     IEnumerator HandleOp(OpType e, AsyncOperationHandle handle)
@@ -76,12 +84,15 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
     IEnumerator LoadAssets()
     {
-        //TODO
+        var handle = Addressables.DownloadDependenciesAsync("Lua");
+        yield return HandleOp(OpType.DownloadLua,handle);
+        yield return GameAssetLoader.Instance.LoadObjectByLabelAsync<TextAsset>("Lua");
         yield return Finish();
     }
 
     IEnumerator Finish()
     {
-        yield return SceneManager.LoadSceneAsync("Main");
+        // yield return SceneManager.LoadSceneAsync("Main");
+        yield return null;
     }
 }

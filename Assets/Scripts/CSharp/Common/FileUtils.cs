@@ -48,4 +48,9 @@ public class FileUtils
     {
         return filePath.Replace("\\", "/").Replace("//", "/");
     }
+
+    public static void DeleteDir(string path,bool recursive=true)
+    {
+        Directory.Delete(path,recursive);
+    }
 }

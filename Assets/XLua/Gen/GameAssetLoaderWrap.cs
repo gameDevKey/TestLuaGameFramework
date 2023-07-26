@@ -21,13 +21,10 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(GameAssetLoader);
-			Utils.BeginObjectRegister(type, L, translator, 0, 6, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 3, 0, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadBytes", _m_LoadBytes);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadText", _m_LoadText);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadTextAsync", _m_LoadTextAsync);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadGameObject", _m_LoadGameObject);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadGameObjectAsync", _m_LoadGameObjectAsync);
 			
 			
@@ -107,64 +104,6 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LoadBytes(RealStatePtr L)
-        {
-		    try {
-            
-                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-            
-            
-                GameAssetLoader gen_to_be_invoked = (GameAssetLoader)translator.FastGetCSObj(L, 1);
-            
-            
-                
-                {
-                    string _path = LuaAPI.lua_tostring(L, 2);
-                    
-                        var gen_ret = gen_to_be_invoked.LoadBytes( _path );
-                        LuaAPI.lua_pushstring(L, gen_ret);
-                    
-                    
-                    
-                    return 1;
-                }
-                
-            } catch(System.Exception gen_e) {
-                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
-            }
-            
-        }
-        
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LoadText(RealStatePtr L)
-        {
-		    try {
-            
-                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-            
-            
-                GameAssetLoader gen_to_be_invoked = (GameAssetLoader)translator.FastGetCSObj(L, 1);
-            
-            
-                
-                {
-                    string _path = LuaAPI.lua_tostring(L, 2);
-                    
-                        var gen_ret = gen_to_be_invoked.LoadText( _path );
-                        LuaAPI.lua_pushstring(L, gen_ret);
-                    
-                    
-                    
-                    return 1;
-                }
-                
-            } catch(System.Exception gen_e) {
-                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
-            }
-            
-        }
-        
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _m_LoadTextAsync(RealStatePtr L)
         {
 		    try {
@@ -185,35 +124,6 @@ namespace XLua.CSObjectWrap
                     
                     
                     return 0;
-                }
-                
-            } catch(System.Exception gen_e) {
-                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
-            }
-            
-        }
-        
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LoadGameObject(RealStatePtr L)
-        {
-		    try {
-            
-                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-            
-            
-                GameAssetLoader gen_to_be_invoked = (GameAssetLoader)translator.FastGetCSObj(L, 1);
-            
-            
-                
-                {
-                    string _path = LuaAPI.lua_tostring(L, 2);
-                    
-                        var gen_ret = gen_to_be_invoked.LoadGameObject( _path );
-                        translator.Push(L, gen_ret);
-                    
-                    
-                    
-                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {

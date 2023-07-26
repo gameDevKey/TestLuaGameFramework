@@ -827,8 +827,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
-  - m_GUID: e625b72a2c89f1847982f9e21a2ae856
-    m_Address: Toolkit.Loader.AssetLoader
+  - m_GUID: dce81360444ae3142ad5b320d80ef7d7
+    m_Address: Toolkit.Loader.AssetDefine
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Lua
+  - m_GUID: ddde6fdb855996c4bb02f4538eb0fd56
+    m_Address: Toolkit.Loader.AssetLoaderUtil
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
@@ -1082,12 +1087,9 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
-  - m_GUID: dce81360444ae3142ad5b320d80ef7d7
-    m_Address: Toolkit.Loader.AssetDefine
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Lua
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a6833e46772cb544eab1e6f07f9c4636, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: 69e5d0d74864a9b45ae83f3ff7ce7195, type: 2}
+    - {fileID: 11400000, guid: 4bb66d328e3a17345a34f055b931a218, type: 2}

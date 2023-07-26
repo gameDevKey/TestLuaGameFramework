@@ -1,5 +1,4 @@
 LoginViewUI = Class("LoginViewUI",ViewUI)
-LoginViewUI.UseTemplate = false --ComUI用现有GameObject加载或者用路径加载
 
 function LoginViewUI:OnInit()
     self:SetAssetPath("LoginWindow")
@@ -9,10 +8,10 @@ function LoginViewUI:OnFindComponent()
     self.loginBtn = self:GetButton("btn")
     self.txtName = self:GetText("btn/txt")
     self.container = self:GetTransform("container")
-    if self.UseTemplate then
-        self.template = self:GetTransform("container/LoginCom").gameObject
-        self.template:SetActive(false)
-    end
+
+    self.template = self:GetTransform("container/LoginCom").gameObject
+    self.template:SetActive(false)
+
     self.serverListSR = self:GetScrollRect("serverlist")
     self.serverTemplate = self:GetGameObject("serverlist/Viewport/Content/serveritem")
     self.serverTemplate:SetActive(false)
@@ -28,11 +27,7 @@ function LoginViewUI:OnEnter(data)
 end
 
 function LoginViewUI:OnEnterComplete()
-    if self.UseTemplate then
-        self:BatchCreateComUIByAmount(UIDefine.ComType.LoginCom,self.container,3,self.template)
-    else
-        self:BatchCreateComUIByAmount(UIDefine.ComType.LoginCom,self.container,3)
-    end
+    self:BatchCreateComUIByAmount(UIDefine.ComType.LoginCom,self.container,3,self.template)
     local testData = {}
     for i = 1, 20, 1 do
         table.insert(testData,{data={name="服务器"..i}})

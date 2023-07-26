@@ -4,10 +4,9 @@ function ViewCtrlBase:OnInitComplete()
 end
 
 function ViewCtrlBase:EnterView(uiType, data)
-    local view = UIManager.Instance:Enter(uiType, data, self)
-    if view then
+    UIManager.Instance:Enter(uiType, data, self, function (view)
         EventDispatcher.Global:Broadcast(EGlobalEvent.ViewEnter,uiType,view)
-    end
+    end)
 end
 
 function ViewCtrlBase:EnterViewComplete(view)

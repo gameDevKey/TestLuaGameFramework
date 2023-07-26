@@ -1,9 +1,6 @@
 LoginComUI = Class("LoginComUI",ComUI)
 
 function LoginComUI:OnInit()
-    if not LoginViewUI.UseTemplate then
-        self:SetAssetPath("LoginCom")
-    end
 end
 
 function LoginComUI:OnFindComponent()

@@ -1,10 +1,10 @@
-using UnityEditor;
+// using UnityEditor;
 
-[InitializeOnLoad]
-public class RunOnEditorInit
-{
-    static RunOnEditorInit()
-    {
-        AddressableGroupSetter.InitGroups();
-    }
-}
+// [InitializeOnLoad]
+// public class RunOnEditorInit
+// {
+//     static RunOnEditorInit()
+//     {
+//         AddressableGroupSetter.InitGroups();
+//     }
+// }

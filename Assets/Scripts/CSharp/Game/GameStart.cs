@@ -32,7 +32,8 @@ public class GameStart : MonoBehaviour
                 return null;
             }
 #endif
-            return GameAssetLoader.Instance.LoadBytes(name);
+            // return GameAssetLoader.Instance.LoadBytes(name);
+            return (GameAssetLoader.Instance.GetAsset<TextAsset>(name) as TextAsset).bytes;
         });
         luaEnv.DoString("require('Core.Main')");
 

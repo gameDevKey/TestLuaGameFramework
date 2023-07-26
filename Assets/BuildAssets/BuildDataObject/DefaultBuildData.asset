@@ -16,4 +16,4 @@ MonoBehaviour:
   LUA_OUTPUT_PATH: Assets/BuildAssets/Scripts/Lua
   UI_PREFAB_PATH: Assets/GameAssets/Prefab/UI
   GAME_PREFAB_PATH: Assets/GameAssets/Prefab/Game
-  BuildMode: 1
+  BuildMode: 2

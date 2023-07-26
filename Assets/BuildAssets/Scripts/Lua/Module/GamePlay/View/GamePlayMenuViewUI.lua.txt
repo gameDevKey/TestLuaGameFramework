@@ -25,8 +25,6 @@ function GamePlayMenuViewUI:OnEnter(data)
 end
 
 function GamePlayMenuViewUI:OnEnterComplete()
-    local num = math.random(1,4)
-    self:BatchCreateComUIByAmount(UIDefine.ComType.LoginCom,self.container,num)
 
     local testData = {}
     for i = 1, 20, 1 do

@@ -1,11 +1,9 @@
 SkinComponent = Class("SkinComponent",ECSLRenderComponent)
 
 function SkinComponent:OnInit()
-    self.assetLoader = AssetLoader.New()
 end
 
 function SkinComponent:OnDelete()
-    self.assetLoader:Delete()
     if self.skin then
         UnityUtil.DestroyGameObject(self.skin)
         self.skin = nil
@@ -23,8 +21,7 @@ end
 
 function SkinComponent:SetSkin(skinData)
     --Test
-    self.assetLoader:AddAsset(AssetDefine.Type.Prefab,skinData.Asset,CallObject.New(self:ToFunc("OnSkinLoaded")))
-    self.assetLoader:LoadAsset()
+    AssetLoaderUtil.LoadGameObjectAsync(skinData.Asset,self:ToFunc("OnSkinLoaded"))
 end
 
 function SkinComponent:OnSkinLoaded(res,path)

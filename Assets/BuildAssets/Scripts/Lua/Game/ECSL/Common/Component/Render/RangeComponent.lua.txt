@@ -1,11 +1,9 @@
 RangeComponent = Class("RangeComponent",ECSLRenderComponent)
 
 function RangeComponent:OnInit()
-    self.assetLoader = AssetLoader.New()
 end
 
 function RangeComponent:OnDelete()
-    self.assetLoader:Delete()
     if self.rangeRes then
         UnityUtil.DestroyGameObject(self.rangeRes)
         self.rangeRes = nil
@@ -32,8 +30,7 @@ end
 
 function RangeComponent:LoadRes()
     local res = RangeConfig.Type2Res[self.range.type]
-    self.assetLoader:AddAsset(AssetDefine.Type.Prefab,res,CallObject.New(self:ToFunc("OnResLoaded")))
-    self.assetLoader:LoadAsset()
+    AssetLoaderUtil.LoadGameObjectAsync(res,self:ToFunc("OnResLoaded"))
 end
 
 function RangeComponent:OnResLoaded(res,path)

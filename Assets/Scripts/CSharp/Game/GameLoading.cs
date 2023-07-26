@@ -3,21 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameLoading : MonoBehaviour
 {
     public RectTransform ProgressFill;
     public Text ProgressTips;
+    public Text Log;
+    public Button EnterButton;
+
+    private string logStr;
 
     void Awake()
     {
+        Application.logMessageReceived += ShowLog;
         HandleProcess(GameLaunch.OpType.Unknown, 0);
+        EnterButton.onClick.AddListener(OnEnterButtonClick);
+    }
+
+    void Start()
+    {
         GameLaunch.Instance.onProcess += HandleProcess;
     }
 
-    void Destroy()
+    void OnDestroy()
     {
         GameLaunch.Instance.onProcess -= HandleProcess;
+        Application.logMessageReceived -= ShowLog;
+        EnterButton.onClick.RemoveListener(OnEnterButtonClick);
+    }
+
+    void OnEnterButtonClick()
+    {
+        SceneManager.LoadSceneAsync("Main",LoadSceneMode.Single);
+    }
+
+    void ShowLog(string condition, string stackTrace, LogType type)
+    {
+        logStr += condition + "\n";
+        Log.text = logStr;
     }
 
     void HandleProcess(GameLaunch.OpType opType, float progress)

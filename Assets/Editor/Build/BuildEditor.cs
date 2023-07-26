@@ -2,7 +2,7 @@ using UnityEditor;
 
 public class BuildEditor
 {
-    [MenuItem("构建/打包工具")]
+    [MenuItem("Tools/打包")]
     public static void OpenBuildWindow()
     {
 #if UNITY_ANDROID

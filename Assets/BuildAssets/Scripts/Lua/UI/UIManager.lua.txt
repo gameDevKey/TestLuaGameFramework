@@ -31,7 +31,7 @@ function UIManager:OnDelete()
     self.uiSortOrder = nil
 end
 
-function UIManager:Enter(uiType, data, viewCtrl)
+function UIManager:Enter(uiType, data, viewCtrl, callback)
     local config = UIDefine.Config[uiType]
     if not config then
         PrintError("界面配置不存在",uiType)
@@ -55,11 +55,12 @@ function UIManager:Enter(uiType, data, viewCtrl)
     end
 
     local view = clazz.New(uiType)
-    self:addView(view)
-    view:SetSortOrder(self:GetSortOrder(view.uiType))
-    view:SetViewCtrl(viewCtrl)
-
-    return self:CreateUIByPool(view.uiType,view.uiAssetPath,view,data)
+    UIUtil.CreateUIByPool(view.uiType,view.uiAssetPath,view,data,function ()
+        self:addView(view)
+        view:SetSortOrder(self:GetSortOrder(view.uiType))
+        view:SetViewCtrl(viewCtrl)
+        _ = callback and callback(view)
+    end)
 end
 
 --退出某个界面
@@ -95,19 +96,6 @@ function UIManager:Exit(targetView)
     end
 
     return true
-end
-
-function UIManager:CreateUIByPool(uiType,pathOrPrefab,ui,enterData)
-    local pool = CacheManager.Instance:GetPool(CacheDefine.PoolType.UI,true)
-    local args = {callback = self:ToFunc("onViewEnter"), args = {ui=ui,data=enterData}}
-    if IsString(pathOrPrefab) then
-        args.path = pathOrPrefab
-    else
-        args.prefab = pathOrPrefab
-    end
-    local cacheUI = pool:Get(uiType, args)
-    ui:SetCacheHandler(cacheUI)
-    return ui
 end
 
 --栈顶界面出栈
@@ -227,14 +215,6 @@ function UIManager:getCacheListByType(uiType)
         return self.uiHoldList
     end
     return self.uiStack
-end
-
---TODO 复用的界面还需要跑findTargets()?
-function UIManager:onViewEnter(args,gameObject)
-    local ui = args.ui
-    local data = args.data
-    ui:SetupViewAsset(gameObject)
-    ui:Enter(data)
 end
 
 --#endregion

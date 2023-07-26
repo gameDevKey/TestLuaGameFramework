@@ -25,12 +25,13 @@ public class AddressableGroupSetter
         });
         ResetGroup<GameObject>("UIPrefab", BuildConfig.UI_PREFAB_PATH, "t:prefab", assetPath =>
         {
-            return BuildUtils.GetLastName(assetPath).Replace(".prefab","");
+            return BuildUtils.GetLastName(assetPath).Replace(".prefab", "");
         });
         ResetGroup<GameObject>("GamePrefab", BuildConfig.GAME_PREFAB_PATH, "t:prefab", assetPath =>
         {
-            return BuildUtils.GetLastName(assetPath).Replace(".prefab","");
+            return BuildUtils.GetLastName(assetPath).Replace(".prefab", "");
         });
+        AssetDatabase.Refresh();
     }
 
 
