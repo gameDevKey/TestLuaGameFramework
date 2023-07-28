@@ -4,12 +4,24 @@ using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Build;
 using UnityEditor.AddressableAssets;
 
 public abstract class BuildToolBase : EditorWindow
 {
+    protected BuildDataObject DataObject;
+    protected string DataObjectPath;
+    protected BuildVersion version;
+    protected string buildPath;
+
+    private const float labelWidth = 200;
+    private int buildModeIndex = 0;
+    private static string[] BuildMode2Name = new string[]{
+        "全量包",
+        "增量包",
+    };
 
     protected virtual void BuildAll()
     {
@@ -24,16 +36,15 @@ public abstract class BuildToolBase : EditorWindow
             ContentUpdateScript.BuildContentUpdate(AddressableAssetSettingsDefaultObject.Settings, path);
     }
 
-    private const float labelWidth = 200;
-    private int buildModeIndex = 0;
-    private static string[] BuildMode2Name = new string[]{
-        "全量包",
-        "增量包",
-    };
-
-
-    protected BuildDataObject DataObject;
-    protected string DataObjectPath;
+    protected virtual void UpdateVersion(bool majorVersionUpdate)
+    {
+        if (version == null) return;
+        if (majorVersionUpdate)
+            version.UpdateMain();
+        else
+            version.UpdateSub();
+        PlayerSettings.bundleVersion = version.Get();
+    }
 
     protected void Init(string objName)
     {
@@ -41,6 +52,18 @@ public abstract class BuildToolBase : EditorWindow
         if (!target.Exists) target.Create();
         DataObjectPath = BuildConfig.BUILD_OBJ_DIR_PATH + objName + ".asset";
         DataObject = GetDataObject();
+        AfterGetDataObject();
+    }
+
+    void AfterGetDataObject()
+    {
+        if (DataObject != null && version == null)
+            ParseVersionData();
+    }
+
+    void ParseVersionData()
+    {
+        version = new BuildVersion(PlayerSettings.bundleVersion, DataObject.BuildMode, 9);
     }
 
     BuildDataObject GetDataObject()
@@ -64,6 +87,7 @@ public abstract class BuildToolBase : EditorWindow
             DrawButton("创建", () =>
             {
                 DataObject = CreateDataObject();
+                AfterGetDataObject();
             },
             "请创建数据集");
         }
@@ -72,6 +96,9 @@ public abstract class BuildToolBase : EditorWindow
             EditorGUILayout.BeginHorizontal();
             DrawLabel("数据集");
             EditorGUILayout.ObjectField(DataObject, typeof(BuildDataObject), false);
+            DrawButton("刷新",()=>{
+                ParseVersionData();
+            });
             EditorGUILayout.EndHorizontal();
         }
     }
@@ -137,7 +164,7 @@ public abstract class BuildToolBase : EditorWindow
 
     string GetBuildDetail()
     {
-        return 
+        return
 @$"包体: {BuildMode2Name[buildModeIndex]}
 平台: {UnityEditor.EditorUserBuildSettings.activeBuildTarget}";
     }
@@ -147,5 +174,22 @@ public abstract class BuildToolBase : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
+    }
+
+    protected void DrawVersion()
+    {
+        if (version == null) return;
+        DrawTextField("Version", version.Get(), null, false);
+    }
+
+    protected void DrawBuildPathClear()
+    {
+        buildPath = DrawTextField("输出路径", buildPath, "ServerData/" + UnityEditor.EditorUserBuildSettings.activeBuildTarget, false);
+        DrawButton("清空", () =>
+        {
+            FileUtil.DeleteFileOrDirectory(buildPath);
+            AssetDatabase.Refresh();
+            Debug.Log("已清空:" + buildPath);
+        });
     }
 }

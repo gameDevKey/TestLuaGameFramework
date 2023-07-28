@@ -80,7 +80,7 @@ MonoBehaviour:
       - m_Id: 1da4f32b518104f48a4e39a126d9a92e
         m_Value: ServerData/[BuildTarget]
       - m_Id: 6ada32ec5e7a4d645adcd3ba250e671d
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: http://yqhtestaa.oss-cn-guangzhou.aliyuncs.com
     m_ProfileEntryNames:
     - m_Id: fffd9ea6a0cd9ad4fbd756fe235b3673
       m_Name: BuildTarget
@@ -139,7 +139,7 @@ MonoBehaviour:
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
-          m_Data: True
+          m_Data: False
           m_Key: IsEnabled
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String

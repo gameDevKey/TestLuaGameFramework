@@ -21,7 +21,7 @@ public class GameStart : MonoBehaviour
         {
 #if UNITY_EDITOR
             var data = BuildDataLoader.Instance.GetData();
-            if (data.BuildMode == BuildConfig.EBuildMode.Dev)
+            if (data.BuildMode == BuildConfig.EBuildMode.Develop)
             {
                 name = name.Replace(".", "/");
                 name = $"{BuildConfig.LUA_SOURCE_PATH}/{name}.lua";

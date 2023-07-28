@@ -8,38 +8,35 @@ using UnityEditor.AddressableAssets;
 
 public class DefaultBuildTool : BuildToolBase
 {
-    private string buildPath;
-
     protected override void BuildAll()
     {
         BuildUtils.HandleLua();
+        base.UpdateVersion(true);
         base.BuildAll();
     }
 
     protected override void BuildDelta()
     {
         BuildUtils.HandleLua();
+        base.UpdateVersion(false);
         base.BuildDelta();
     }
 
     void OnEnable()
     {
-        Init(BuildConfig.DEFAULT_DATA_OBJ_NAME);
+        base.Init(BuildConfig.DEFAULT_DATA_OBJ_NAME);
         this.titleContent = new GUIContent("默认平台");
     }
 
     void OnGUI()
     {
+        DrawVersion();
+        DrawVerticalSpace();
         DrawDataObjectArea();
         DrawVerticalSpace();
         DrawBuildSelectList("包体类型");
         DrawVerticalSpace();
-        buildPath = DrawTextField("输出路径",buildPath,"ServerData/"+UnityEditor.EditorUserBuildSettings.activeBuildTarget,false);
-        DrawButton("清空",()=>{
-            FileUtil.DeleteFileOrDirectory(buildPath);
-            AssetDatabase.Refresh();
-            Debug.Log("已清空:"+buildPath);
-        });
+        DrawBuildPathClear();
         DrawVerticalSpace();
         DrawButton("Lua导出",()=>BuildUtils.HandleLua());
         DrawVerticalSpace();

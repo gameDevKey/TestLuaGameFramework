@@ -16,7 +16,7 @@ public static class BuildConfig
     public enum EBuildMode
     {
         Unknown,
-        Dev,
-        Build
+        Develop,
+        Release
     }
 }
