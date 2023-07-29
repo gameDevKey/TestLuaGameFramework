@@ -1,0 +1,15 @@
+{
+    "base_path": "Assets/Things/Textures/UI/Base",
+
+    "font_normal_path": "Assets/Things/Font/wqy.ttf",
+    "font_special_path": "Assets/Things/Font/fzzch.ttf",
+    "font_normal_key": "wqy",
+    "font_special_key": "fzz",
+
+    "auto_check": [
+        "Assets/Things/Textures/UI/Base"
+    ],
+
+    "pre_defined": [
+    ]
+}
