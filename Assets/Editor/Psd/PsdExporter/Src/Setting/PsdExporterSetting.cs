@@ -5,66 +5,64 @@ using MiniJSON;
 // using TMPro;
 using UnityEditor;
 
-namespace ShanShuo.PsdExporter
+public class PsdExporterSetting
 {
-    public class PsdExporterSetting
+    public int width;
+    public int height;
+    public string outPath;
+    public Transform uiRoot;
+    public List<string> commonTexPaths = new List<string>();
+    public Dictionary<string, Font> fonts = new Dictionary<string, Font>();
+
+
+    public static string projectPath = IOUtils.GetAbsPath(Application.dataPath + "/../");
+
+    public void ParseSetting(string file)
     {
-        public int width;
-        public int height;
-        public string outPath;
-        public Transform uiRoot;
-        public List<string> commonTexPaths = new List<string>();
-        public Dictionary<string, Font> fonts = new Dictionary<string, Font>();
+        string content = IOUtils.ReadAllText(file);
 
+        Debug.Log("ï¿½ï¿½È¡Psdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + content);
 
-        public static string projectPath = IOUtils.GetAbsPath(Application.dataPath + "/../");
+        Dictionary<string, object> setting = Json.Deserialize(content) as Dictionary<string, object>;
 
-        public void ParseSetting(string file)
+        width = (int)setting["width"];
+        height = (int)setting["height"];
+
+        string uiRootName = (string)setting["ui_root"];
+        var root = GameObject.Find(uiRootName);
+
+        if (root == null)
         {
-            string content = IOUtils.ReadAllText(file);
-
-            Debug.Log("¶ÁÈ¡Psd¹¤¾ßÅäÖÃ:"+content);
-
-            Dictionary<string, object> setting = Json.Deserialize(content) as Dictionary<string, object>;
-
-            width = (int)setting["width"];
-            height = (int)setting["height"];
-
-            string uiRootName = (string)setting["ui_root"];
-            var root = GameObject.Find(uiRootName);
-
-            if(root==null)
-            {
-                Debug.LogError("ÇëÔÚ³¡¾°ÖÐ´´½¨Ò»¸öÃûÎª["+uiRootName+"]µÄ½Úµã(×îºÃ´øÓÐCanvasÊôÐÔ)");
-                return;
-            }
-
-            uiRoot = root.transform;
-
-            outPath = (string)setting["output_path"];
-            outPath =IOUtils.GetAbsPath(Application.dataPath + "/" + outPath);
-
-            List<object> texPaths = setting["common_tex_path"] as List<object>;
-            foreach(var path in texPaths)
-            {
-                commonTexPaths.Add(IOUtils.GetAbsPath(Application.dataPath +"/" + path));
-            }
-
-            List<object> fontPaths = setting["font_path"] as List<object>;
-            foreach (var v in fontPaths)
-            {
-                Font font = AssetDatabase.LoadAssetAtPath<Font>("Assets/" + v.ToString());
-                fonts.Add(font.fontNames[1], font);
-            }
+            Debug.LogError("ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Îª[" + uiRootName + "]ï¿½Ä½Úµï¿½(ï¿½ï¿½Ã´ï¿½ï¿½ï¿½Canvasï¿½ï¿½ï¿½ï¿½)");
+            return;
         }
 
-        public Font GetFont(string fontName)
+        uiRoot = root.transform;
+
+        outPath = (string)setting["output_path"];
+        outPath = IOUtils.GetAbsPath(Application.dataPath + "/" + outPath);
+
+        List<object> texPaths = setting["common_tex_path"] as List<object>;
+        foreach (var path in texPaths)
         {
-            if(fonts.ContainsKey(fontName))
-            {
-                return fonts[fontName];
-            }
-            return null;
+            commonTexPaths.Add(IOUtils.GetAbsPath(Application.dataPath + "/" + path));
+        }
+
+        List<object> fontPaths = setting["font_path"] as List<object>;
+        foreach (var v in fontPaths)
+        {
+            Font font = AssetDatabase.LoadAssetAtPath<Font>("Assets/" + v.ToString());
+            fonts.Add(font.fontNames[1], font);
         }
     }
+
+    public Font GetFont(string fontName)
+    {
+        if (fonts.ContainsKey(fontName))
+        {
+            return fonts[fontName];
+        }
+        return null;
+    }
 }
+

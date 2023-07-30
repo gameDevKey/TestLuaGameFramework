@@ -5,129 +5,128 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace ShanShuo.PsdExporter
+
+public class PsdParse
 {
-    public class PsdParse
+    public string filePath;
+    public string fileName;
+    public List<LayerNode> nodes = new List<LayerNode>();
+
+    public List<string> errors = new List<string>();
+
+    int index;
+
+    public void Parse(string file)
     {
-        public string filePath;
-        public string fileName;
-        public List<LayerNode> nodes = new List<LayerNode>();
+        filePath = file;
 
-        public List<string> errors = new List<string>();
+        PsdDocument document = PsdDocument.Create(file);
 
-        int index;
+        fileName = IOUtils.GetFileName(file);
 
-        public void Parse(string file)
+        //foreach (PsdLayer layer in document.Childs)
+        //{
+        //    ParseLayer(layer, null);
+        //}
+
+        try
         {
-            filePath = file;
-
-            PsdDocument document = PsdDocument.Create(file);
-
-            fileName = IOUtils.GetFileName(file);
-
-            //foreach (PsdLayer layer in document.Childs)
-            //{
-            //    ParseLayer(layer, null);
-            //}
-
-            try
+            foreach (PsdLayer layer in document.Childs)
             {
-                foreach (PsdLayer layer in document.Childs)
-                {
-                    ParseLayer(layer, null);
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                document.Dispose();
+                ParseLayer(layer, null);
             }
         }
-
-        private void ParseLayer(PsdLayer layer, LayerNode parent)
+        catch (Exception e)
         {
-            if (!layer.IsVisible)
-            {
-                return;
-            }
-
-            checkLinkLayer(layer);
-            checkMask(layer);
-
-            LayerNode node;
-
-            switch (layer.LayerType)
-            {
-                case LayerType.Text:
-                    node = new TextNode(++index,layer, parent) ;
-                    break;
-                case LayerType.Group:
-                    node = new GroupNode(0,layer, parent);
-                    break;
-                case LayerType.Complex:
-                case LayerType.Color:
-                case LayerType.Normal:
-                    node = new ImageNode(++index,layer, parent);
-                    break;
-                default:
-                    throw new Exception("½âÎöPsdÍ¼²ãÒì³££¬ÎÞ·¨Ê¶±ðµÄÍ¼²ãÀàÐÍ:" + layer.LayerType);
-            }
-
-            if(node.alpha <= 0.1f)
-            {
-                return;
-            }
-
-            if(layer.LayerType != LayerType.Group)
-            {
-                nodes.Add(node);
-            }
-
-            if (node != null && layer.Childs.Length > 0)
-            {
-                foreach (PsdLayer child in layer.Childs)
-                {
-                    ParseLayer(child,node);
-                }
-            }
+            throw e;
         }
-
-        void checkLinkLayer(PsdLayer psdLayer)
+        finally
         {
-            if(psdLayer.LinkedLayer != null)
-            {
-                string error = string.Format("½ûÖ¹Á´½ÓÍ¼²ã[{0}]",psdLayer.Name);
-                errors.Add(error);
-            }
-        }
-
-        void checkMask(PsdLayer psdLayer)
-        {
-            if (psdLayer.HasMask)
-            {
-                string error = string.Format("½ûÖ¹ÕÚÕÖÍ¼²ã[{0}]", psdLayer.Name);
-                errors.Add(error);
-            }
-        }
-
-        public void HasError()
-        {
-            if (errors.Count <= 0)
-            {
-                return;
-            }
-
-            StringBuilder err = new StringBuilder();
-            err.AppendLine(string.Format("PsdÎÄ¼þ½âÎöÒì³£[{0}]:", filePath));
-            foreach (var error in errors)
-            {
-                err.AppendLine(error.ToString());
-            }
-            throw new Exception(err.ToString());
+            document.Dispose();
         }
     }
+
+    private void ParseLayer(PsdLayer layer, LayerNode parent)
+    {
+        if (!layer.IsVisible)
+        {
+            return;
+        }
+
+        checkLinkLayer(layer);
+        checkMask(layer);
+
+        LayerNode node;
+
+        switch (layer.LayerType)
+        {
+            case LayerType.Text:
+                node = new TextNode(++index, layer, parent);
+                break;
+            case LayerType.Group:
+                node = new GroupNode(0, layer, parent);
+                break;
+            case LayerType.Complex:
+            case LayerType.Color:
+            case LayerType.Normal:
+                node = new ImageNode(++index, layer, parent);
+                break;
+            default:
+                throw new Exception("ï¿½ï¿½ï¿½ï¿½PsdÍ¼ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½Þ·ï¿½Ê¶ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + layer.LayerType);
+        }
+
+        if (node.alpha <= 0.1f)
+        {
+            return;
+        }
+
+        if (layer.LayerType != LayerType.Group)
+        {
+            nodes.Add(node);
+        }
+
+        if (node != null && layer.Childs.Length > 0)
+        {
+            foreach (PsdLayer child in layer.Childs)
+            {
+                ParseLayer(child, node);
+            }
+        }
+    }
+
+    void checkLinkLayer(PsdLayer psdLayer)
+    {
+        if (psdLayer.LinkedLayer != null)
+        {
+            string error = string.Format("ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½[{0}]", psdLayer.Name);
+            errors.Add(error);
+        }
+    }
+
+    void checkMask(PsdLayer psdLayer)
+    {
+        if (psdLayer.HasMask)
+        {
+            string error = string.Format("ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½[{0}]", psdLayer.Name);
+            errors.Add(error);
+        }
+    }
+
+    public void HasError()
+    {
+        if (errors.Count <= 0)
+        {
+            return;
+        }
+
+        StringBuilder err = new StringBuilder();
+        err.AppendLine(string.Format("Psdï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£[{0}]:", filePath));
+        foreach (var error in errors)
+        {
+            err.AppendLine(error.ToString());
+        }
+        throw new Exception(err.ToString());
+    }
 }
+
 

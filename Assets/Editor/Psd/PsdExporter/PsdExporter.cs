@@ -1,10 +1,9 @@
-using ShanShuo.PsdExporter;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PsdExporter 
+public class PsdExporter
 {
     [MenuItem("工具库/UI/导出Psd预设")]
     public static void ExporterPrefab()
@@ -55,22 +54,25 @@ public class PsdExporter
 
     static string selectPsdFile()
     {
-        string dir = EditorPrefs.GetString("psd_file", string.Empty);
-        if (string.IsNullOrEmpty(dir))
-        {
-            dir = Application.dataPath;
-        }
+        // string dir = EditorPrefs.GetString("psd_file", string.Empty);
+        // if (string.IsNullOrEmpty(dir))
+        // {
+        //     dir = Application.dataPath;
+        // }
 
-        string psdFile = EditorUtility.OpenFilePanel("选择一个psd文件", dir, "psd");
-        if (string.IsNullOrEmpty(psdFile))
-        {
-            return string.Empty;
-        }
-        else
-        {
-            psdFile = IOUtils.GetAbsPath(psdFile);
-            EditorPrefs.SetString("psd_file", IOUtils.GetFolderNameByFile(psdFile));
-            return psdFile;
-        }
+        // string psdFile = EditorUtility.OpenFilePanel("选择一个psd文件", dir, "psd");
+        // if (string.IsNullOrEmpty(psdFile))
+        // {
+        //     return string.Empty;
+        // }
+        // else
+        // {
+        //     psdFile = IOUtils.GetAbsPath(psdFile);
+        //     EditorPrefs.SetString("psd_file", IOUtils.GetFolderNameByFile(psdFile));
+        //     return psdFile;
+        // }
+
+        string dir = Application.dataPath;
+        return EditorUtility.OpenFilePanel("选择一个psd文件", dir, "psd");
     }
 }

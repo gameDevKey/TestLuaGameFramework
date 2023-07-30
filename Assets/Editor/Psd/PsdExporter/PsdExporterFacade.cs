@@ -1,32 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ShanShuo.EditorSdk.Frame;
 
-namespace ShanShuo.PsdExporter
+public class PsdExporterFacade : Facade
 {
-    public class PsdExporterFacade : Facade
+    public const string NAME = "PsdExporterFacade";
+
+    public static PsdExporterFacade Instance
     {
-        public const string NAME = "PsdExporterFacade";
+        get { return GetFacade(NAME) as PsdExporterFacade; }
+    }
 
-        public static PsdExporterFacade Instance
-        {
-            get { return GetFacade(NAME) as PsdExporterFacade; }
-        }
+    public PsdExporterFacade() : base(NAME)
+    {
 
-        public PsdExporterFacade() : base(NAME)
-        {
+    }
 
-        }
+    protected override void OnInit()
+    {
+        base.OnInit();
 
-        protected override void OnInit()
-        {
-            base.OnInit();
+        BindCtrl(new PsdGenCtrl());
 
-            BindCtrl(new PsdGenCtrl());
-
-            BindProxy(new PsdExporterProxy());
-        }
+        BindProxy(new PsdExporterProxy());
     }
 }
+
 
