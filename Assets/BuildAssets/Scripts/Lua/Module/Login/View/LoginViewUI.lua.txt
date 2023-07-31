@@ -30,7 +30,9 @@ function LoginViewUI:OnEnterComplete()
     self:BatchCreateComUIByAmount(UIDefine.ComType.LoginCom,self.container,3,self.template)
     local testData = {}
     for i = 1, 20, 1 do
-        table.insert(testData,{data={name="服务器"..i}})
+        -- table.insert(testData,{data={name="服务器"..i}})
+
+        table.insert(testData,{data={name="测试"..i}})
     end
     self:buildServerList(testData)
 end
