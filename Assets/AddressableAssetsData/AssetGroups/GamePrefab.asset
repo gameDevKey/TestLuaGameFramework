@@ -15,21 +15,9 @@ MonoBehaviour:
   m_GroupName: GamePrefab
   m_Data:
     m_SerializedData: []
-  m_GUID: 8a1274d954b806745bd0ea74c2a2c617
-  m_SerializeEntries:
-  - m_GUID: fa5776e59e62341429c627ab447e2ef1
-    m_Address: Enermy
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - GamePrefab
-  - m_GUID: a7fd362e58e421c4a82369506a5dfede
-    m_Address: Player
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - GamePrefab
+  m_GUID: 985fa2438b145df4cb9be369f3e3ebe7
+  m_SerializeEntries: []
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: a6833e46772cb544eab1e6f07f9c4636, type: 2}
+  m_Settings: {fileID: 11400000, guid: e7810444f69bdeb41a9753d6f86f1386, type: 2}
   m_SchemaSet:
-    m_Schemas:
-    - {fileID: 11400000, guid: d1ce31f161d0e404b892d239537ee2dd, type: 2}
-    - {fileID: 11400000, guid: 7bc4786fa0f81644c9cad3935fde7503, type: 2}
+    m_Schemas: []
