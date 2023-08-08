@@ -15,7 +15,7 @@ public class BuildUtils
     public static void ParseLuaToTxt(string luaDir, string outputDir)
     {
         var count = 0;
-        FileUtils.CopyDir(luaDir,outputDir,
+        FileUtils.CopyFloder(luaDir,outputDir,
             (file)=>{
                 return !file.FullName.EndsWith(".lua");
             },

@@ -43,14 +43,15 @@ namespace Meryel.UnityCodeAssist.Editor.Input
         {
             Serilog.Log.Debug("InputMonitor {Event}", nameof(Bump));
 
-            var inputManager = new UnityInputManager(yamlPath: inputManagerFilePath);
+            var inputManager = new UnityInputManager();
+            inputManager.ReadFromPath(inputManagerFilePath);
             inputManager.SendData();
         }
 
     }
 
 
-    public static class Extensions
+    public static partial class Extensions
     {
         public static string GetInfo(this List<InputAxis> axes, string? name)
         {
