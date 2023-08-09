@@ -43,6 +43,9 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: fcbe543f8ea84ff478f10d049b144cca, type: 2}
   - {fileID: 11400000, guid: ec63fa16163a55941bf987cb36fa61dc, type: 2}
+  - {fileID: 11400000, guid: 55137236310576844b4aff2c6ca2f4f7, type: 2}
+  - {fileID: 11400000, guid: 918985b018f6d0c44b875a22c9d7582d, type: 2}
+  - {fileID: 11400000, guid: f6ac2507b1afd0041ae95877b4e02dec, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -84,6 +87,9 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Lua
+    - UIPrefab
+    - GamePrefab
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 21ed18c4b0de6894099db908d9c56583, type: 2}

@@ -16,7 +16,42 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 558db303e2b178347a1d942e964e223f
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 30f907a8ebb873140b85e113751f6488
+    m_Address: CircleRange
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
+  - m_GUID: a20095cab9f510a48bbd32e81a08be02
+    m_Address: GameMenuWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
+  - m_GUID: f34f5dc4ed0b583458c43f426ecb2d1b
+    m_Address: GameWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
+  - m_GUID: 0b23ceef17b2818448401a6553cb495b
+    m_Address: GenericWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
+  - m_GUID: ca819809e6813794aa315b6a7a84ba61
+    m_Address: GuideWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
+  - m_GUID: a3ae7a7e7d488414298a9f4f8c477412
+    m_Address: LoginCom
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
+  - m_GUID: 7991a18c496c1214da0a29db20df9c5d
+    m_Address: LoginWindow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIPrefab
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e7810444f69bdeb41a9753d6f86f1386, type: 2}
   m_SchemaSet:
