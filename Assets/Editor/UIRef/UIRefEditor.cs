@@ -25,9 +25,6 @@ public class UIRefEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
-
-
         foreach (var data in uiRefStructs)
         {
             if (!CheckValid(data))
@@ -43,10 +40,7 @@ public class UIRefEditor : Editor
                 if (!string.IsNullOrEmpty(newKey) && newKey != data.Key)
                 {
                     ModifyKey(data, newKey);
-                    EditorGUILayout.EndHorizontal();
-                    continue;
                 }
-
             }
 
             //修改组件类型
@@ -57,8 +51,6 @@ public class UIRefEditor : Editor
                 {
                     data.TypeIndex = newIndex;
                     ModifyRef(data);
-                    EditorGUILayout.EndHorizontal();
-                    continue;
                 }
             }
 
@@ -113,7 +105,7 @@ public class UIRefEditor : Editor
         }
         if (!string.IsNullOrEmpty(data.Key))
         {
-            if (data.GameObject == null)
+            if (data.RootObj == null)
             {
                 Debug.LogError($"UIRef的GameObject丢失:{data.Key}");
                 RemoveRef(data);
@@ -150,15 +142,15 @@ public class UIRefEditor : Editor
     {
         if (newObj == null) return false;
         if (newObj == data.TargetObj) return false;
-        var gameObject = GetSourceGameObject(newObj);
-        var trans = gameObject.transform;
+        var sourceGO = GetSourceGameObject(newObj);
+        var trans = sourceGO?.transform;
         while (trans != null)
         {
-            if (trans == data.GameObject.transform)
+            if (trans == data.RootObj.transform)
             {
                 return true;
             }
-            trans = gameObject.transform.parent;
+            trans = trans.parent;
         }
         return false;
     }
@@ -210,7 +202,7 @@ public class UIRefEditor : Editor
         var sc = new UIRefEditorStruct();
         sc.Key = key;
         sc.TargetObj = obj;
-        sc.GameObject = m_Target.gameObject;
+        sc.RootObj = m_Target.gameObject;
         RefreshTypeList(sc);
         uiRefStructs.Add(sc);
         Debug.Log($"添加:{sc.Key} obj:{sc.TargetObj} index:{sc.TypeIndex}");
@@ -229,7 +221,7 @@ public class UIRefEditorStruct
     public string Key;
     public int TypeIndex;
     public UnityEngine.Object TargetObj;
-    public UnityEngine.GameObject GameObject;
+    public UnityEngine.GameObject RootObj;
     public string[] TypeStrList;
     public UnityEngine.Object[] TypeList;
 }

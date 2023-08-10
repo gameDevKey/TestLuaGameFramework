@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameLoading : MonoBehaviour
 {
@@ -13,29 +14,33 @@ public class GameLoading : MonoBehaviour
     public Button EnterButton;
 
     private string logStr;
+    private bool isFinish;
 
     void Awake()
     {
         Application.logMessageReceived += ShowLog;
         HandleProcess(GameLaunch.OpType.Unknown, 0);
         EnterButton.onClick.AddListener(OnEnterButtonClick);
+        EnterButton.gameObject.SetActive(false);
     }
 
     void Start()
     {
         GameLaunch.Instance.onProcess += HandleProcess;
+        GameLaunch.Instance.onFinish += UpdateBtnState;
     }
 
     void OnDestroy()
     {
         GameLaunch.Instance.onProcess -= HandleProcess;
+        GameLaunch.Instance.onFinish -= UpdateBtnState;
         Application.logMessageReceived -= ShowLog;
         EnterButton.onClick.RemoveListener(OnEnterButtonClick);
     }
 
     void OnEnterButtonClick()
     {
-        SceneManager.LoadSceneAsync("Main",LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
     }
 
     void ShowLog(string condition, string stackTrace, LogType type)
@@ -48,6 +53,15 @@ public class GameLoading : MonoBehaviour
     {
         UpdateImageFill(progress);
         UpdateTips(opType, progress);
+    }
+
+    void UpdateBtnState()
+    {
+        if (!isFinish)
+        {
+            isFinish = true;
+            EnterButton.gameObject.SetActive(true);
+        }
     }
 
     void UpdateImageFill(float progress)

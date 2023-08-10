@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[XLua.LuaCallCSharp]
 public class UIRef : MonoBehaviour
 {
+    [XLua.BlackList]
     public UnitySerializedDictionary<string, UnityEngine.Object> Objects = new UnitySerializedDictionary<string, UnityEngine.Object>();
 
     private static Dictionary<Type, string> m_Type2Prefix = new()
@@ -20,6 +22,14 @@ public class UIRef : MonoBehaviour
 
     private int duplicateIndex = 0;
 
+    public UnityEngine.Object GetRef(string key)
+    {
+        UnityEngine.Object obj;
+        Objects.TryGetValue(key, out obj);
+        return obj;
+    }
+
+    [XLua.BlackList]
     public string ModifyKey(string key, string newKey)
     {
         if (!Objects.ContainsKey(key) || key == newKey)
@@ -33,6 +43,7 @@ public class UIRef : MonoBehaviour
         return realKey;
     }
 
+    [XLua.BlackList]
     public string ModifyObject(string key, UnityEngine.Object obj)
     {
         if (!string.IsNullOrEmpty(key) && !Objects.ContainsKey(key))
@@ -49,6 +60,7 @@ public class UIRef : MonoBehaviour
         return newKey;
     }
 
+    [XLua.BlackList]
     public bool RemoveObject(string key)
     {
         if (!Objects.ContainsKey(key))
@@ -59,9 +71,10 @@ public class UIRef : MonoBehaviour
         return true;
     }
 
+    [XLua.BlackList]
     public string GetUniqueKey(string newKey)
     {
-        var realKey = newKey;
+        var realKey = newKey.Trim();
         if (Objects.ContainsKey(realKey))
         {
             realKey += ++duplicateIndex;//±‹√‚º¸÷ÿ∏¥
@@ -69,11 +82,13 @@ public class UIRef : MonoBehaviour
         return realKey;
     }
 
+    [XLua.BlackList]
     public string GetUniqueKey(UnityEngine.Object obj)
     {
         return GetUniqueKey(GetObjKey(obj));
     }
 
+    [XLua.BlackList]
     public static string GetObjKey(UnityEngine.Object obj)
     {
         var prefix = GetObjKeyPrefix(obj);
