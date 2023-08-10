@@ -1,40 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class PsdExporterProxy : Proxy
+public class PsdExporterProxy : Proxy<PsdExporterProxy>
 {
-    public const string NAME = "PsdExporterProxy";
+    public PsdParse SelectPsd;
+    public PsdSetting Setting;
 
-    public PsdExporterProxy() : base(NAME)
+    public string OutputPath;
+    public Transform UIRoot;
+    public List<string> CommonTexPaths;
+    public Dictionary<string, Font> Fonts;
+
+    protected override void OnInit()
     {
-
+        base.OnInit();
+        CommonTexPaths = new List<string>();
+        Fonts = new Dictionary<string, Font>();
     }
 
-    public static PsdExporterProxy Instance
+    protected override void OnInitComplete()
     {
-        get
+        CreateOrLoadSetting();
+        InitSetting();
+    }
+
+    private void CreateOrLoadSetting()
+    {
+        string path = Application.dataPath + "/Editor/Psd/PsdSettingData.asset";
+        Setting = AssetDatabase.LoadAssetAtPath<PsdSetting>(path);
+        if (Setting == null)
         {
-            return (PsdExporterProxy)PsdExporterFacade.Instance.GetProxy(NAME);
+            Setting = ScriptableObject.CreateInstance<PsdSetting>();
+            AssetDatabase.CreateAsset(Setting, path);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            Debug.Log("创建PsdSetting:" + path);
+        }
+        else
+        {
+            Debug.Log("读取PsdSetting:" + path);
         }
     }
 
-    public override void OnInitComplete()
+    private void InitSetting()
     {
-        loadSetting();
+        var uIRootObj = GameObject.Find(Setting.UIRootName);
+        if(uIRootObj == null)
+        {
+            uIRootObj = new GameObject(Setting.UIRootName);
+        }
+        UIRoot = uIRootObj.transform;
+        Debug.Log("Psd预设挂载点:" + Setting.UIRootName);
+        OutputPath = Application.dataPath + "/" + Setting.OutputPath;
+        Debug.Log("Psd输出路径:" + OutputPath);
     }
-
-    public PsdParse selectPsd;
-    public PsdExporterSetting setting;
-
-    void loadSetting()
-    {
-        string settingFile = Application.dataPath + "/Editor/UI/PsdExporter/Src/Setting/setting.json";
-        setting = new PsdExporterSetting();
-        setting.ParseSetting(settingFile);
-    }
-
-
 }
 
 

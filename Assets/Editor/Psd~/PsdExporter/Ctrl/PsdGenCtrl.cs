@@ -3,33 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
-// using TMPro;
-using System.Text;
+using System.IO;
 
-public class PsdGenCtrl : Controller
+public class PsdGenCtrl : Controller<PsdGenCtrl>
 {
-    public const string NAME = "PsdGenCtrl";
-
-    public PsdGenCtrl() : base(NAME)
-    {
-
-    }
-
-    public static PsdGenCtrl Instance
-    {
-        get
-        {
-            return (PsdGenCtrl)PsdExporterFacade.Instance.GetCtrl(NAME);
-        }
-    }
 
     public void ExportPrefab(PsdParse psdParse)
     {
-        PsdExporterSetting setting = PsdExporterProxy.Instance.setting;
-        string outPath = setting.outPath + psdParse.fileName + "/";
+        string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
 
-        IOUtils.CleanFolder(outPath);
-        IOUtils.CreateFolder(outPath);
+        Directory.Delete(outPath);
+        FileUtils.CreateFolder(outPath);
 
         GameObject root = createRootObject(psdParse.fileName);
         foreach (LayerNode node in psdParse.nodes)
@@ -50,11 +34,10 @@ public class PsdGenCtrl : Controller
 
     public void ExportTexture(PsdParse psdParse)
     {
-        PsdExporterSetting setting = PsdExporterProxy.Instance.setting;
-        string outPath = setting.outPath + psdParse.fileName + "/";
+        string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
 
-        IOUtils.CleanFolder(outPath);
-        IOUtils.CreateFolder(outPath);
+        Directory.Delete(outPath);
+        FileUtils.CreateFolder(outPath);
 
         foreach (LayerNode node in psdParse.nodes)
         {
@@ -69,13 +52,13 @@ public class PsdGenCtrl : Controller
 
     GameObject createRootObject(string name)
     {
-        PsdExporterSetting setting = PsdExporterProxy.Instance.setting;
+        var proxy = PsdExporterProxy.Instance;
 
         GameObject root = new GameObject(name, typeof(RectTransform));
         root.layer = LayerMask.NameToLayer("UI");
 
-        root.transform.SetParent(setting.uiRoot, false);
-        root.GetComponent<RectTransform>().sizeDelta = new Vector2(setting.width, setting.height);
+        root.transform.SetParent(proxy.UIRoot, false);
+        root.GetComponent<RectTransform>().sizeDelta = proxy.Setting.CanvasSize;
 
         return root;
     }
@@ -90,10 +73,11 @@ public class PsdGenCtrl : Controller
         rectTrans.anchorMax = new Vector2(0.5f, 0.5f);
         rectTrans.anchorMin = new Vector2(0.5f, 0.5f);
 
-        if (node.rect.width == 0 && node.rect.height == 0)
+        if (node.rect.width == 0 || node.rect.height == 0)
         {
             rectTrans.offsetMin = Vector2.zero;
             rectTrans.offsetMax = Vector2.zero;
+            Debug.LogError($"节点{node.name}尺寸异常, 宽:{node.rect.width},高:{node.rect.height}");
         }
         else
         {
@@ -106,7 +90,7 @@ public class PsdGenCtrl : Controller
 
     void createText(PsdParse psdParse, TextNode node, GameObject obj)
     {
-        PsdExporterSetting setting = PsdExporterProxy.Instance.setting;
+        var setting = PsdExporterProxy.Instance.Setting;
 
         RectTransform rectTrans = obj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x + 2, rectTrans.sizeDelta.y + 2);
@@ -115,7 +99,8 @@ public class PsdGenCtrl : Controller
         Text text = obj.AddComponent<Text>();
         text.raycastTarget = false;
         text.fontSize = node.fontSize;
-        text.font = setting.GetFont(node.fontName);
+        // text.font = setting.GetFont(node.fontName);
+        Debug.Log("字体缺失 TODO:"+node.fontName);
         text.color = new Color(node.color.r, node.color.g, node.color.b, node.alpha);
 
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
@@ -152,56 +137,55 @@ public class PsdGenCtrl : Controller
 
     void createImage(PsdParse psdParse, ImageNode node, GameObject obj)
     {
-        PsdExporterSetting setting = PsdExporterProxy.Instance.setting;
-        string outPath = setting.outPath + psdParse.fileName + "/";
+        // string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
 
-        string texFile = string.Empty;
-        bool isGen = false;
+        // string texFile = string.Empty;
+        // bool isGen = false;
 
-        foreach (var path in setting.commonTexPaths)
-        {
-            string commonPath = path + node.name + ".png";
-            if (IOUtils.ExistFile(commonPath))
-            {
-                texFile = commonPath;
-                break;
-            }
-        }
+        // foreach (var path in setting.commonTexPaths)
+        // {
+        //     string commonPath = path + node.name + ".png";
+        //     if (File.Exists(commonPath))
+        //     {
+        //         texFile = commonPath;
+        //         break;
+        //     }
+        // }
 
-        if (texFile.Equals(string.Empty))
-        {
-            texFile = outPath + node.name + ".png";
-            isGen = true;
-        }
+        // if (texFile.Equals(string.Empty))
+        // {
+        //     texFile = outPath + node.name + ".png";
+        //     isGen = true;
+        // }
 
-        string assetPath = IOUtils.SubPath(texFile, PsdExporterSetting.projectPath);
+        // string assetPath = IOUtils.SubPath(texFile, PsdExporterSetting.projectPath);
 
-        if (isGen)
-        {
-            if (IOUtils.ExistFile(texFile))
-            {
-                string folder = IOUtils.GetPathDirectory(texFile);
-                string name = IOUtils.GetFileName(texFile);
-                texFile = string.Format("{0}/{1}_{2}.png", folder, name, node.index);
-                assetPath = IOUtils.SubPath(texFile, PsdExporterSetting.projectPath);
-            }
+        // if (isGen)
+        // {
+        //     if (File.Exists(texFile))
+        //     {
+        //         string folder = IOUtils.GetPathDirectory(texFile);
+        //         string name = IOUtils.GetFileName(texFile);
+        //         texFile = string.Format("{0}/{1}_{2}.png", folder, name, node.index);
+        //         assetPath = IOUtils.SubPath(texFile, PsdExporterSetting.projectPath);
+        //     }
 
-            node.SaveTexture(texFile);
-            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
-        }
+        //     node.SaveTexture(texFile);
+        //     AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+        // }
 
-        Image image = obj.AddComponent<Image>();
-        image.raycastTarget = false;
-        image.color = new Color(1.0f, 1.0f, 1.0f, node.alpha);
+        // Image image = obj.AddComponent<Image>();
+        // image.raycastTarget = false;
+        // image.color = new Color(1.0f, 1.0f, 1.0f, node.alpha);
 
-        Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
-        image.sprite = sprite;
+        // Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
+        // image.sprite = sprite;
 
-        Vector4 border = sprite.border;
-        if (border.x + border.y + border.z + border.w > 2)
-        {
-            image.type = Image.Type.Sliced;
-        }
+        // Vector4 border = sprite.border;
+        // if (border.x + border.y + border.z + border.w > 2)
+        // {
+        //     image.type = Image.Type.Sliced;
+        // }
     }
 }
 

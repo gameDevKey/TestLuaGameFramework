@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 
 
 #nullable enable
@@ -15,28 +16,64 @@ namespace Meryel.UnityCodeAssist.Editor.Input
     internal class UnityInputManager
     {
         //string yamlPath;
-        readonly TextReader? reader;
+        TextReader? reader;
         InputManager? inputManager;
 
-        public UnityInputManager(string? yamlPath = null, string? text = null)
+        public void ReadFromText(string text)
         {
-            //var yamlPath = path.Substring(0, Math.Max(path.LastIndexOf(@"\Assets\"), path.LastIndexOf(@"/Assets/"))) + @"/ProjectSettings/InputManager.asset";
+            reader = new StringReader(text);
+            ReadAux(false, out _);
+        }
 
-            //if (enchaterPath != null)
-                //yamlPath = enchaterPath.Substring(0, Math.Max(enchaterPath.LastIndexOf(@"\Assets\"), enchaterPath.LastIndexOf(@"/Assets/"))) + @"/ProjectSettings/InputManager.asset";
+        public void ReadFromPath(string yamlPath)
+        {
 
-            if (yamlPath != null)
-                reader = new StreamReader(yamlPath);
+            switch (UnityEditor.EditorSettings.serializationMode)
+            {
+                case UnityEditor.SerializationMode.ForceText:
+                    {
+                        reader = new StreamReader(yamlPath);
+                        ReadAux(false, out _);
+                    }
+                    break;
 
-            if (text != null)
-                reader = new StringReader(text);
+                case UnityEditor.SerializationMode.ForceBinary:
+                    {
+                        // this approach will work for InputManager since its file size is small and limited
+                        // but in the future, we may need to switch to reading binary files for big files
+                        // like this https://github.com/Unity-Technologies/UnityDataTools
+                        // or this https://github.com/SeriousCache/UABE
+                        var converted = GetOrCreateConvertedFile(yamlPath);
+                        var rawLines = File.ReadLines(converted);
+                        var yamlText = Text2Yaml.Convert(rawLines);
+                        reader = new StringReader(yamlText);
+                        ReadAux(false, out _);
+                    }
+                    break;
 
-            Read();
+                case UnityEditor.SerializationMode.Mixed:
+                    {
+                        reader = new StreamReader(yamlPath);
+                        ReadAux(true, out var hasSemanticError);
+                        if (hasSemanticError)
+                        {
+                            var converted = GetOrCreateConvertedFile(yamlPath);
+                            var rawLines = File.ReadLines(converted);
+                            var yamlText = Text2Yaml.Convert(rawLines);
+                            reader = new StringReader(yamlText);
+                            ReadAux(false, out _);
+                        }
+                    }
+                    break;
+                
+            }
         }
 
 
-        void Read()
+        void ReadAux(bool canHaveSemanticError, out bool hasSemanticError)
         {
+            hasSemanticError = false;
+
             if (reader == null)
             {
                 Serilog.Log.Warning($"{nameof(UnityInputManager)}.{nameof(reader)} is null");
@@ -58,12 +95,17 @@ namespace Meryel.UnityCodeAssist.Editor.Input
             catch (YamlDotNet.Core.SemanticErrorException semanticErrorException)
             {
                 Serilog.Log.Debug(semanticErrorException, "Couldn't parse InputManager.asset yaml file");
+                if (!canHaveSemanticError)
+                    Serilog.Log.Error(semanticErrorException, "Couldn't parse InputManager.asset yaml file unexpectedly");
+
+                hasSemanticError = true;
                 return;
             }
             finally
             {
                 reader.Close();
             }
+
             var inputManagerMapper = result?.InputManager;
             if (inputManagerMapper == null)
             {
@@ -82,13 +124,21 @@ namespace Meryel.UnityCodeAssist.Editor.Input
 
             var axisNames = inputManager.Axes.Select(a => a.Name!).Where(n => !string.IsNullOrEmpty(n)).Distinct().ToArray();
             var axisInfos = axisNames.Select(a => inputManager.Axes.GetInfo(a)).ToArray();
-            CreateBindingsMap(out var buttonKeys, out var buttonAxis);
+            if (!CreateBindingsMap(out var buttonKeys, out var buttonAxis))
+                return;
 
-            NetMQInitializer.Publisher?.SendInputManager(
-                axisNames, axisInfos, buttonKeys!, buttonAxis!,
-                UnityEngine.Input.GetJoystickNames()
-                );
+            string[] joystickNames;
+            try
+            {
+                joystickNames = UnityEngine.Input.GetJoystickNames();
+            }
+            catch (InvalidOperationException)
+            {
+                // Occurs if user have switched active Input handling to Input System package in Player Settings.
+                joystickNames = new string[0];
+            }
 
+            NetMQInitializer.Publisher?.SendInputManager(axisNames, axisInfos, buttonKeys, buttonAxis, joystickNames);
 
             /*
             NetMQInitializer.Publisher?.SendInputManager(
@@ -104,13 +154,13 @@ namespace Meryel.UnityCodeAssist.Editor.Input
         }
 
 
-        void CreateBindingsMap(out string[]? inputKeys, out string[]? inputAxis)
+        bool CreateBindingsMap([System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string[]? inputKeys, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]  out string[]? inputAxis)
         {
             if (inputManager == null)
             {
                 inputKeys = null;
                 inputAxis = null;
-                return;
+                return false;
             }
 
             var dict = new Dictionary<string, string?>();
@@ -143,7 +193,67 @@ namespace Meryel.UnityCodeAssist.Editor.Input
 
             inputKeys = keys;
             inputAxis = values;
+            return true;
         }
+
+
+
+        static string GetOrCreateConvertedFile(string filePath)
+        {
+            var hash = GetMD5Hash(filePath);
+            var convertedPath = Path.Combine(Path.GetTempPath(), $"UCA_IM_{hash}.txt");
+
+            if (!File.Exists(convertedPath))
+            {
+                Serilog.Log.Debug("Converting binary to text format of {File} to {Target}", filePath, convertedPath);
+                var converter = new Binary2TextExec();
+                converter.Exec(filePath, convertedPath);
+            }
+            else
+            {
+                Serilog.Log.Debug("Converted file already exists at {Target}", convertedPath);
+            }    
+
+            return convertedPath;
+        }
+
+        /// <summary>
+        /// Gets a hash of the file using MD5.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string GetMD5Hash(string filePath)
+        {
+            using var md5 = new MD5CryptoServiceProvider();
+            return GetHash(filePath, md5);
+        }
+
+        /// <summary>
+        /// Gets a hash of the file using MD5.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string GetMD5Hash(Stream s)
+        {
+            using var md5 = new MD5CryptoServiceProvider();
+            return GetHash(s, md5);
+        }
+
+        private static string GetHash(string filePath, HashAlgorithm hasher)
+        {
+            using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            return GetHash(fs, hasher);
+        }
+
+        private static string GetHash(Stream s, HashAlgorithm hasher)
+        {
+            var hash = hasher.ComputeHash(s);
+            var hashStr = Convert.ToBase64String(hash);
+            //return hashStr.TrimEnd('=');
+            var hashStrAlphaNumeric = System.Text.RegularExpressions.Regex.Replace(hashStr, "[^A-Za-z0-9]", "");
+            return hashStrAlphaNumeric;
+        }
+
     }
 
     public enum AxisType

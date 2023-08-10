@@ -2,6 +2,7 @@ using Ntreev.Library.Psd;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ImageNode : LayerNode
 {
@@ -16,7 +17,7 @@ public class ImageNode : LayerNode
     public void SaveTexture(string file)
     {
         byte[] buf = texture.EncodeToPNG();
-        IOUtils.WriteAllBytes(file, buf);
+        File.WriteAllBytes(file, buf);
     }
 }
 

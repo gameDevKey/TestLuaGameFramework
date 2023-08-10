@@ -34,9 +34,9 @@ namespace XLua.CSObjectWrap
 		    Utils.BeginClassRegister(type, L, __CreateInstance, 6, 0, 0);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "GetAllFile", _m_GetAllFile_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "GetCurrentDir", _m_GetCurrentDir_xlua_st_);
-            Utils.RegisterFunc(L, Utils.CLS_IDX, "CopyDir", _m_CopyDir_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "CopyFloder", _m_CopyFloder_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "FormatFilePath", _m_FormatFilePath_xlua_st_);
-            Utils.RegisterFunc(L, Utils.CLS_IDX, "DeleteDir", _m_DeleteDir_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "CreateFolder", _m_CreateFolder_xlua_st_);
             
 			
             
@@ -129,7 +129,7 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_CopyDir_xlua_st_(RealStatePtr L)
+        static int _m_CopyFloder_xlua_st_(RealStatePtr L)
         {
 		    try {
             
@@ -146,7 +146,7 @@ namespace XLua.CSObjectWrap
                     System.Func<System.IO.FileInfo, bool> _fileFilter = translator.GetDelegate<System.Func<System.IO.FileInfo, bool>>(L, 3);
                     System.Func<System.IO.FileInfo, string> _nameGetter = translator.GetDelegate<System.Func<System.IO.FileInfo, string>>(L, 4);
                     
-                    FileUtils.CopyDir( _sourceDir, _targetDir, _fileFilter, _nameGetter );
+                    FileUtils.CopyFloder( _sourceDir, _targetDir, _fileFilter, _nameGetter );
                     
                     
                     
@@ -158,7 +158,7 @@ namespace XLua.CSObjectWrap
                     string _targetDir = LuaAPI.lua_tostring(L, 2);
                     System.Func<System.IO.FileInfo, bool> _fileFilter = translator.GetDelegate<System.Func<System.IO.FileInfo, bool>>(L, 3);
                     
-                    FileUtils.CopyDir( _sourceDir, _targetDir, _fileFilter );
+                    FileUtils.CopyFloder( _sourceDir, _targetDir, _fileFilter );
                     
                     
                     
@@ -169,7 +169,7 @@ namespace XLua.CSObjectWrap
                     string _sourceDir = LuaAPI.lua_tostring(L, 1);
                     string _targetDir = LuaAPI.lua_tostring(L, 2);
                     
-                    FileUtils.CopyDir( _sourceDir, _targetDir );
+                    FileUtils.CopyFloder( _sourceDir, _targetDir );
                     
                     
                     
@@ -180,7 +180,7 @@ namespace XLua.CSObjectWrap
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
             
-            return LuaAPI.luaL_error(L, "invalid arguments to FileUtils.CopyDir!");
+            return LuaAPI.luaL_error(L, "invalid arguments to FileUtils.CopyFloder!");
             
         }
         
@@ -210,30 +210,17 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_DeleteDir_xlua_st_(RealStatePtr L)
+        static int _m_CreateFolder_xlua_st_(RealStatePtr L)
         {
 		    try {
             
             
             
-			    int gen_param_count = LuaAPI.lua_gettop(L);
-            
-                if(gen_param_count == 2&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 2)) 
-                {
-                    string _path = LuaAPI.lua_tostring(L, 1);
-                    bool _recursive = LuaAPI.lua_toboolean(L, 2);
-                    
-                    FileUtils.DeleteDir( _path, _recursive );
-                    
-                    
-                    
-                    return 0;
-                }
-                if(gen_param_count == 1&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)) 
+                
                 {
                     string _path = LuaAPI.lua_tostring(L, 1);
                     
-                    FileUtils.DeleteDir( _path );
+                    FileUtils.CreateFolder( _path );
                     
                     
                     
@@ -243,8 +230,6 @@ namespace XLua.CSObjectWrap
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
-            
-            return LuaAPI.luaL_error(L, "invalid arguments to FileUtils.DeleteDir!");
             
         }
         

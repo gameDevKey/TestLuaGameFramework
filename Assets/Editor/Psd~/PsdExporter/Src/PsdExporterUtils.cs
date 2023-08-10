@@ -71,12 +71,6 @@ public class PsdExporterUtils
         return texture;
     }
 
-    /// <summary>
-    /// ����Layer�еĳߴ���Ϣ
-    /// ���м�ê��Ϊ���㷽ʽ
-    /// </summary>
-    /// <param name="psdLayer"></param>
-    /// <returns></returns>
     public static Rect GetRectFromLayer(IPsdLayer psdLayer, LayerNode parentNode)
     {
         //rootSize = new Vector2(rootSize.x > maxSize.x ? maxSize.x : rootSize.x, rootSize.y > maxSize.y ? maxSize.y : rootSize.y);
@@ -90,8 +84,8 @@ public class PsdExporterUtils
         // var xMin = (rigtht + left - parentRect.width) * 0.5f;
         // var yMin = -(top + bottom - parentRect.height) * 0.5f;
         //Vector2 pa = GetParenRectAddition(parentNode);
-        var xMin = (left + width * 0.5f) - (PsdExporterProxy.Instance.setting.width * 0.5f);
-        var yMin = (PsdExporterProxy.Instance.setting.height * 0.5f) - (top + height * 0.5f);
+        var xMin = (left + width * 0.5f) - (PsdExporterProxy.Instance.Setting.CanvasSize.x * 0.5f);
+        var yMin = (PsdExporterProxy.Instance.Setting.CanvasSize.y * 0.5f) - (top + height * 0.5f);
         return new Rect(xMin, yMin, width, height);
     }
 

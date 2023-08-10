@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MiniJSON;
-// using TMPro;
+using LitJson;
 using UnityEditor;
+using System.IO;
 
 public class PsdExporterSetting
 {
@@ -15,45 +15,51 @@ public class PsdExporterSetting
     public Dictionary<string, Font> fonts = new Dictionary<string, Font>();
 
 
-    public static string projectPath = IOUtils.GetAbsPath(Application.dataPath + "/../");
+    // public static string projectPath = IOUtils.GetAbsPath(Application.dataPath + "/../");
 
     public void ParseSetting(string file)
     {
-        string content = IOUtils.ReadAllText(file);
+        // if(!File.Exists(file))
+        // {
+        //     Debug.LogError("找不到psd配置:"+file);
+        //     return;
+        // }
 
-        Debug.Log("��ȡPsd��������:" + content);
+        // string content = File.ReadAllText(file);
 
-        Dictionary<string, object> setting = Json.Deserialize(content) as Dictionary<string, object>;
+        // Debug.Log("读取psd配置:" + content);
 
-        width = (int)setting["width"];
-        height = (int)setting["height"];
+        // Dictionary<string, object> setting = JsonMapper.ToObject<Dictionary<string, object>>(content);
 
-        string uiRootName = (string)setting["ui_root"];
-        var root = GameObject.Find(uiRootName);
+        // width = (int)setting["width"];
+        // height = (int)setting["height"];
 
-        if (root == null)
-        {
-            Debug.LogError("���ڳ����д���һ����Ϊ[" + uiRootName + "]�Ľڵ�(��ô���Canvas����)");
-            return;
-        }
+        // string uiRootName = (string)setting["ui_root"];
+        // var root = GameObject.Find(uiRootName);
 
-        uiRoot = root.transform;
+        // if (root == null)
+        // {
+        //     Debug.LogError("���ڳ����д���һ����Ϊ[" + uiRootName + "]�Ľڵ�(��ô���Canvas����)");
+        //     return;
+        // }
 
-        outPath = (string)setting["output_path"];
-        outPath = IOUtils.GetAbsPath(Application.dataPath + "/" + outPath);
+        // uiRoot = root.transform;
 
-        List<object> texPaths = setting["common_tex_path"] as List<object>;
-        foreach (var path in texPaths)
-        {
-            commonTexPaths.Add(IOUtils.GetAbsPath(Application.dataPath + "/" + path));
-        }
+        // outPath = (string)setting["output_path"];
+        // outPath = IOUtils.GetAbsPath(Application.dataPath + "/" + outPath);
 
-        List<object> fontPaths = setting["font_path"] as List<object>;
-        foreach (var v in fontPaths)
-        {
-            Font font = AssetDatabase.LoadAssetAtPath<Font>("Assets/" + v.ToString());
-            fonts.Add(font.fontNames[1], font);
-        }
+        // List<object> texPaths = setting["common_tex_path"] as List<object>;
+        // foreach (var path in texPaths)
+        // {
+        //     commonTexPaths.Add(IOUtils.GetAbsPath(Application.dataPath + "/" + path));
+        // }
+
+        // List<object> fontPaths = setting["font_path"] as List<object>;
+        // foreach (var v in fontPaths)
+        // {
+        //     Font font = AssetDatabase.LoadAssetAtPath<Font>("Assets/" + v.ToString());
+        //     fonts.Add(font.fontNames[1], font);
+        // }
     }
 
     public Font GetFont(string fontName)

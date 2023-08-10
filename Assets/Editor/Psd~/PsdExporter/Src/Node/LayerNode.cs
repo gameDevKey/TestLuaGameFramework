@@ -34,25 +34,25 @@ public class LayerNode
     void setLayerName()
     {
         name = layer.Name;
-        name = name.Replace(" ", "");
-        name = name.Replace("����", "");
+        // name = name.Replace(" ", "");
+        // name = name.Replace("����", "");
 
-        int beginIndex = name.IndexOf("(");
-        if (beginIndex == -1)
-        {
-            beginIndex = name.IndexOf("��");
-        }
+        // int beginIndex = name.IndexOf("(");
+        // if (beginIndex == -1)
+        // {
+        //     beginIndex = name.IndexOf("��");
+        // }
 
-        int endIndex = name.IndexOf(")");
-        if (endIndex == -1)
-        {
-            endIndex = name.IndexOf("��");
-        }
+        // int endIndex = name.IndexOf(")");
+        // if (endIndex == -1)
+        // {
+        //     endIndex = name.IndexOf("��");
+        // }
 
-        if (beginIndex != -1 && endIndex != -1)
-        {
-            name = name = name.Substring(0, beginIndex);
-        }
+        // if (beginIndex != -1 && endIndex != -1)
+        // {
+        //     name = name = name.Substring(0, beginIndex);
+        // }
     }
 
     void setAlpha()

@@ -14,14 +14,15 @@ public class PsdExporter
             return;
         }
 
-        new PsdExporterFacade();
+        var facade = new PsdExporterFacade();
+        facade.InitComplete();
 
         PsdParse psdParse = new PsdParse();
         psdParse.Parse(psdFile);
 
         psdParse.HasError();
 
-        PsdExporterProxy.Instance.selectPsd = psdParse;
+        PsdExporterProxy.Instance.SelectPsd = psdParse;
 
         PsdGenCtrl.Instance.ExportPrefab(psdParse);
 
@@ -38,14 +39,15 @@ public class PsdExporter
             return;
         }
 
-        new PsdExporterFacade();
+        var facade = new PsdExporterFacade();
+        facade.InitComplete();
 
         PsdParse psdParse = new PsdParse();
         psdParse.Parse(psdFile);
 
         psdParse.HasError();
 
-        PsdExporterProxy.Instance.selectPsd = psdParse;
+        PsdExporterProxy.Instance.SelectPsd = psdParse;
 
         PsdGenCtrl.Instance.ExportTexture(psdParse);
 

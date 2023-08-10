@@ -170,7 +170,7 @@ namespace Meryel.UnityCodeAssist.Editor.Logger
     public class MyDestructuringPolicy : IDestructuringPolicy
     {
         // serilog cannot destruct StringArrayContainer by default, so do it manually
-        public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, out Serilog.Events.LogEventPropertyValue? result)
+        public bool TryDestructure(object value, ILogEventPropertyValueFactory propertyValueFactory, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out Serilog.Events.LogEventPropertyValue? result)
         {
             if (value is Synchronizer.Model.StringArrayContainer sac)
             {

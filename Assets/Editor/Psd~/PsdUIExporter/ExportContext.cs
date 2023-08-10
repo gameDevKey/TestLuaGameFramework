@@ -126,7 +126,7 @@ namespace PsdUIExporter {
         public List<PreDefinedInfo> predefinedList = new List<PreDefinedInfo>();
 
         public ExpConfigVO() {
-            string config = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Editor/UI/PsdUIExporter/psd_config.json").text;
+            string config = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Editor/Psd/PsdUIExporter/psd_config.json").text;
             JsonData jsonData = JsonMapper.ToObject(config);
             basePath = jsonData["base_path"].ToString();
 

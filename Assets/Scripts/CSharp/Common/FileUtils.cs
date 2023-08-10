@@ -18,7 +18,7 @@ public class FileUtils
         return Application.dataPath;
     }
 
-    public static void CopyDir(string sourceDir, string targetDir, Func<FileInfo, bool> fileFilter = null, Func<FileInfo, string> nameGetter = null)
+    public static void CopyFloder(string sourceDir, string targetDir, Func<FileInfo, bool> fileFilter = null, Func<FileInfo, string> nameGetter = null)
     {
         DirectoryInfo source = new DirectoryInfo(sourceDir);
         if (!source.Exists) return;
@@ -40,7 +40,7 @@ public class FileUtils
         DirectoryInfo[] dirs = source.GetDirectories();
         for (int j = 0; j < dirs.Length; j++)
         {
-            CopyDir(dirs[j].FullName, FormatFilePath(target.FullName + @"\" + dirs[j].Name), fileFilter, nameGetter);
+            CopyFloder(dirs[j].FullName, FormatFilePath(target.FullName + @"\" + dirs[j].Name), fileFilter, nameGetter);
         }
     }
 
@@ -49,8 +49,9 @@ public class FileUtils
         return filePath.Replace("\\", "/").Replace("//", "/");
     }
 
-    public static void DeleteDir(string path,bool recursive=true)
+    public static void CreateFolder(string path)
     {
-        Directory.Delete(path,recursive);
+        DirectoryInfo source = new DirectoryInfo(path);
+        if (!source.Exists) source.Create();
     }
 }

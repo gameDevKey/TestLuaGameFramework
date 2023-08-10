@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System.IO;
 
 
 public class PsdParse
@@ -22,7 +23,7 @@ public class PsdParse
 
         PsdDocument document = PsdDocument.Create(file);
 
-        fileName = IOUtils.GetFileName(file);
+        fileName = Path.GetFileName(file);
 
         //foreach (PsdLayer layer in document.Childs)
         //{
@@ -72,7 +73,7 @@ public class PsdParse
                 node = new ImageNode(++index, layer, parent);
                 break;
             default:
-                throw new Exception("����Psdͼ���쳣���޷�ʶ���ͼ������:" + layer.LayerType);
+                throw new Exception("无法识别的图层:" + layer.LayerType);
         }
 
         if (node.alpha <= 0.1f)
@@ -98,7 +99,7 @@ public class PsdParse
     {
         if (psdLayer.LinkedLayer != null)
         {
-            string error = string.Format("��ֹ����ͼ��[{0}]", psdLayer.Name);
+            string error = string.Format("无法处理链接图层[{0}]", psdLayer.Name);
             errors.Add(error);
         }
     }
@@ -107,7 +108,7 @@ public class PsdParse
     {
         if (psdLayer.HasMask)
         {
-            string error = string.Format("��ֹ����ͼ��[{0}]", psdLayer.Name);
+            string error = string.Format("无法处理遮罩图层[{0}]", psdLayer.Name);
             errors.Add(error);
         }
     }
@@ -120,7 +121,7 @@ public class PsdParse
         }
 
         StringBuilder err = new StringBuilder();
-        err.AppendLine(string.Format("Psd�ļ������쳣[{0}]:", filePath));
+        err.AppendLine(string.Format("Psd解析异常[{0}]:", filePath));
         foreach (var error in errors)
         {
             err.AppendLine(error.ToString());
