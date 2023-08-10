@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -34,11 +35,9 @@ public class UIRefEditor : Editor
                 return;
             }
             EditorGUILayout.BeginHorizontal();
-            if (data.GameObject == null)
-            {
-                data.GameObject = (GameObject)EditorGUILayout.ObjectField(data.GameObject, typeof(GameObject), true);
-            }
-            else
+
+            //修改Key
+            if (data.TargetObj != null)
             {
                 var newKey = EditorGUILayout.TextField(data.Key);
                 if (!string.IsNullOrEmpty(newKey) && newKey != data.Key)
@@ -47,8 +46,12 @@ public class UIRefEditor : Editor
                     EditorGUILayout.EndHorizontal();
                     continue;
                 }
-                data.TypeList ??= GetTypeList(data.GameObject);
-                data.TypeStrList ??= GetTypeStrList(data.TypeList);
+
+            }
+
+            //修改组件类型
+            if (data.TargetObj != null)
+            {
                 var newIndex = EditorGUILayout.Popup(data.TypeIndex, data.TypeStrList);
                 if (newIndex != data.TypeIndex)
                 {
@@ -57,15 +60,17 @@ public class UIRefEditor : Editor
                     EditorGUILayout.EndHorizontal();
                     continue;
                 }
-                var newObj = EditorGUILayout.ObjectField(data.TargetObj, data.TargetObj?.GetType(), true);
-                if (newObj != data.TargetObj && IsValidObject(data, newObj))
-                {
-                    data.TargetObj = newObj;
-                    ModifyRef(data, newObj);
-                    EditorGUILayout.EndHorizontal();
-                    continue;
-                }
             }
+
+            //修改目标组件
+            var newObj = EditorGUILayout.ObjectField(data.TargetObj, typeof(UnityEngine.Object), true);
+            if (IsValidObject(data, newObj))
+            {
+                data.TargetObj = newObj;
+                ModifyRef(data, newObj);
+                RefreshTypeList(data);
+            }
+
             if (GUILayout.Button("移除", GUILayout.Width(50)))
             {
                 RemoveRef(data);
@@ -78,6 +83,24 @@ public class UIRefEditor : Editor
         if (GUILayout.Button("新增"))
         {
             AddRef();
+        }
+    }
+
+    private void RefreshTypeList(UIRefEditorStruct data)
+    {
+        if (data.TargetObj == null) return;
+        var sourceGo = GetSourceGameObject(data.TargetObj);
+        if (sourceGo == null) return;
+        data.TypeList = GetTypeList(sourceGo);
+        data.TypeStrList = GetTypeStrList(data.TypeList);
+        data.TypeIndex = 0;
+        for (int i = 0; i < data.TypeList.Length; i++)
+        {
+            if (data.TargetObj == data.TypeList[i])
+            {
+                data.TypeIndex = i;
+                break;
+            }
         }
     }
 
@@ -106,6 +129,17 @@ public class UIRefEditor : Editor
         return true;
     }
 
+    private GameObject GetSourceGameObject(UnityEngine.Object obj)
+    {
+        var gameObject = obj as GameObject;
+        if (gameObject == null)
+        {
+            var cmp = obj as Component;
+            gameObject = cmp?.gameObject;
+        }
+        return gameObject;
+    }
+
     /// <summary>
     /// 保证新增组件为当前GameObject的子物体
     /// </summary>
@@ -114,19 +148,17 @@ public class UIRefEditor : Editor
     /// <returns></returns>
     private bool IsValidObject(UIRefEditorStruct data, UnityEngine.Object newObj)
     {
-        var gameObject = newObj as GameObject;
-        if (gameObject == null)
+        if (newObj == null) return false;
+        if (newObj == data.TargetObj) return false;
+        var gameObject = GetSourceGameObject(newObj);
+        var trans = gameObject.transform;
+        while (trans != null)
         {
-            var cmp = newObj as Component;
-            gameObject = cmp.gameObject;
-        }
-        while (gameObject != null)
-        {
-            if (gameObject == data.GameObject)
+            if (trans == data.GameObject.transform)
             {
                 return true;
             }
-            gameObject = gameObject.transform.parent.gameObject;
+            trans = gameObject.transform.parent;
         }
         return false;
     }
@@ -178,26 +210,8 @@ public class UIRefEditor : Editor
         var sc = new UIRefEditorStruct();
         sc.Key = key;
         sc.TargetObj = obj;
-        sc.TypeIndex = -1;
-        if (obj != null)
-        {
-            sc.GameObject = obj as GameObject;
-            if (sc.GameObject == null)
-            {
-                var cmp = obj as Component;
-                sc.GameObject = cmp.gameObject;
-            }
-            sc.TypeList = GetTypeList(sc.GameObject);
-            sc.TypeStrList = GetTypeStrList(sc.TypeList);
-            for (int i = 0; i < sc.TypeList.Length; i++)
-            {
-                if (sc.TargetObj == sc.TypeList[i])
-                {
-                    sc.TypeIndex = i;
-                    break;
-                }
-            }
-        }
+        sc.GameObject = m_Target.gameObject;
+        RefreshTypeList(sc);
         uiRefStructs.Add(sc);
         Debug.Log($"添加:{sc.Key} obj:{sc.TargetObj} index:{sc.TypeIndex}");
     }

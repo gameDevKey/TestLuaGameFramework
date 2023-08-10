@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIRef : MonoBehaviour
 {
@@ -10,11 +8,14 @@ public class UIRef : MonoBehaviour
 
     private static Dictionary<Type, string> m_Type2Prefix = new()
     {
-        {typeof(Button),"btn" },
-        {typeof(Image),"img" },
-        {typeof(RectTransform),"rect" },
-        {typeof(GameObject),"obj" },
-        {typeof(Transform),"trans" },
+        {typeof(UnityEngine.GameObject),"obj" },
+        {typeof(UnityEngine.RectTransform),"rect" },
+        {typeof(UnityEngine.Transform),"trans" },
+        {typeof(UnityEngine.UI.Button),"btn" },
+        {typeof(UnityEngine.UI.Image),"img" },
+        {typeof(UnityEngine.UI.Text),"txt" },
+        {typeof(UnityEngine.UI.InputField),"input" },
+        {typeof(UnityEngine.UI.ScrollRect),"scroll" },
     };
 
     private int duplicateIndex = 0;
