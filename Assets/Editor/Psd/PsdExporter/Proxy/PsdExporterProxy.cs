@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class PsdExporterProxy : Proxy<PsdExporterProxy>
+public class PsdExporterProxy : Proxy
 {
+    public static PsdExporterProxy Instance => PsdExporterFacade.Instance.GetProxy<PsdExporterProxy>() as PsdExporterProxy;
+
     public PsdParse SelectPsd;
     public PsdSetting Setting;
 
@@ -28,7 +30,7 @@ public class PsdExporterProxy : Proxy<PsdExporterProxy>
 
     private void CreateOrLoadSetting()
     {
-        string path = Application.dataPath + "/Editor/Psd/PsdSettingData.asset";
+        string path = PsdSetting.SettingPath;
         Setting = AssetDatabase.LoadAssetAtPath<PsdSetting>(path);
         if (Setting == null)
         {
@@ -47,12 +49,12 @@ public class PsdExporterProxy : Proxy<PsdExporterProxy>
     private void InitSetting()
     {
         var uIRootObj = GameObject.Find(Setting.UIRootName);
-        if(uIRootObj == null)
+        if (uIRootObj == null)
         {
             uIRootObj = new GameObject(Setting.UIRootName);
         }
         UIRoot = uIRootObj.transform;
-        Debug.Log("Psd预设挂载点:" + Setting.UIRootName);
+        Debug.Log("Psd预设挂载点:" + UIRoot);
         OutputPath = Application.dataPath + "/" + Setting.OutputPath;
         Debug.Log("Psd输出路径:" + OutputPath);
     }

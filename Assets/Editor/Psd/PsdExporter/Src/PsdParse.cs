@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using System.IO;
-
+using System.Linq;
 
 public class PsdParse
 {
@@ -24,11 +24,6 @@ public class PsdParse
         PsdDocument document = PsdDocument.Create(file);
 
         fileName = Path.GetFileName(file);
-
-        //foreach (PsdLayer layer in document.Childs)
-        //{
-        //    ParseLayer(layer, null);
-        //}
 
         try
         {

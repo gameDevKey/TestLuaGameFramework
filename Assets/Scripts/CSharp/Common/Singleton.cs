@@ -1,15 +1,20 @@
-public class Singleton<T> where T : new()
+using System;
+using System.Collections.Generic;
+
+public class Singleton<T> where T : class, new()
 {
-    private static T instance;
+    private static readonly Dictionary<Type, T> instances = new Dictionary<Type, T>();
+
     public static T Instance
     {
         get
         {
-            if (instance == null)
+            Type type = typeof(T);
+            if (!instances.ContainsKey(type))
             {
-                instance = new T();
+                instances[type] = new T();
             }
-            return instance;
+            return instances[type];
         }
     }
 }

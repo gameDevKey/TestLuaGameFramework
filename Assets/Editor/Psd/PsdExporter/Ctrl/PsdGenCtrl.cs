@@ -5,14 +5,15 @@ using UnityEngine.UI;
 using UnityEditor;
 using System.IO;
 
-public class PsdGenCtrl : Controller<PsdGenCtrl>
+public class PsdGenCtrl : Controller
 {
+    public static PsdGenCtrl Instance => PsdExporterFacade.Instance.GetCtrl<PsdGenCtrl>() as PsdGenCtrl;
 
     public void ExportPrefab(PsdParse psdParse)
     {
         string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
 
-        Directory.Delete(outPath);
+        //Directory.Delete(outPath);
         FileUtils.CreateFolder(outPath);
 
         GameObject root = createRootObject(psdParse.fileName);
@@ -100,7 +101,7 @@ public class PsdGenCtrl : Controller<PsdGenCtrl>
         text.raycastTarget = false;
         text.fontSize = node.fontSize;
         // text.font = setting.GetFont(node.fontName);
-        Debug.Log("字体缺失 TODO:"+node.fontName);
+        Debug.Log("字体缺失 TODO:" + node.fontName);
         text.color = new Color(node.color.r, node.color.g, node.color.b, node.alpha);
 
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
@@ -137,6 +138,7 @@ public class PsdGenCtrl : Controller<PsdGenCtrl>
 
     void createImage(PsdParse psdParse, ImageNode node, GameObject obj)
     {
+        Debug.Log("创建图层失败 TODO:" + node.name);
         // string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
 
         // string texFile = string.Empty;

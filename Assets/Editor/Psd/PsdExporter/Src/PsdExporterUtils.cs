@@ -32,8 +32,11 @@ public class PsdExporterUtils
 
     public static Texture2D CreateTexture(PsdLayer layer)
     {
-        Debug.Assert(layer.Width != 0 && layer.Height != 0, layer.Name + ": width = height = 0");
-        if (layer.Width == 0 || layer.Height == 0) return new Texture2D(layer.Width, layer.Height);
+        if (layer.Width == 0 || layer.Height == 0)
+        {
+            Debug.LogError($"图层【{layer.Name}】宽高异常! (宽:{layer.Width},高:{layer.Height})");
+            return new Texture2D(layer.Width, layer.Height);
+        }
 
         Texture2D texture = new Texture2D(layer.Width, layer.Height);
         Color32[] pixels = new Color32[layer.Width * layer.Height];
@@ -81,12 +84,28 @@ public class PsdExporterUtils
         var width = psdLayer.Width;// psdLayer.Width > rootSize.x ? rootSize.x : psdLayer.Width;
         var height = psdLayer.Height;// psdLayer.Height > rootSize.y ? rootSize.y : psdLayer.Height;
 
+        Debug.Log($"图层数据 {psdLayer.Name} left:{left} bottom:{bottom} top:{top} rigtht:{rigtht} w:{width} h:{height}");
+
+        var canvasSize = PsdExporterProxy.Instance.Setting.CanvasSize;
+
         // var xMin = (rigtht + left - parentRect.width) * 0.5f;
         // var yMin = -(top + bottom - parentRect.height) * 0.5f;
         //Vector2 pa = GetParenRectAddition(parentNode);
-        var xMin = (left + width * 0.5f) - (PsdExporterProxy.Instance.Setting.CanvasSize.x * 0.5f);
-        var yMin = (PsdExporterProxy.Instance.Setting.CanvasSize.y * 0.5f) - (top + height * 0.5f);
-        return new Rect(xMin, yMin, width, height);
+        var xMin = (left + width * 0.5f) - canvasSize.x * 0.5f;
+        var yMin = canvasSize.y * 0.5f - (top + height * 0.5f);
+
+        var rate = canvasSize.x / width;
+
+        Debug.Log("缩放比" + rate);
+
+        xMin = xMin * rate;
+        yMin = yMin * rate;
+        var real_width = canvasSize.x;
+        var real_height = rate * height;
+
+        Debug.Log($"图层 {psdLayer.Name} x:{xMin} y:{yMin} w:{real_width} h:{real_height}");
+
+        return new Rect(xMin, yMin, real_width, real_height);
     }
 
     //public static Vector2 GetParenRectAddition(LayerNode node)

@@ -14,8 +14,7 @@ public class PsdExporter
             return;
         }
 
-        var facade = new PsdExporterFacade();
-        facade.InitComplete();
+        PsdExporterFacade.Instance.InitComplete();
 
         PsdParse psdParse = new PsdParse();
         psdParse.Parse(psdFile);
@@ -39,8 +38,7 @@ public class PsdExporter
             return;
         }
 
-        var facade = new PsdExporterFacade();
-        facade.InitComplete();
+        PsdExporterFacade.Instance.InitComplete();
 
         PsdParse psdParse = new PsdParse();
         psdParse.Parse(psdFile);
@@ -56,25 +54,16 @@ public class PsdExporter
 
     static string selectPsdFile()
     {
-        // string dir = EditorPrefs.GetString("psd_file", string.Empty);
-        // if (string.IsNullOrEmpty(dir))
-        // {
-        //     dir = Application.dataPath;
-        // }
-
-        // string psdFile = EditorUtility.OpenFilePanel("选择一个psd文件", dir, "psd");
-        // if (string.IsNullOrEmpty(psdFile))
-        // {
-        //     return string.Empty;
-        // }
-        // else
-        // {
-        //     psdFile = IOUtils.GetAbsPath(psdFile);
-        //     EditorPrefs.SetString("psd_file", IOUtils.GetFolderNameByFile(psdFile));
-        //     return psdFile;
-        // }
-
-        string dir = Application.dataPath;
-        return EditorUtility.OpenFilePanel("选择一个psd文件", dir, "psd");
+        string dir = EditorPrefs.GetString("psd_file", string.Empty);
+        if (string.IsNullOrEmpty(dir))
+        {
+            dir = Application.dataPath;
+        }
+        string psdFile = EditorUtility.OpenFilePanel("选择一个psd文件", dir, "psd");
+        if (!string.IsNullOrEmpty(psdFile))
+        {
+            EditorPrefs.SetString("psd_file", psdFile);
+        }
+        return psdFile;
     }
 }

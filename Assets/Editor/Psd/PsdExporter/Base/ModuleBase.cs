@@ -1,4 +1,6 @@
-public class ModuleBase<T> :Singleton<T> where T:new()
+using System;
+
+public class ModuleBase
 {
     public Facade Facade;
 
@@ -22,6 +24,6 @@ public class ModuleBase<T> :Singleton<T> where T:new()
         Facade = facade;
     }
 
-    protected virtual void OnInit(){}
-    protected virtual void OnInitComplete(){}
+    protected virtual void OnInit() { }
+    protected virtual void OnInitComplete() { }
 }

@@ -1,41 +1,42 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using UnityDebug = UnityEngine.Debug;
+using SystemDebug = System.Diagnostics.Debug;
 
-public class Facade : ModuleBase<Facade>
+public class Facade : ModuleBase
 {
-    private Dictionary<Type, Controller<object>> m_Ctrls;
-    private Dictionary<Type, Proxy<object>> m_Proxys;
+    private Dictionary<Type, Controller> m_Ctrls = new Dictionary<Type, Controller>();
+    private Dictionary<Type, Proxy> m_Proxys = new Dictionary<Type, Proxy>();
 
-    protected void BindCtrl<T>(T ctrl) where T:Controller<T>,new()
+    protected void BindCtrl<T>() where T : Controller, new()
     {
-        var target = ctrl as Controller<object>;
-        target.SetFacade(this);
-        var success = m_Ctrls.TryAdd(target.GetType(), target);
-        Debug.Assert(success, "Facade重复绑定Ctrl");
+        var ctrl = new T();
+        ctrl.SetFacade(this);
+        var success = m_Ctrls.TryAdd(ctrl.GetType(), ctrl);
+        SystemDebug.Assert(success, "Facade重复绑定Ctrl");
     }
 
-    protected void BindProxy<T>(T proxy) where T:Proxy<T>,new()
+    protected void BindProxy<T>() where T : Proxy, new()
     {
-        var target = proxy as Proxy<object>;
-        target.SetFacade(this);
-        var success = m_Proxys.TryAdd(target.GetType(), target);
-        Debug.Assert(success, "Facade重复绑定Proxy");
+        var proxy = new T();
+        proxy.SetFacade(this);
+        var success = m_Proxys.TryAdd(proxy.GetType(), proxy);
+        SystemDebug.Assert(success, "Facade重复绑定Proxy");
     }
 
-    // public T GetCtrl<T>() where T:ModuleBase<object>
-    // {
-    //     object target;
-    //     m_Ctrls.TryGetValue(typeof(T), out target);
-    //     return target as T;
-    // }
+    public Controller GetCtrl<T>() where T : Controller, new()
+    {
+        Controller target;
+        m_Ctrls.TryGetValue(typeof(T), out target);
+        return target;
+    }
 
-    // public T GetProxy<T>() where T:Proxy<T>,new()
-    // {
-    //     object target;
-    //     m_Proxys.TryGetValue(typeof(T), out target);
-    //     return target as T;
-    // }
+    public Proxy GetProxy<T>() where T : Proxy, new()
+    {
+        Proxy target;
+        m_Proxys.TryGetValue(typeof(T), out target);
+        return target;
+    }
 
     protected override void OnInit()
     {

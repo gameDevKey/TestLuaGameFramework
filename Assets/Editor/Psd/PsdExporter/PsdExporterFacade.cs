@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PsdExporterFacade : Facade
 {
+    public static PsdExporterFacade Instance => Singleton<PsdExporterFacade>.Instance;
+
     protected override void OnInit()
     {
-        BindCtrl(new PsdGenCtrl());
-        BindProxy(new PsdExporterProxy());
+        BindCtrl<PsdGenCtrl>();
+        BindProxy<PsdExporterProxy>();
         base.OnInit();
     }
 }
