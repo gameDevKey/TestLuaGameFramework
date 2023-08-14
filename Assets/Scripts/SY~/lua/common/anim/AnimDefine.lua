@@ -1,0 +1,1 @@
+AnimDefine = SingleClass("AnimDefine")

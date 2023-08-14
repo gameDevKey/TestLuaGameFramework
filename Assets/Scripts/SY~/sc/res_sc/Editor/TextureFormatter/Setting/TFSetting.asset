@@ -1,0 +1,212 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2cd0de500800e4f8ca12a3c6e5d892, type: 3}
+  m_Name: TFSetting
+  m_EditorClassIdentifier: 
+  standaloneDefault: 12
+  androidDefault: 50
+  iosDefault: 50
+  formatList:
+  - _name: UI
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 4
+      maxSize: 2048
+      compressionQuality: 100
+      loadType: 0
+    androidSet:
+      format: 48
+      maxSize: 2048
+      compressionQuality: 100
+      loadType: 0
+    iosSet:
+      format: 48
+      maxSize: 2048
+      compressionQuality: 100
+      loadType: 0
+    paths:
+    - Assets/Things/Textures/UI
+    nonPowerOf2: 0
+    useMipMaps: 0
+    isReadable: 1
+    anisoLevel: 0
+  - _name: Unit
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 12
+      maxSize: 2048
+      compressionQuality: 100
+      loadType: 0
+    androidSet:
+      format: 48
+      maxSize: 2048
+      compressionQuality: 100
+      loadType: 0
+    iosSet:
+      format: 48
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Things/Unit/Npc
+    - Assets/Things/Unit/Role
+    - Assets/Things/Unit/Weapon
+    nonPowerOf2: 0
+    useMipMaps: 0
+    isReadable: 0
+    anisoLevel: 0
+  - _name: Sound
+    index: -1
+    iType: 2
+    standaloneSet:
+      format: -1
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 1
+    androidSet:
+      format: -1
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    iosSet:
+      format: -1
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Things/Sound
+    nonPowerOf2: 0
+    useMipMaps: 0
+    isReadable: 0
+    anisoLevel: 0
+  - _name: Effect
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 12
+      maxSize: 2048
+      compressionQuality: 0
+      loadType: 0
+    androidSet:
+      format: 50
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    iosSet:
+      format: 50
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Things/Effect
+    nonPowerOf2: 0
+    useMipMaps: 0
+    isReadable: 0
+    anisoLevel: 0
+  - _name: Icon
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 12
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    androidSet:
+      format: 50
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    iosSet:
+      format: 50
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Things/Textures/Icon
+    nonPowerOf2: 0
+    useMipMaps: 0
+    isReadable: 0
+    anisoLevel: 0
+  - _name: BigBg
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 12
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    androidSet:
+      format: 51
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    iosSet:
+      format: 51
+      maxSize: 2048
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Things/Textures/BigBgOrigin
+    nonPowerOf2: 0
+    useMipMaps: 0
+    isReadable: 0
+    anisoLevel: 0
+  - _name: LightMap
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 12
+      maxSize: 512
+      compressionQuality: 50
+      loadType: 0
+    androidSet:
+      format: 48
+      maxSize: 512
+      compressionQuality: 50
+      loadType: 0
+    iosSet:
+      format: 48
+      maxSize: 512
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Things/LightMap/MapAsset
+    nonPowerOf2: 0
+    useMipMaps: 1
+    isReadable: 0
+    anisoLevel: 0
+  - _name: ScenesTexture
+    index: -1
+    iType: 0
+    standaloneSet:
+      format: 12
+      maxSize: 512
+      compressionQuality: 50
+      loadType: 0
+    androidSet:
+      format: 48
+      maxSize: 512
+      compressionQuality: 50
+      loadType: 0
+    iosSet:
+      format: 48
+      maxSize: 512
+      compressionQuality: 50
+      loadType: 0
+    paths:
+    - Assets/Scenes
+    nonPowerOf2: 0
+    useMipMaps: 1
+    isReadable: 0
+    anisoLevel: 0

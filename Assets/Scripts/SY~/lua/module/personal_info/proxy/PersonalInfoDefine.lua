@@ -1,0 +1,1 @@
+PersonalInfoDefine = StaticClass("PersonalInfoDefine")

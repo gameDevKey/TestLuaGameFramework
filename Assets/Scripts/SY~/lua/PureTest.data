@@ -1,0 +1,151 @@
+function Test() {
+    CS.UnityEngine.Debug.Log("js测试")
+    Test1()
+    Test2()
+    Test3()
+    Test4()
+    Test5()
+    Test6()
+    Test7()
+    Test8()
+}
+
+function Test1() {
+    let obj = new CS.UnityEngine.GameObject('testObject')
+    let transform = obj.transform
+
+    let one = CS.UnityEngine.Vector3.one
+    let t = new Date().getTime()
+
+    for (var i = 0; i < 200000; i++)
+    {
+        transform.position = transform.position
+    }
+      
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("Transform.position js cost time: " + t)
+}
+
+function Test2() 
+{
+    let obj = new CS.UnityEngine.GameObject('testObject')
+    let transform = obj.transform
+
+    let up = CS.UnityEngine.Vector3.up
+    let t = new Date().getTime()
+
+    for (var i = 0; i < 200000; i++)
+    {
+        transform.Rotate(up, 1)
+    }
+
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("Transform.Rotate js cost time: " + t)
+}
+
+function Test3() 
+{
+    let obj = new CS.UnityEngine.GameObject('testObject')
+    let transform = obj.transform
+
+    let t = new Date().getTime()
+    let Vector3 = CS.UnityEngine.Vector3
+
+    for (var i = 0; i < 200000; i++)
+    {
+        transform.position = new Vector3(i, i , i)   
+    }
+          
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("Vector3.New lua cost time: " + t)
+}
+
+function Test4() 
+{
+    let GameObject = CS.UnityEngine.GameObject
+    let t = new Date().getTime()
+    let go = new GameObject()
+    let node = go.transform
+
+    for (var i = 0; i < 100000; i++)
+    {
+        go = node.gameObject
+    }
+      
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("GameObject.New lua cost time: " + t)
+}
+
+function Test5()
+{
+    var array = [];
+
+    for (var i = 0; i < 1024; i++)
+    {
+        array.push(i)
+    }
+
+    let total = 0
+    let t = new Date().getTime()
+
+    for (var j = 0; j < 100000; j++)
+    {
+        for (var i = 0; i < 1024; i++)
+        {
+            total = total + array[i]
+        }
+    }
+
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("Array cost time: " + t)
+}
+
+
+function Test6()
+{
+    let Vector3 = CS.UnityEngine.Vector3
+    let t = new Date().getTime()
+          
+    for (var i = 0; i < 200000; i++)
+    {
+        let v = new Vector3(i,i,i)
+        Vector3.Normalize(v)
+    }
+          
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("lua Vector3 New Normalize cost time: " + t)
+}
+
+function Test7()
+{
+    let Quaternion = CS.UnityEngine.Quaternion
+    let t = new Date().getTime()
+      
+    for (var i = 0; i < 200000; i++)
+    {
+        let q1 = Quaternion.Euler(i, i, i)       
+        let q2 = Quaternion.Euler(i * 2, i * 2, i * 2)
+        Quaternion.Slerp(Quaternion.identity, q1, 0.5)     
+    }
+          
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("Quaternion Euler Slerp const: " + t)
+}
+
+function Test8()
+{
+    let total = 0
+    let t = new Date().getTime()
+
+    for (var i = 0; i < 10000000; i++)
+    {
+        total = total + i - (i/2) * (i + 3) / (i + 5)
+    }
+
+    t = (new Date().getTime() - t) * 0.001
+    CS.UnityEngine.Debug.Log("math cal cost: " + t)       
+}
+
+Test()
+
+export default { Test };
