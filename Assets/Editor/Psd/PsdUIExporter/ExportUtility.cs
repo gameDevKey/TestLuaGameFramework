@@ -7,9 +7,11 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace PsdUIExporter {
+namespace PsdUIExporter
+{
 
-    public static class ExportUtility {
+    public static class ExportUtility
+    {
 
         // 通道分离-alpha
         public const int SPLIT_ALPHA = 1;
@@ -20,16 +22,18 @@ namespace PsdUIExporter {
         // 真彩
         public const int TRUE_COLOR = 4;
 
-        [MenuItem("PsdTools/PSDWindow")]
-        static void OpenPSDConfigWindow() {
+        //[MenuItem("PsdTools/PSDWindow")]
+        static void OpenPSDConfigWindow()
+        {
             var window = EditorWindow.GetWindow<PsdUIWindow>();
             window.position = new Rect(100, 100, 1200, 600);
             window.titleContent = new GUIContent("PSDExporter");
             window.Repaint();
         }
 
-        [MenuItem("PsdTools/SliceWindow")]
-        static void OpenSliceWindow() {
+        //[MenuItem("PsdTools/SliceWindow")]
+        static void OpenSliceWindow()
+        {
             var window = EditorWindow.GetWindow<SliceWindow>();
             window.position = new Rect(100, 100, 1000, 600);
             window.titleContent = new GUIContent("SliceWindow");
@@ -43,7 +47,8 @@ namespace PsdUIExporter {
         /// </summary>
         /// <param name="psdLayer"></param>
         /// <returns></returns>
-        public static Rect GetRectFromLayer(IPsdLayer psdLayer, INode parentNode) {
+        public static Rect GetRectFromLayer(IPsdLayer psdLayer, INode parentNode)
+        {
             //rootSize = new Vector2(rootSize.x > maxSize.x ? maxSize.x : rootSize.x, rootSize.y > maxSize.y ? maxSize.y : rootSize.y);
             var left = psdLayer.Left;// psdLayer.Left <= 0 ? 0 : psdLayer.Left;
             var bottom = psdLayer.Bottom;// psdLayer.Bottom <= 0 ? 0 : psdLayer.Bottom;
@@ -60,10 +65,14 @@ namespace PsdUIExporter {
             return new Rect(xMin, yMin, width, height);
         }
 
-        public static Vector2 GetParenRectAddition(INode node) {
-            if (node.GetParentNode() == null) {
+        public static Vector2 GetParenRectAddition(INode node)
+        {
+            if (node.GetParentNode() == null)
+            {
                 return new Vector2(node.GetRect().width / 2f, node.GetRect().height / 2f);
-            } else {
+            }
+            else
+            {
                 Vector2 parent = GetParenRectAddition(node.GetParentNode());
                 return new Vector2(parent.x + node.GetRect().x, parent.y - node.GetRect().y);
             }
@@ -74,7 +83,8 @@ namespace PsdUIExporter {
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        public static Color GetLayerColor(PsdLayer layer) {
+        public static Color GetLayerColor(PsdLayer layer)
+        {
             Channel red = Array.Find(layer.Channels, i => i.Type == ChannelType.Red);
             Channel green = Array.Find(layer.Channels, i => i.Type == ChannelType.Green);
             Channel blue = Array.Find(layer.Channels, i => i.Type == ChannelType.Blue);
@@ -83,7 +93,8 @@ namespace PsdUIExporter {
 
             Color[] pixels = new Color[layer.Width * layer.Height];
 
-            for (int i = 0; i < pixels.Length; i++) {
+            for (int i = 0; i < pixels.Length; i++)
+            {
                 byte r = red.Data[i];
                 byte g = green.Data[i];
                 byte b = blue.Data[i];
@@ -99,7 +110,8 @@ namespace PsdUIExporter {
                 pixels[pixels.Length - n - 1] = new Color(r / 255f, g / 255f, b / 255f, a / 255f);
             }
             Color color = Color.white;
-            foreach (var item in pixels) {
+            foreach (var item in pixels)
+            {
                 color += item;
                 color *= 0.5f;
             }
@@ -111,7 +123,8 @@ namespace PsdUIExporter {
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        public static Texture2D CreateTexture(PsdLayer layer) {
+        public static Texture2D CreateTexture(PsdLayer layer)
+        {
             Debug.Assert(layer.Width != 0 && layer.Height != 0, layer.Name + ": width = height = 0");
             if (layer.Width == 0 || layer.Height == 0) return new Texture2D(layer.Width, layer.Height);
 
@@ -129,7 +142,8 @@ namespace PsdUIExporter {
             //{
             //    Debug.Log(mask.Data.Length + ":" + alpha.Data.Length);
             //}
-            for (int i = 0; i < pixels.Length; i++) {
+            for (int i = 0; i < pixels.Length; i++)
+            {
                 var redErr = red == null || red.Data == null || red.Data.Length <= i;
                 var greenErr = green == null || green.Data == null || green.Data.Length <= i;
                 var blueErr = blue == null || blue.Data == null || blue.Data.Length <= i;
@@ -155,34 +169,45 @@ namespace PsdUIExporter {
         /// </summary>
         /// <param name="texture"></param>
         /// <returns></returns>
-        public static byte[] EncordToPng(this Texture2D texture) {
-            try {
+        public static byte[] EncordToPng(this Texture2D texture)
+        {
+            try
+            {
                 var assemble = System.Reflection.Assembly.Load("UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-                if (assemble != null) {
+                if (assemble != null)
+                {
                     var imageConvention = assemble.GetType("UnityEngine.ImageConversion");
-                    if (imageConvention != null) {
+                    if (imageConvention != null)
+                    {
                         return imageConvention.GetMethod("EncodeToPNG", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.InvokeMethod).Invoke(null, new object[] { texture }) as byte[];
                     }
                 }
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 return texture.GetType().GetMethod("EncodeToPNG").Invoke(texture, null) as byte[];
             }
             return new byte[0];
         }
 
-        public static void SetPlatformTextureSettings(string path, int maxSize = 2048, int type = COMPRESS_ALPHA) {
-            if (path == null || path.Trim().Length == 0) {
+        public static void SetPlatformTextureSettings(string path, int maxSize = 2048, int type = COMPRESS_ALPHA)
+        {
+            if (path == null || path.Trim().Length == 0)
+            {
                 return;
             }
             TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
             SetPlatformTextureSettings(importer, maxSize, type);
         }
 
-        public static void SetPlatformTextureSettings(TextureImporter importer, int maxSize = 2048, int type = COMPRESS_ALPHA) {
-            if (importer == null) {
+        public static void SetPlatformTextureSettings(TextureImporter importer, int maxSize = 2048, int type = COMPRESS_ALPHA)
+        {
+            if (importer == null)
+            {
                 return;
             }
-            switch (type) {
+            switch (type)
+            {
                 case SPLIT_ALPHA:
                     importer.textureType = TextureImporterType.Default;
                     importer.isReadable = false;
@@ -240,7 +265,8 @@ namespace PsdUIExporter {
         }
 
         // 设置分离通道图片资源格式
-        public static void SetPlatformTextureSettingsSub(TextureImporter importer, int type, int maxSize = 2048) {
+        public static void SetPlatformTextureSettingsSub(TextureImporter importer, int type, int maxSize = 2048)
+        {
             TextureImporterPlatformSettings setting = new TextureImporterPlatformSettings();
             setting.name = BuildTarget.Android.ToString();
             setting.maxTextureSize = maxSize;
@@ -281,9 +307,12 @@ namespace PsdUIExporter {
             importer.SetPlatformTextureSettings(setting);
         }
 
-        public static void SetPlatformTextureSettingsFormat(TextureImporterPlatformSettings setting, int type, BuildTarget target) {
-            if (target == BuildTarget.Android) {
-                switch (type) {
+        public static void SetPlatformTextureSettingsFormat(TextureImporterPlatformSettings setting, int type, BuildTarget target)
+        {
+            if (target == BuildTarget.Android)
+            {
+                switch (type)
+                {
                     case SPLIT_ALPHA:
                         setting.format = TextureImporterFormat.ETC_RGB4;
                         break;
@@ -297,8 +326,11 @@ namespace PsdUIExporter {
                         setting.format = TextureImporterFormat.ETC2_RGBA8;
                         break;
                 }
-            } else if (target == BuildTarget.iOS) {
-                switch (type) {
+            }
+            else if (target == BuildTarget.iOS)
+            {
+                switch (type)
+                {
                     case SPLIT_ALPHA:
                         setting.format = TextureImporterFormat.PVRTC_RGB4;
                         break;
@@ -312,8 +344,11 @@ namespace PsdUIExporter {
                         setting.format = TextureImporterFormat.PVRTC_RGBA4;
                         break;
                 }
-            } else {
-                switch (type) {
+            }
+            else
+            {
+                switch (type)
+                {
                     case SPLIT_ALPHA:
                         setting.format = TextureImporterFormat.DXT1;
                         break;
@@ -330,21 +365,29 @@ namespace PsdUIExporter {
             }
         }
 
-        public static bool IsSliceSprite(string path) {
-            if (path != null && path.ToLower().EndsWith("png")) {
+        public static bool IsSliceSprite(string path)
+        {
+            if (path != null && path.ToLower().EndsWith("png"))
+            {
                 TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
                 Vector4 border = importer.spriteBorder;
-                if ((border.x + border.y + border.w + border.z) > 3) {
+                if ((border.x + border.y + border.w + border.z) > 3)
+                {
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
 
-        public static GameObject CreateGameObject(string name, Rect rect, Vector2 pivot, Vector2 anchorMax, Vector2 anchorMin) {
+        public static GameObject CreateGameObject(string name, Rect rect, Vector2 pivot, Vector2 anchorMax, Vector2 anchorMin)
+        {
             GameObject go = new GameObject();
             go.layer = UnityEngine.LayerMask.NameToLayer("UI");
             go.name = name;
@@ -352,12 +395,15 @@ namespace PsdUIExporter {
             rect2.pivot = pivot;
             rect2.anchorMax = anchorMax;
             rect2.anchorMin = anchorMin;
-            if (rect.width == 0 && rect.height == 0) {
+            if (rect.width == 0 && rect.height == 0)
+            {
                 // 全屏布局，待定
                 // rect2.sizeDelta = new Vector2(rect.width, rect.height);
                 rect2.offsetMin = Vector2.zero;
                 rect2.offsetMax = Vector2.zero;
-            } else {
+            }
+            else
+            {
                 rect2.sizeDelta = new Vector2(rect.width, rect.height);
             }
             rect2.anchoredPosition3D = new Vector3(rect.x, rect.y, 0);
@@ -365,11 +411,15 @@ namespace PsdUIExporter {
             return go;
         }
 
-        public static bool IsNoexportLayer(PsdLayer layer) {
+        public static bool IsNoexportLayer(PsdLayer layer)
+        {
             string name = layer.Name;
-            if (!layer.IsVisible || (name != null && (name.ToLower().StartsWith("noexport_") || name.ToLower().StartsWith("ignore_"))) ) {
+            if (!layer.IsVisible || (name != null && (name.ToLower().StartsWith("noexport_") || name.ToLower().StartsWith("ignore_"))))
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
