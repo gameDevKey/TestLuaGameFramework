@@ -18,21 +18,24 @@ end
 
 --#region 获得所有Lua文件路径
 LuaFiles = {}
-local MODULE,FACADE,CTRL,PROXY = "Module","Facade","Ctrl","Proxy"
+local MODULE, FACADE, CTRL, PROXY = "Module", "Facade", "Ctrl", "Proxy"
 local facadeFiles = {}
 local facadeModules = {}
 local currentDir
 local luaFiles
+local startIndex, endIndex
 if PURE_LUA_TEST_ENV then
     currentDir = LFS.currentdir()
     luaFiles = {}
     LuaFileUtil.FindAllFile(currentDir, ".lua", luaFiles)
+    startIndex, endIndex = 1, #luaFiles
 else
-    currentDir = CsFileUtil.GetCurrentDir()..'/Scripts/Lua'
-    luaFiles = CsFileUtil.GetAllFilePath(currentDir,"*.lua")
+    currentDir = CsFileUtil.GetCurrentDir() .. '/Scripts/Lua'
+    luaFiles = CsFileUtil.GetAllFilePath(currentDir, "*.lua")
+    startIndex, endIndex = 0, luaFiles.Length - 1
 end
-local function IsValidFile(key,dir,lastDir,lastDir2)
-    if string.endswith(key,"meta") then
+local function IsValidFile(key, dir, lastDir, lastDir2)
+    if string.endswith(key, "meta") then
         return false
     end
     if TEST_ENV then
@@ -46,27 +49,21 @@ local function IsValidFile(key,dir,lastDir,lastDir2)
     end
     return true
 end
-local startIndex,endIndex
-if PURE_LUA_TEST_ENV then
-    startIndex,endIndex = 1,#luaFiles
-else
-    startIndex,endIndex = 0,luaFiles.Length-1
-end
 for i = startIndex, endIndex, 1 do
     local path = luaFiles[i]
     local realPath = string.gsub(path, currentDir, "")
     realPath = string.gsub(realPath, ".lua", "")
     local paths = string.split(realPath, '\\')
     local len = #paths
-    local key = paths[len]          --当前文件名
-    local dir = paths[len-1]        --文件夹
-    local lastDir = paths[len-2]    --上级文件夹
-    local lastDir2 = paths[len-3]   --上两级文件夹
+    local key = paths[len]        --当前文件名
+    local dir = paths[len - 1]    --文件夹
+    local lastDir = paths[len - 2] --上级文件夹
+    local lastDir2 = paths[len - 3] --上两级文件夹
     if LuaFiles[key] then
         PrintError("Lua文件重名", path)
     else
         --文件过滤，带有Debug或者Template的文件不加载
-        if IsValidFile(key,dir,lastDir,lastDir2) then
+        if IsValidFile(key, dir, lastDir, lastDir2) then
             LuaFiles[key] = table.concat(paths, ".")
             if lastDir == MODULE then
                 if string.endswith(key, FACADE) then
@@ -110,6 +107,7 @@ function SetupFacadeModules()
     facadeFiles = nil
     facadeModules = nil
 end
+
 --#endregion
 
 

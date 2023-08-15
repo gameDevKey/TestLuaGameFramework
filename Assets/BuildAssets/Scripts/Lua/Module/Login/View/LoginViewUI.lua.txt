@@ -5,15 +5,22 @@ function LoginViewUI:OnInit()
 end
 
 function LoginViewUI:OnFindComponent()
-    self.loginBtn = self:GetButton("btn")
-    self.txtName = self:GetText("btn/txt")
-    self.container = self:GetTransform("container")
+    -- self.loginBtn = self:GetButton("btn")
+    -- self.container = self:GetTransform("container")
 
-    self.template = self:GetTransform("container/LoginCom").gameObject
+    -- self.template = self:GetTransform("container/LoginCom").gameObject
+    -- self.template:SetActive(false)
+
+    -- self.serverListSR = self:GetScrollRect("serverlist")
+    -- self.serverTemplate = self:GetGameObject("serverlist/Viewport/Content/serveritem")
+    -- self.serverTemplate:SetActive(false)
+
+    self.loginBtn = self:GetRef("loginBtn")
+    self.container = self:GetRef("rectContainer")
+    self.template = self:GetRef("objLoginCom")
     self.template:SetActive(false)
-
-    self.serverListSR = self:GetScrollRect("serverlist")
-    self.serverTemplate = self:GetGameObject("serverlist/Viewport/Content/serveritem")
+    self.serverListSR = self:GetRef("scrollserverlist")
+    self.serverTemplate = self:GetRef("objserveritem")
     self.serverTemplate:SetActive(false)
 end
 

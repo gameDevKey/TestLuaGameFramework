@@ -13,14 +13,14 @@ function ListMap:OnDelete()
     self.list = nil
 end
 
-function ListMap:Add(key,data)
+function ListMap:Add(key, data)
     if self.dict[key] then
-        PrintError("[ListMap]键重复",key)
+        PrintError("[ListMap]键重复", key)
         return
     end
     self.index = self.index + 1
     self.size = self.size + 1
-    self.dict[key] = {key=key,value=data,index=self.index}
+    self.dict[key] = { key = key, value = data, index = self.index }
     self.list[self.index] = self.dict[key]
     return self.index
 end
@@ -51,10 +51,10 @@ function ListMap:GetVal(key)
     return self.dict[key] and self.dict[key].value
 end
 
-function ListMap:Range(func,caller)
+function ListMap:Range(func, caller)
     for key, value in pairs(self.list) do
         if caller then
-            func(caller,value)
+            func(caller, value)
         else
             func(value)
         end

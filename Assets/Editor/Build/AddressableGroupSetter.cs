@@ -23,6 +23,10 @@ public class AddressableGroupSetter
                 .Replace(".lua.txt", "");
             return path;
         });
+        ResetGroup<GameObject>("SpriteAtlas", BuildConfig.SPRITE_ATLAS_PATH, "t:spriteatlas", assetPath =>
+        {
+            return BuildUtils.GetLastName(assetPath).Replace(".spriteatlas", "");
+        });
         ResetGroup<GameObject>("UIPrefab", BuildConfig.UI_PREFAB_PATH, "t:prefab", assetPath =>
         {
             return BuildUtils.GetLastName(assetPath).Replace(".prefab", "");

@@ -2,6 +2,21 @@ UIBaseExtend = ExtendClass(UIBase)
 
 local CS_UI = UnityEngine.UI
 
+function UIBaseExtend:GetRef(key, transform)
+    transform = transform or self.transform
+    if not self.uiRefs then
+        self.uiRefs = {}
+        setmetatable(self.uiRefs, { __mode = "kv" })
+    end
+    if not self.uiRefs[transform] then
+        self.uiRefs[transform] = self:GetComponent(nil, CS.UIRef, transform)
+    end
+    if not self.uiRefs[transform] then
+        return nil
+    end
+    return self.uiRefs[transform]:GetRef(key)
+end
+
 function UIBaseExtend:GetComponent(path, cmp, transform)
     transform = transform or self.transform
     if transform and path then

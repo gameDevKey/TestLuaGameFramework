@@ -362,8 +362,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
-  - m_GUID: 481ae341e35a8504aa2e69a550c9d3de
-    m_Address: Game.Interface.IWorld
+  - m_GUID: 75bc93ccf84a9884e9c5ba4008157ba2
+    m_Address: Game.Module.Interface.IWorld
     m_ReadOnly: 0
     m_SerializedLabels:
     - Lua
