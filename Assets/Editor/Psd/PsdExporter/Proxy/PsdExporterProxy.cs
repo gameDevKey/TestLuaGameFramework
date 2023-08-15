@@ -8,42 +8,24 @@ public class PsdExporterProxy : Proxy
     public static PsdExporterProxy Instance => PsdExporterFacade.Instance.GetProxy<PsdExporterProxy>() as PsdExporterProxy;
 
     public PsdParse SelectPsd;
-    public PsdSetting Setting;
+    public ProjectSetting Setting;
 
-    public string OutputPath;
+    public string RootPath;
+    public string UITexPath;
+    public string CommonTexPath;
     public Transform UIRoot;
-    public List<string> CommonTexPaths;
     public Dictionary<string, Font> Fonts;
 
     protected override void OnInit()
     {
         base.OnInit();
-        CommonTexPaths = new List<string>();
         Fonts = new Dictionary<string, Font>();
     }
 
     protected override void OnInitComplete()
     {
-        CreateOrLoadSetting();
+        Setting = ProjectSetting.GetData();
         InitSetting();
-    }
-
-    private void CreateOrLoadSetting()
-    {
-        string path = PsdSetting.SettingPath;
-        Setting = AssetDatabase.LoadAssetAtPath<PsdSetting>(path);
-        if (Setting == null)
-        {
-            Setting = ScriptableObject.CreateInstance<PsdSetting>();
-            AssetDatabase.CreateAsset(Setting, path);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            Debug.Log("创建PsdSetting:" + path);
-        }
-        else
-        {
-            Debug.Log("读取PsdSetting:" + path);
-        }
     }
 
     private void InitSetting()
@@ -54,9 +36,34 @@ public class PsdExporterProxy : Proxy
             uIRootObj = new GameObject(Setting.UIRootName);
         }
         UIRoot = uIRootObj.transform;
-        Debug.Log("Psd预设挂载点:" + UIRoot);
-        OutputPath = Application.dataPath + "/" + Setting.OutputPath;
-        Debug.Log("Psd输出路径:" + OutputPath);
+        Debug.Log("[PsdExporter]预设挂载点:" + UIRoot);
+        RootPath = Application.dataPath.Replace("Assets", "");
+        UITexPath = Application.dataPath + "/" + Setting.UITextureDir;
+        Debug.Log("[PsdExporter]纹理路径:" + UITexPath);
+        CommonTexPath = Application.dataPath + "/" + Setting.CommonTextureDir;
+        Debug.Log("[PsdExporter]公共纹理路径:" + CommonTexPath);
+        var fontPath = "Assets/" + Setting.FontDir;
+        var fonts = EditorUtil.FindAssets<Font>("t:font", fontPath);
+        Debug.Log("[PsdExporter]加载字体:" + fontPath + ",个数:" + fonts.Count);
+        foreach (var font in fonts)
+        {
+            var f = font as Font;
+            if (f != null)
+            {
+                Fonts.ForceAdd(f.name, f);
+                Debug.Log("[PsdExporter]加载字体:" + f.name);
+            }
+        }
+    }
+
+    public Font GetFont(string name)
+    {
+        return Fonts.TryGetValue(name, out var font) ? font : null;
+    }
+
+    public string GetAssetPath(string fullPath)
+    {
+        return fullPath.Replace(RootPath, "");
     }
 }
 

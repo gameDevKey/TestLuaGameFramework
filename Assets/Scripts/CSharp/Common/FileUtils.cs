@@ -30,7 +30,7 @@ public class FileUtils
         {
             if (fileFilter == null || !fileFilter.Invoke(files[i]))
             {
-                if(!target.Exists) target.Create();
+                if (!target.Exists) target.Create();
                 string newName = nameGetter != null ? nameGetter(files[i]) : files[i].Name;
                 string newPath = FormatFilePath(target.FullName + @"\" + newName);
                 File.Copy(files[i].FullName, newPath, true);
@@ -53,5 +53,11 @@ public class FileUtils
     {
         DirectoryInfo source = new DirectoryInfo(path);
         if (!source.Exists) source.Create();
+    }
+
+    public static string GetLastName(string path, int lastIndex = 0)
+    {
+        var arr = path.Split("/");
+        return arr[arr.Length - 1 - lastIndex];
     }
 }

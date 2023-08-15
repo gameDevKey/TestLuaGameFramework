@@ -11,9 +11,9 @@ public class PsdGenCtrl : Controller
 
     public void ExportPrefab(PsdParse psdParse)
     {
-        string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
+        string outPath = PsdExporterProxy.Instance.UITexPath + psdParse.fileName + "/";
 
-        //Directory.Delete(outPath);
+        FileUtil.DeleteFileOrDirectory(outPath);
         FileUtils.CreateFolder(outPath);
 
         GameObject root = createRootObject(psdParse.fileName);
@@ -35,9 +35,9 @@ public class PsdGenCtrl : Controller
 
     public void ExportTexture(PsdParse psdParse)
     {
-        string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
+        string outPath = PsdExporterProxy.Instance.UITexPath + psdParse.fileName + "/";
 
-        Directory.Delete(outPath);
+        FileUtil.DeleteFileOrDirectory(outPath);
         FileUtils.CreateFolder(outPath);
 
         foreach (LayerNode node in psdParse.nodes)
@@ -78,7 +78,7 @@ public class PsdGenCtrl : Controller
         {
             rectTrans.offsetMin = Vector2.zero;
             rectTrans.offsetMax = Vector2.zero;
-            Debug.LogError($"节点{node.name}尺寸异常, 宽:{node.rect.width},高:{node.rect.height}");
+            Debug.LogError($"图层【{node.name}】尺寸异常, 宽:{node.rect.width},高:{node.rect.height}");
         }
         else
         {
@@ -91,8 +91,6 @@ public class PsdGenCtrl : Controller
 
     void createText(PsdParse psdParse, TextNode node, GameObject obj)
     {
-        var setting = PsdExporterProxy.Instance.Setting;
-
         RectTransform rectTrans = obj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x + 2, rectTrans.sizeDelta.y + 2);
         rectTrans.anchoredPosition3D = new Vector3(node.rect.x - (node.rect.width * 0.5f), node.rect.y + (node.rect.height * 0.5f), 0);
@@ -100,8 +98,12 @@ public class PsdGenCtrl : Controller
         Text text = obj.AddComponent<Text>();
         text.raycastTarget = false;
         text.fontSize = node.fontSize;
-        // text.font = setting.GetFont(node.fontName);
-        Debug.Log("字体缺失 TODO:" + node.fontName);
+        text.font = PsdExporterProxy.Instance.GetFont(node.fontName);
+        if (text.font == null)
+        {
+            Debug.LogError($"图层【{node.name}】缺失字体:{node.fontName}");
+            text.font = PsdExporterProxy.Instance.Setting.DefaultFont;
+        }
         text.color = new Color(node.color.r, node.color.g, node.color.b, node.alpha);
 
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
@@ -138,56 +140,58 @@ public class PsdGenCtrl : Controller
 
     void createImage(PsdParse psdParse, ImageNode node, GameObject obj)
     {
-        Debug.Log("创建图层失败 TODO:" + node.name);
-        // string outPath = PsdExporterProxy.Instance.OutputPath + psdParse.fileName + "/";
+        var setting = PsdExporterProxy.Instance.Setting;
+        string outPath = PsdExporterProxy.Instance.UITexPath + psdParse.fileName + "/";
 
-        // string texFile = string.Empty;
-        // bool isGen = false;
+        string texFile = string.Empty;
+        bool isGen = false;
 
-        // foreach (var path in setting.commonTexPaths)
-        // {
-        //     string commonPath = path + node.name + ".png";
-        //     if (File.Exists(commonPath))
-        //     {
-        //         texFile = commonPath;
-        //         break;
-        //     }
-        // }
+        var suffixs = new List<string> { ".jpg", ".png" };
+        foreach (var suffix in suffixs)
+        {
+            string commonPath = PsdExporterProxy.Instance.CommonTexPath + node.name + suffix;
+            if (File.Exists(commonPath))
+            {
+                texFile = commonPath;
+                break;
+            }
+        }
 
-        // if (texFile.Equals(string.Empty))
-        // {
-        //     texFile = outPath + node.name + ".png";
-        //     isGen = true;
-        // }
+        if (texFile.Equals(string.Empty))
+        {
+            texFile = outPath + node.name + ".png";
+            isGen = true;
+        }
 
-        // string assetPath = IOUtils.SubPath(texFile, PsdExporterSetting.projectPath);
+        string assetPath = PsdExporterProxy.Instance.GetAssetPath(texFile);
 
-        // if (isGen)
-        // {
-        //     if (File.Exists(texFile))
-        //     {
-        //         string folder = IOUtils.GetPathDirectory(texFile);
-        //         string name = IOUtils.GetFileName(texFile);
-        //         texFile = string.Format("{0}/{1}_{2}.png", folder, name, node.index);
-        //         assetPath = IOUtils.SubPath(texFile, PsdExporterSetting.projectPath);
-        //     }
+        if (isGen && !File.Exists(texFile))
+        {
+            //创建并保存纹理
+            node.SaveTexture(texFile);
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+            //转换成Sprite纹理类型
+            TextureImporter texture = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+            texture.textureType = TextureImporterType.Sprite;
+            //texture.spritePixelsPerUnit = 1;
+            //texture.filterMode = FilterMode.Trilinear;
+            //texture.mipmapEnabled = false;
+            //texture.textureFormat = TextureImporterFormat.AutomaticTruecolor;
+            AssetDatabase.ImportAsset(assetPath);
+        }
 
-        //     node.SaveTexture(texFile);
-        //     AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
-        // }
+        Image image = obj.AddComponent<Image>();
+        image.raycastTarget = false;
+        image.color = new Color(1.0f, 1.0f, 1.0f, node.alpha);
 
-        // Image image = obj.AddComponent<Image>();
-        // image.raycastTarget = false;
-        // image.color = new Color(1.0f, 1.0f, 1.0f, node.alpha);
+        Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
+        image.sprite = sprite;
 
-        // Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
-        // image.sprite = sprite;
-
-        // Vector4 border = sprite.border;
-        // if (border.x + border.y + border.z + border.w > 2)
-        // {
-        //     image.type = Image.Type.Sliced;
-        // }
+        Vector4 border = sprite.border;
+        if (border.x + border.y + border.z + border.w > 2)
+        {
+            image.type = Image.Type.Sliced;
+        }
     }
 }
 

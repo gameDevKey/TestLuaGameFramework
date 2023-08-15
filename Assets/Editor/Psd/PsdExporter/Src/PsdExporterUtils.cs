@@ -84,7 +84,7 @@ public class PsdExporterUtils
         var width = psdLayer.Width;// psdLayer.Width > rootSize.x ? rootSize.x : psdLayer.Width;
         var height = psdLayer.Height;// psdLayer.Height > rootSize.y ? rootSize.y : psdLayer.Height;
 
-        Debug.Log($"图层数据 {psdLayer.Name} left:{left} bottom:{bottom} top:{top} rigtht:{rigtht} w:{width} h:{height}");
+        //Debug.Log($"图层数据 {psdLayer.Name} left:{left} bottom:{bottom} top:{top} rigtht:{rigtht} w:{width} h:{height}");
 
         var canvasSize = PsdExporterProxy.Instance.Setting.CanvasSize;
 
@@ -94,18 +94,7 @@ public class PsdExporterUtils
         var xMin = (left + width * 0.5f) - canvasSize.x * 0.5f;
         var yMin = canvasSize.y * 0.5f - (top + height * 0.5f);
 
-        var rate = canvasSize.x / width;
-
-        Debug.Log("缩放比" + rate);
-
-        xMin = xMin * rate;
-        yMin = yMin * rate;
-        var real_width = canvasSize.x;
-        var real_height = rate * height;
-
-        Debug.Log($"图层 {psdLayer.Name} x:{xMin} y:{yMin} w:{real_width} h:{real_height}");
-
-        return new Rect(xMin, yMin, real_width, real_height);
+        return new Rect(xMin, yMin, width, height);
     }
 
     //public static Vector2 GetParenRectAddition(LayerNode node)
