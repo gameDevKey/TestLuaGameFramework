@@ -130,6 +130,9 @@ public class PsdGenCtrl : Controller
 
         text.horizontalOverflow = node.isOneline ? HorizontalWrapMode.Overflow : HorizontalWrapMode.Wrap;
 
+        //TODO 这一行该不该加呢
+        text.alignment = TextAnchor.MiddleCenter;
+
         //ContentSizeFitter sizeFitter = obj.AddComponent<ContentSizeFitter>();
         //sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
         //sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
