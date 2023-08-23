@@ -205,7 +205,7 @@ public class UIRefEditor : Editor
         sc.RootObj = m_Target.gameObject;
         RefreshTypeList(sc);
         uiRefStructs.Add(sc);
-        Debug.Log($"Ìí¼Ó:{sc.Key} obj:{sc.TargetObj} index:{sc.TypeIndex}");
+        //Debug.Log($"Ìí¼Ó:{sc.Key} obj:{sc.TargetObj} index:{sc.TypeIndex}");
     }
 
     private void RemoveRef(UIRefEditorStruct data)
