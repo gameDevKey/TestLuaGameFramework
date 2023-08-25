@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RedFont
+  serializedVersion: 2
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 24f85d0e2ef19bd4db87e357862abdc9, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 86a8838284a704041af905c38cfbf204, type: 3}
+  - {fileID: 21300000, guid: 330ad5b23929c5f4980ae1c29dd764b4, type: 3}
+  - {fileID: 21300000, guid: 7c66b285955d4da4cb41dcf751351a3b, type: 3}
+  - {fileID: 21300000, guid: bbc45c172a494f943bcdf6cedfc8cce6, type: 3}
+  - {fileID: 21300000, guid: 7d061678908da4c4cafe7ae437ed1adc, type: 3}
+  - {fileID: 21300000, guid: 1a00c1982fddcc54fb32578d54c055eb, type: 3}
+  - {fileID: 21300000, guid: 177da1dbd947a074aa73b65161d86bb6, type: 3}
+  - {fileID: 21300000, guid: c612bf9cd5d70804dbf3a648eeb00e89, type: 3}
+  - {fileID: 21300000, guid: c3159acd19bf3b042a65ae9ceec1d2a4, type: 3}
+  - {fileID: 21300000, guid: 5e700d3eec850fa409818f65f94ec0e6, type: 3}
+  - {fileID: 21300000, guid: 55db5b7e20023a3408f93841f4da52c2, type: 3}
+  - {fileID: 21300000, guid: 484d0d8ed9a037d49ad76f5ef72d79f3, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - red6
+  - red9
+  - red7
+  - red+
+  - red-
+  - red4
+  - red2
+  - red5
+  - red8
+  - red1
+  - red0
+  - red3
+  m_RenderDataMap: {}
+  m_Tag: RedFont
+  m_IsVariant: 0
+  m_IsPlaceholder: 0

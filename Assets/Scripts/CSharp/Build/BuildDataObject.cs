@@ -11,6 +11,8 @@ public class BuildDataObject : ScriptableObject
     public string UI_PREFAB_PATH = BuildConfig.UI_PREFAB_PATH;
     [Header("Game预设路径")]
     public string GAME_PREFAB_PATH = BuildConfig.GAME_PREFAB_PATH;
+    [Header("Config预设路径")]
+    public string[] CONFIG_PREFAB_PATHS = BuildConfig.CONFIG_PREFAB_PATHS;
     [Header("构建模式")]
     public BuildConfig.EBuildMode BuildMode;
 }

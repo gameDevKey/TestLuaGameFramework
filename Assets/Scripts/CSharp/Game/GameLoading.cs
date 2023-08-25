@@ -75,13 +75,17 @@ public class GameLoading : MonoBehaviour
         switch (opType)
         {
             case GameLaunch.OpType.AddressablesInit:
-                name = "引擎初始化中";
+                name = "初始化引擎";
                 break;
             case GameLaunch.OpType.CatalogCheckUpdate:
-                name = "检查资源更新中";
+                name = "检查资源更新";
                 break;
             case GameLaunch.OpType.CatalogUpdate:
-                name = "更新资源中";
+                name = "更新资源";
+                break;
+            case GameLaunch.OpType.DownloadLua:
+            case GameLaunch.OpType.DownloadSpriteAltas:
+                name = "下载必要文件";
                 break;
         }
         ProgressTips.text = $"{name}... {GetPercentStr(progress)}";

@@ -6,6 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 
 public class GameLaunch : MonoSingleton<GameLaunch>
 {
@@ -16,6 +17,7 @@ public class GameLaunch : MonoSingleton<GameLaunch>
         CatalogCheckUpdate,
         CatalogUpdate,
         DownloadLua,
+        DownloadSpriteAltas,
     }
     public Action<OpType, float> onProcess;
     public Action onFinish;
@@ -89,6 +91,11 @@ public class GameLaunch : MonoSingleton<GameLaunch>
         var handle = Addressables.DownloadDependenciesAsync("Lua");
         yield return HandleOp(OpType.DownloadLua, handle);
         yield return GameAssetLoader.Instance.LoadObjectByLabelAsync<TextAsset>("Lua");
+
+        handle = Addressables.DownloadDependenciesAsync("RedFont");
+        yield return HandleOp(OpType.DownloadSpriteAltas, handle);
+        yield return GameAssetLoader.Instance.LoadAtlasByLabelAsync("RedFont");
+
         yield return Finish();
     }
 

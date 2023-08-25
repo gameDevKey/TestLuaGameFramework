@@ -31,12 +31,13 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 6, 0, 0);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 7, 0, 0);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "GetAllFile", _m_GetAllFile_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "GetCurrentDir", _m_GetCurrentDir_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "CopyFloder", _m_CopyFloder_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "FormatFilePath", _m_FormatFilePath_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "CreateFolder", _m_CreateFolder_xlua_st_);
+            Utils.RegisterFunc(L, Utils.CLS_IDX, "GetLastName", _m_GetLastName_xlua_st_);
             
 			
             
@@ -230,6 +231,47 @@ namespace XLua.CSObjectWrap
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_GetLastName_xlua_st_(RealStatePtr L)
+        {
+		    try {
+            
+            
+            
+			    int gen_param_count = LuaAPI.lua_gettop(L);
+            
+                if(gen_param_count == 2&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)) 
+                {
+                    string _path = LuaAPI.lua_tostring(L, 1);
+                    int _lastIndex = LuaAPI.xlua_tointeger(L, 2);
+                    
+                        var gen_ret = FileUtils.GetLastName( _path, _lastIndex );
+                        LuaAPI.lua_pushstring(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                if(gen_param_count == 1&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)) 
+                {
+                    string _path = LuaAPI.lua_tostring(L, 1);
+                    
+                        var gen_ret = FileUtils.GetLastName( _path );
+                        LuaAPI.lua_pushstring(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+            return LuaAPI.luaL_error(L, "invalid arguments to FileUtils.GetLastName!");
             
         }
         

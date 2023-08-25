@@ -5,6 +5,7 @@
 	<assembly fullname="Assembly-CSharp">
 	    <type fullname="UnityEngineExtention" preserve="all"/>
 		<type fullname="DG.Tweening.DOTweenModuleUI" preserve="all"/>
+		<type fullname="HUDManager" preserve="all"/>
 		<type fullname="FileUtils" preserve="all"/>
 		<type fullname="UnityEngineExtention" preserve="all"/>
 		<type fullname="GameAssetLoader" preserve="all"/>

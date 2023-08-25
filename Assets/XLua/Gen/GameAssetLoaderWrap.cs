@@ -21,11 +21,12 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(GameAssetLoader);
-			Utils.BeginObjectRegister(type, L, translator, 0, 3, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 4, 0, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadTextAsync", _m_LoadTextAsync);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadGameObjectAsync", _m_LoadGameObjectAsync);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetTextAsync", _m_GetTextAsync);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetGameObjectAsync", _m_GetGameObjectAsync);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadAtlasByLabelAsync", _m_LoadAtlasByLabelAsync);
 			
 			
 			
@@ -104,7 +105,7 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LoadTextAsync(RealStatePtr L)
+        static int _m_GetTextAsync(RealStatePtr L)
         {
 		    try {
             
@@ -119,7 +120,7 @@ namespace XLua.CSObjectWrap
                     string _path = LuaAPI.lua_tostring(L, 2);
                     XLua.LuaFunction _func = (XLua.LuaFunction)translator.GetObject(L, 3, typeof(XLua.LuaFunction));
                     
-                    gen_to_be_invoked.LoadTextAsync( _path, _func );
+                    gen_to_be_invoked.GetTextAsync( _path, _func );
                     
                     
                     
@@ -133,7 +134,51 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LoadGameObjectAsync(RealStatePtr L)
+        static int _m_GetGameObjectAsync(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                GameAssetLoader gen_to_be_invoked = (GameAssetLoader)translator.FastGetCSObj(L, 1);
+            
+            
+			    int gen_param_count = LuaAPI.lua_gettop(L);
+            
+                if(gen_param_count == 3&& (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING)&& translator.Assignable<System.Action<UnityEngine.GameObject, string>>(L, 3)) 
+                {
+                    string _path = LuaAPI.lua_tostring(L, 2);
+                    System.Action<UnityEngine.GameObject, string> _func = translator.GetDelegate<System.Action<UnityEngine.GameObject, string>>(L, 3);
+                    
+                    gen_to_be_invoked.GetGameObjectAsync( _path, _func );
+                    
+                    
+                    
+                    return 0;
+                }
+                if(gen_param_count == 3&& (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING)&& (LuaAPI.lua_isnil(L, 3) || LuaAPI.lua_type(L, 3) == LuaTypes.LUA_TFUNCTION)) 
+                {
+                    string _path = LuaAPI.lua_tostring(L, 2);
+                    XLua.LuaFunction _func = (XLua.LuaFunction)translator.GetObject(L, 3, typeof(XLua.LuaFunction));
+                    
+                    gen_to_be_invoked.GetGameObjectAsync( _path, _func );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+            return LuaAPI.luaL_error(L, "invalid arguments to GameAssetLoader.GetGameObjectAsync!");
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_LoadAtlasByLabelAsync(RealStatePtr L)
         {
 		    try {
             
@@ -145,14 +190,14 @@ namespace XLua.CSObjectWrap
             
                 
                 {
-                    string _path = LuaAPI.lua_tostring(L, 2);
-                    XLua.LuaFunction _func = (XLua.LuaFunction)translator.GetObject(L, 3, typeof(XLua.LuaFunction));
+                    string _label = LuaAPI.lua_tostring(L, 2);
                     
-                    gen_to_be_invoked.LoadGameObjectAsync( _path, _func );
+                        var gen_ret = gen_to_be_invoked.LoadAtlasByLabelAsync( _label );
+                        translator.PushAny(L, gen_ret);
                     
                     
                     
-                    return 0;
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {

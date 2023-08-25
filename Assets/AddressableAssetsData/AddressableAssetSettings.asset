@@ -47,6 +47,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 918985b018f6d0c44b875a22c9d7582d, type: 2}
   - {fileID: 11400000, guid: f6ac2507b1afd0041ae95877b4e02dec, type: 2}
   - {fileID: 11400000, guid: b5757f17868903d4cba92f9c6df0b297, type: 2}
+  - {fileID: 11400000, guid: a0d249b55807cc147bdb77b1c61c1272, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -92,6 +93,7 @@ MonoBehaviour:
     - UIPrefab
     - GamePrefab
     - SpriteAtlas
+    - ConfigPrefab
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 21ed18c4b0de6894099db908d9c56583, type: 2}

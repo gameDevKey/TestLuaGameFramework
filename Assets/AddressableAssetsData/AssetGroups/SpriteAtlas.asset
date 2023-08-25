@@ -16,8 +16,14 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 21c6cc49529946e4eb435d93b8c728f3
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 5c7fd4a63f09c1c448d11371f8a4d67f
+    m_Address: RedFont
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SpriteAtlas
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e7810444f69bdeb41a9753d6f86f1386, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: e0dfc6539d7471341b79ff2e2f94365f, type: 2}

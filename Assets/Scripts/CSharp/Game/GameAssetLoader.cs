@@ -1,11 +1,9 @@
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using IResourceLocation = UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation;
 using XLua;
@@ -21,6 +19,7 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     Dictionary<string, bool> loadLock = null;
     Dictionary<Type, Dictionary<string, Object>> assetCache = null;
     Dictionary<string, List<Action<Object>>> waitCalls;
+    Dictionary<Sprite, SpriteAtlas> sprite2Atlas;
 
     protected override void Awake()
     {
@@ -38,7 +37,12 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
 
         if (waitCalls == null) waitCalls = new Dictionary<string, List<Action<Object>>>();
         else waitCalls.Clear();
+
+        if (sprite2Atlas == null) sprite2Atlas = new Dictionary<Sprite, SpriteAtlas>();
+        else sprite2Atlas.Clear();
     }
+
+    #region 获取资源的接口
 
     public Object GetAsset<T>(string key)
     {
@@ -70,7 +74,6 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     //     return GetAsset<T>(key);
     // }
 
-
     public IEnumerator GetOrLoadAssetAsync<T>(string key, Action<Object> callback)
     {
         if (ExistAsset<T>(key))
@@ -97,7 +100,7 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
                 AddAsset(key, op.Result);
                 foreach (var call in waitCalls[key])
                 {
-                    call.Invoke(GetAsset<T>(key));
+                    call.Invoke(op.Result);
                 }
                 waitCalls[key].Clear();
                 loadLock[key] = false;
@@ -107,7 +110,6 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
         }
 
     }
-
 
     // public byte[] LoadBytes(string path)
     // {
@@ -121,7 +123,7 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     //     return text.text;
     // }
 
-    public void LoadTextAsync(string path, LuaFunction func)
+    public void GetTextAsync(string path, LuaFunction func)
     {
         StartCoroutine(GetOrLoadAssetAsync<TextAsset>(path, (obj) =>
         {
@@ -134,7 +136,15 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
     //     return GetOrLoadAsset<GameObject>(path) as GameObject;
     // }
 
-    public void LoadGameObjectAsync(string path, LuaFunction func)
+    public void GetGameObjectAsync(string path, Action<GameObject, string> func)
+    {
+        StartCoroutine(GetOrLoadAssetAsync<GameObject>(path, (obj) =>
+        {
+            func.Invoke(obj as GameObject, path);
+        }));
+    }
+
+    public void GetGameObjectAsync(string path, LuaFunction func)
     {
         StartCoroutine(GetOrLoadAssetAsync<GameObject>(path, (obj) =>
         {
@@ -142,55 +152,44 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
         }));
     }
 
-    string GetLoadKey<T>(string key)
+    public SpriteAtlas GetAtlasBySpriteKey(string spriteKey)
     {
-        return typeof(T).Name + key;
+        var sprite = GetAsset<Sprite>(spriteKey);
+        if (sprite == null) return null;
+        return GetAtlasBySprite(sprite as Sprite);
     }
 
-    void AddAsset(string key, Object obj)
+    public SpriteAtlas GetAtlasBySprite(Sprite sprite)
     {
-        var tpe = obj.GetType();
-        if (!assetCache.ContainsKey(tpe))
-        {
-            assetCache.Add(tpe, new Dictionary<string, Object>());
-        }
-        if (!assetCache[tpe].TryAdd(key, obj))
-        {
-            Debug.LogError($"资源重复添加:Key={key} Type={tpe}");
-        }
+        if (sprite == null) return null;
+        sprite2Atlas.TryGetValue(sprite, out var atlas);
+        return atlas;
     }
 
-    //图集应该如何加载，预处理？Sprite如何返回到lua？
-
-    // public void LoadAtlasByLabel(string label)
-    // {
-    //     GameAssetLoader.LoadObjectByLabelSync<SpriteAtlas>(label, (obj) =>
-    //     {
-    //         Sprite[] sp = new Sprite[obj.spriteCount];
-    //         obj.GetSprites(sp);
-    //         for (int i = 0; i < sp.Length; i++)
-    //         {
-    //             string key = sp[i].name.ToLower().Replace("(clone)", "");
-    //             if (!ExistAsset<Sprite>(key)) AddAsset(key, sp[i]);
-    //         }
-    //     });
-    // }
-
-    // public void LoadAtlasByLabelAsync(string label)
-    // {
-    //     StartCoroutine(GameAssetLoader.LoadObjectByLabelAsync<SpriteAtlas>(label, (location,obj) =>
-    //     {
-    //         Sprite[] sp = new Sprite[obj.spriteCount];
-    //         obj.GetSprites(sp);
-    //         for (int i = 0; i < sp.Length; i++)
-    //         {
-    //             string key = sp[i].name.ToLower().Replace("(clone)", "");
-    //             if (!ExistAsset<Sprite>(key)) AddAsset(key, sp[i]);
-    //         }
-    //     }));
-    // }
+    #endregion
 
 
+    #region 加载到内存的接口
+
+    //加载SpriteAtlas到内存中(获取Sprite前先加载SpriteAtlas)
+    public IEnumerator LoadAtlasByLabelAsync(string label)
+    {
+        yield return LoadObjectByLabelAsync<SpriteAtlas>(label, (location, obj) =>
+        {
+            Sprite[] sp = new Sprite[obj.spriteCount];
+            obj.GetSprites(sp);
+            for (int i = 0; i < sp.Length; i++)
+            {
+                string key = sp[i].name.Replace("(Clone)", "");
+                //if (!ExistAsset<Sprite>(key))
+                AddAsset(key, sp[i]);
+                sprite2Atlas.Add(sp[i], obj);
+                if (Log) Debug.Log($"加载label为{label}的图集{location.PrimaryKey}的Sprite:{key}");
+            }
+        });
+    }
+
+    //加载任意类型的Object到内存中
     public IEnumerator LoadObjectByLabelAsync<T>(string label, Action<IResourceLocation, T> callback = null) where T : Object
     {
         if (Log) Debug.Log($"开始加载label为{label}的{typeof(T)}");
@@ -211,4 +210,29 @@ public class GameAssetLoader : MonoSingleton<GameAssetLoader>
         yield return Addressables.ResourceManager.CreateGenericGroupOperation(ops, true);
         if (Log) Debug.Log($"结束加载label为{label}的{typeof(T)},用时{Time.realtimeSinceStartup - st}s");
     }
+
+    #endregion
+
+
+    #region 私有函数
+    string GetLoadKey<T>(string key)
+    {
+        return typeof(T).Name + key;
+    }
+
+    void AddAsset(string key, Object obj)
+    {
+        var tpe = obj.GetType();
+        if (!assetCache.ContainsKey(tpe))
+        {
+            assetCache.Add(tpe, new Dictionary<string, Object>());
+        }
+        if (!assetCache[tpe].TryAdd(key, obj))
+        {
+            Debug.LogError($"资源重复添加:Key={key} Type={tpe}");
+        }
+    }
+
+    #endregion
+
 }
