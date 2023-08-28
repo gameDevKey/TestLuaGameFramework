@@ -22,6 +22,7 @@ public class HUDManager : MonoSingleton<HUDManager>
         base.Awake();
         IsInitComplete = false;
         sprite2Index = new BiDictionary<Sprite, int>();
+        atlas2Index = new BiDictionary<SpriteAtlas, int>();
         MainCamera = Camera.main;
         render = new HUDNumberRender();
         GameAssetLoader.Instance.GetGameObjectAsync("HUDSetting", (obj, path) =>
@@ -72,11 +73,15 @@ public class HUDManager : MonoSingleton<HUDManager>
         return sprite;
     }
 
-    //public SpriteAtlas
+    public SpriteAtlas GetAtlasByID(int atlasId)
+    {
+        atlas2Index.TryGetBySecond(atlasId, out var atlas);
+        return atlas;
+    }
 
     public void ShowNumber(int number, Transform t)
     {
-        render.AddHudNumber(t ?? transform, HUDNumberRenderType.HUD_SHOW_HP_HURT, number, false, true, false);
+        render.AddHudNumber(t != null ? t : transform, HUDNumberRenderType.HUD_SHOW_HP_HURT, number, false, true, false);
     }
 }
 

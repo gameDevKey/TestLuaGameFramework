@@ -208,8 +208,7 @@ class HUDMesh
     BetterList<HUDVertex> m_SpriteVertex = new BetterList<HUDVertex>();
     bool m_bQueryTexture = false;
     int mAtlasID = 0;
-    Texture mainTex;
-    Texture alphaTex;
+    int mSpriteID = 0;
     bool mDirty = false;
     bool mHaveNullVertex = false;
 
@@ -224,13 +223,15 @@ class HUDMesh
         return HUDManager.Instance.MainCamera;
     }
 
-    public void SetAtlasID(int nAtlasID)
+    public void SetAtlasID(int nAtlasID, int nSpriteID)
     {
         if (mAtlasID != nAtlasID && mAtlasID != 0)
         {
             ReleaseTexture();
         }
         mAtlasID = nAtlasID;
+        mSpriteID = nSpriteID;
+        //var atlas = HUDManager.Instance.GetAtlasByID(mAtlasID);
         if (m_mat == null)
         {
             m_mat = new Material(Shader.Find("Unlit/HUDSprite"));
@@ -279,9 +280,9 @@ class HUDMesh
         if (sprite != null)
         {
             m_mat.SetTexture("_MainTex", sprite.texture);
-            m_mat.SetTexture("_MainAlpha", sprite.associatedAlphaSplitTexture);
+            //m_mat.SetTexture("_MainAlpha", sprite.associatedAlphaSplitTexture);
             m_mat.SetFloat("_ReverseY", GetReserveY());
-            Debug.Log($"LoadHUDSprite:{mSpriteID},{sprite},{sprite.texture}");
+            //Debug.Log($"LoadHUDSprite:{mSpriteID},{sprite},{sprite.texture}");
         }
     }
 
@@ -547,45 +548,4 @@ class HUDMesh
         }
         mIndices.size = index;
     }
-
-    //public void PushChar(Vector3 vWorld, float fScreenX, float fScreenY, float fLocalX, float fLocalY, char ch, Color clrLeftUp, Color clrLeftDown, Color clrRightUp, Color clrRightDown)
-    //{
-    //    mFont.GetCharacterInfo(ch, ref m_tempCharInfo);
-
-    //    float fL = fLocalX;
-    //    float fB = fLocalY;
-    //    float fR = fLocalX + m_tempCharInfo.glyphWidth;
-    //    float fT = fLocalY + m_tempCharInfo.glyphHeight;
-
-    //    fL = fScreenX + fL * m_Scale;
-    //    fT = fScreenY + fT * m_Scale;
-    //    fR = fScreenX + fR * m_Scale;
-    //    fB = fScreenY + fB * m_Scale;
-
-    //    Vector3[] vertex = { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero };
-    //    vertex[0].Set(fR, fB, 0f);  // 右上角
-    //    vertex[1].Set(fR, fT, 0f);  // 右下角
-    //    vertex[2].Set(fL, fT, 0f);  // 左下角
-    //    vertex[3].Set(fL, fB, 0f);  // 左上角
-
-    //    mVerts.Add(vWorld);
-    //    mVerts.Add(vWorld);
-    //    mVerts.Add(vWorld);
-    //    mVerts.Add(vWorld);
-
-    //    mOffset.Add(vertex[0]);
-    //    mOffset.Add(vertex[1]);
-    //    mOffset.Add(vertex[2]);
-    //    mOffset.Add(vertex[3]);
-
-    //    mUvs.Add(m_tempCharInfo.uvBottomRight);
-    //    mUvs.Add(m_tempCharInfo.uvTopRight);
-    //    mUvs.Add(m_tempCharInfo.uvTopLeft);
-    //    mUvs.Add(m_tempCharInfo.uvBottomLeft);
-
-    //    mCols.Add(clrRightDown);
-    //    mCols.Add(clrRightUp);
-    //    mCols.Add(clrLeftUp);
-    //    mCols.Add(clrLeftDown);
-    //}
 }

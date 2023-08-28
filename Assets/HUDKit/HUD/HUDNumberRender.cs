@@ -199,6 +199,7 @@ class HUDNumberRender
                 m_renderCamera.RemoveCommandBuffer(CameraEvent.AfterImageEffects, s_cmdBuffer);
             m_renderCamera = null;
             s_cmdBuffer.Clear();
+            Debug.Log("RemoveCommandBuffer");
         }
     }
 
@@ -327,10 +328,10 @@ class HUDNumberRender
     {
         for (int i = 0; i < pNode.m_aSprite.size; ++i)
         {
-            HUDMesh hudMesh = m_MeshRender.QueryMesh(pNode.m_aSprite[i].AtlasID);
+            HUDMesh hudMesh = m_MeshRender.QueryMesh(pNode.m_aSprite[i].AtlasID, pNode.m_aSprite[i].SpriteID);
             pNode.m_aSprite[i].hudMesh = hudMesh;
             hudMesh.PushHUDVertex(pNode.m_aSprite[i]);
-            Debug.Log($"申请了Mesh:{pNode.m_aSprite[i].AtlasID}({hudMesh.GetHashCode()})");
+            Debug.Log($"申请了Mesh:{pNode.m_aSprite[i].AtlasID}");
         }
     }
     void OnErase(HUDNumberEntry pNode)
@@ -363,6 +364,7 @@ class HUDNumberRender
                 m_renderCamera.RemoveCommandBuffer(CameraEvent.AfterImageEffects, s_cmdBuffer);
                 m_renderCamera = null;
                 m_bAddCommandBuffer = false;
+                Debug.Log("111 RemoveCommandBuffer");
             }
             Camera caMain = HUDMesh.GetHUDMainCamera();
             s_cmdBuffer.Clear();
@@ -374,7 +376,7 @@ class HUDNumberRender
                 m_renderCamera = caMain;
                 caMain.AddCommandBuffer(CameraEvent.AfterImageEffects, s_cmdBuffer);
                 m_bAddCommandBuffer = true;
-                Debug.Log("CommandBuffer Size:" + s_cmdBuffer.sizeInBytes);
+                Debug.Log("Add CommandBuffer Size:" + s_cmdBuffer.sizeInBytes);
             }
         }
     }
@@ -475,8 +477,8 @@ class HUDNumberRender
     // 功能：添加一个显示的数字
     public void AddHudNumber(Transform tf, HUDNumberRenderType nType, int nNumber, bool bShowHead, bool bShowAdd, bool bShowSub)
     {
-        Debug.Log("尝试显示数字:" + nNumber);
         Vector3 vPos = tf.position;
+        Debug.Log("尝试显示数字:" + nNumber + ",pos:" + vPos);
         int nIndex = (int)nType;
 
         Camera caMain = HUDMesh.GetHUDMainCamera();

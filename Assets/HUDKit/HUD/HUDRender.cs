@@ -9,7 +9,7 @@ class HUDRender
     HUDMesh m_curFontMesh;
     public bool m_bMeshDirty;
 
-    public HUDMesh QueryMesh(int nAtlasID)
+    public HUDMesh QueryMesh(int nAtlasID, int nSpriteID)
     {
         // 先从当前有效的Mesh的找
         for (int i = m_ValidList.size - 1; i >= 0; --i)
@@ -23,13 +23,13 @@ class HUDRender
             if (m_MeshList[i].AtlasID == nAtlasID)
             {
                 m_ValidList.Add(m_MeshList[i]);
-                m_MeshList[i].SetAtlasID(nAtlasID);
+                m_MeshList[i].SetAtlasID(nAtlasID, nSpriteID);
                 m_bMeshDirty = true;
                 return m_MeshList[i];
             }
         }
         HUDMesh pHudMesh = new HUDMesh();
-        pHudMesh.SetAtlasID(nAtlasID);
+        pHudMesh.SetAtlasID(nAtlasID, nSpriteID);
         m_MeshList.Add(pHudMesh);
         m_ValidList.Add(pHudMesh);
         m_bMeshDirty = true;
